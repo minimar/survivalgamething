@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btfq7j22a7ahu"]
+
+[ext_resource type="SpriteFrames" uid="uid://c3dhlm8kr5l4o" path="res://Assets/Sprites/itemSpriteFrames.tres" id="1_6t8cj"]
+
+[node name="itemUI" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_6t8cj")
+animation = &"items"

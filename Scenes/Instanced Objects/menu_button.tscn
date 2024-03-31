@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b530jfnag226s"]
+
+[ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="1_a5ywr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1u3u"]
+texture = ExtResource("1_a5ywr")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_641o8"]
+sources/0 = SubResource("TileSetAtlasSource_g1u3u")
+
+[node name="MenuButton" type="TextureButton"]
+custom_minimum_size = Vector2(256, 64)
+size_flags_horizontal = 4
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_641o8")
+format = 2
+layer_0/tile_data = PackedInt32Array(65537, 65536, 1, 131073, 65536, 1, 65538, 65536, 1, 131074, 65536, 1, 65539, 65536, 1, 131075, 65536, 1, 65540, 65536, 1, 131076, 65536, 1, 65541, 65536, 1, 131077, 65536, 1, 65542, 65536, 1, 131078, 65536, 1, 65543, 65536, 1, 131079, 65536, 1, 65544, 65536, 1, 131080, 65536, 1, 65545, 65536, 1, 131081, 65536, 1, 65546, 65536, 1, 131082, 65536, 1, 65547, 65536, 1, 131083, 65536, 1, 65548, 65536, 1, 131084, 65536, 1, 65549, 65536, 1, 131085, 65536, 1, 65550, 65536, 1, 131086, 65536, 1, 65551, 131072, 1, 131087, 131072, 1, 14, 65536, 0, 13, 65536, 0, 12, 65536, 0, 11, 65536, 0, 10, 65536, 0, 9, 65536, 0, 8, 65536, 0, 7, 65536, 0, 6, 65536, 0, 5, 65536, 0, 4, 65536, 0, 3, 65536, 0, 2, 65536, 0, 1, 65536, 0, 196622, 65536, 2, 196621, 65536, 2, 196620, 65536, 2, 196619, 65536, 2, 196618, 65536, 2, 196617, 65536, 2, 196616, 65536, 2, 196615, 65536, 2, 196614, 65536, 2, 196613, 65536, 2, 196612, 65536, 2, 196611, 65536, 2, 196610, 65536, 2, 196609, 65536, 2, 65536, 0, 1, 131072, 0, 1, 0, 0, 0, 15, 131072, 0, 196623, 131072, 2, 196608, 0, 2)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+horizontal_alignment = 1
+vertical_alignment = 1

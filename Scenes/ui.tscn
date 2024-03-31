@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt2omxug7nikb"]
+[gd_scene load_steps=3 format=3 uid="uid://dt2omxug7nikb"]
 
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
+[ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="2_y7we4"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -12,3 +13,27 @@ offset_left = 25.0
 offset_top = 790.0
 offset_right = 1907.0
 offset_bottom = 1062.0
+
+[node name="PauseMenu" type="PanelContainer" parent="."]
+visible = false
+offset_left = 768.0
+offset_top = 256.0
+offset_right = 1280.0
+offset_bottom = 896.0
+script = ExtResource("2_y7we4")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MainPauseMenu" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionsMenu" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
