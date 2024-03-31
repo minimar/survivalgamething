@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://pdvg5i74c58p"]
+[gd_scene load_steps=10 format=3 uid="uid://pdvg5i74c58p"]
 
 [ext_resource type="Texture2D" uid="uid://dlk503n14kgo1" path="res://Assets/Sprites/worldSpriteSheet.png" id="1_elug6"]
 [ext_resource type="Texture2D" uid="uid://cb7mcesitkwdl" path="res://Assets/Sprites/playerTemp.png" id="2_j2q2m"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="3_ce862"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="4_twgmq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jw1s1"]
 texture = ExtResource("1_elug6")
@@ -69,3 +70,14 @@ sprite_frames = SubResource("SpriteFrames_7k0fh")
 [node name="Collision" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_1bo3f")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Dialogue Handler" type="Node" parent="UI"]
+script = ExtResource("4_twgmq")
+
+[node name="Dialogue Box" type="RichTextLabel" parent="UI/Dialogue Handler"]
+offset_left = 131.0
+offset_top = 125.0
+offset_right = 411.0
+offset_bottom = 308.0
