@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://brfafs40nxg43"]
+[gd_scene load_steps=7 format=3 uid="uid://brfafs40nxg43"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_plsyy"]
 [ext_resource type="Texture2D" uid="uid://cb7mcesitkwdl" path="res://Assets/Sprites/playerTemp.png" id="2_e1k7d"]
@@ -26,6 +26,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bo3f"]
 size = Vector2(16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec67u"]
+size = Vector2(19, 16)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(347, 185)
 scale = Vector2(2, 2)
@@ -40,3 +43,10 @@ sprite_frames = SubResource("SpriteFrames_7k0fh")
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_1bo3f")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Dialog Hitbox" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ec67u")

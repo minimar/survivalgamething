@@ -8,7 +8,7 @@
 script = ExtResource("1_jmj38")
 
 [node name="Dialogue Box" type="RichTextLabel" parent="Dialogue Handler"]
-offset_left = 131.0
-offset_top = 125.0
-offset_right = 411.0
-offset_bottom = 308.0
+offset_left = 25.0
+offset_top = 790.0
+offset_right = 1907.0
+offset_bottom = 1062.0
