@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt2omxug7nikb"]
+
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Dialogue Handler" type="Node" parent="."]
+script = ExtResource("1_jmj38")
+
+[node name="Dialogue Box" type="RichTextLabel" parent="Dialogue Handler"]
+offset_left = 131.0
+offset_top = 125.0
+offset_right = 411.0
+offset_bottom = 308.0
