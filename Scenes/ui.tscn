@@ -1,18 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt2omxug7nikb"]
+[gd_scene load_steps=7 format=3 uid="uid://dt2omxug7nikb"]
 
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
+[ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="2_giw67"]
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="2_y7we4"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2snxt"]
+texture = ExtResource("2_giw67")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bk5wx"]
+sources/0 = SubResource("TileSetAtlasSource_2snxt")
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="Dialogue Handler" type="Node" parent="."]
 script = ExtResource("1_jmj38")
 
+[node name="TileMap" type="TileMap" parent="Dialogue Handler"]
+visible = false
+position = Vector2(0, 768)
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_bk5wx")
+format = 2
+layer_0/tile_data = PackedInt32Array(28, 65536, 0, 27, 65536, 0, 26, 65536, 0, 25, 65536, 0, 24, 65536, 0, 23, 65536, 0, 22, 65536, 0, 21, 65536, 0, 20, 65536, 0, 19, 65536, 0, 18, 65536, 0, 17, 65536, 0, 16, 65536, 0, 15, 65536, 0, 14, 65536, 0, 13, 65536, 0, 12, 65536, 0, 11, 65536, 0, 10, 65536, 0, 9, 65536, 0, 8, 65536, 0, 7, 65536, 0, 6, 65536, 0, 5, 65536, 0, 4, 65536, 0, 3, 65536, 0, 2, 65536, 0, 1, 65536, 0, 262145, 65536, 2, 262146, 65536, 2, 262147, 65536, 2, 262148, 65536, 2, 262149, 65536, 2, 262150, 65536, 2, 262151, 65536, 2, 262152, 65536, 2, 262153, 65536, 2, 262154, 65536, 2, 262155, 65536, 2, 262156, 65536, 2, 262157, 65536, 2, 262158, 65536, 2, 262159, 65536, 2, 262160, 65536, 2, 262161, 65536, 2, 262162, 65536, 2, 262163, 65536, 2, 262164, 65536, 2, 262165, 65536, 2, 262166, 65536, 2, 262167, 65536, 2, 262168, 65536, 2, 262169, 65536, 2, 262170, 65536, 2, 262171, 65536, 2, 262172, 65536, 2, 65565, 131072, 1, 131101, 131072, 1, 196637, 131072, 1, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 0, 0, 0, 29, 131072, 0, 262173, 131072, 2, 262144, 0, 2, 65537, 65536, 1, 131073, 65536, 1, 196609, 65536, 1, 65538, 65536, 1, 131074, 65536, 1, 196610, 65536, 1, 65539, 65536, 1, 131075, 65536, 1, 196611, 65536, 1, 65540, 65536, 1, 131076, 65536, 1, 196612, 65536, 1, 65541, 65536, 1, 131077, 65536, 1, 196613, 65536, 1, 65542, 65536, 1, 131078, 65536, 1, 196614, 65536, 1, 65543, 65536, 1, 131079, 65536, 1, 196615, 65536, 1, 65544, 65536, 1, 131080, 65536, 1, 196616, 65536, 1, 65545, 65536, 1, 131081, 65536, 1, 196617, 65536, 1, 65546, 65536, 1, 131082, 65536, 1, 196618, 65536, 1, 65547, 65536, 1, 131083, 65536, 1, 196619, 65536, 1, 65548, 65536, 1, 131084, 65536, 1, 196620, 65536, 1, 65549, 65536, 1, 131085, 65536, 1, 196621, 65536, 1, 65550, 65536, 1, 131086, 65536, 1, 196622, 65536, 1, 65551, 65536, 1, 131087, 65536, 1, 196623, 65536, 1, 65552, 65536, 1, 131088, 65536, 1, 196624, 65536, 1, 65553, 65536, 1, 131089, 65536, 1, 196625, 65536, 1, 65554, 65536, 1, 131090, 65536, 1, 196626, 65536, 1, 65555, 65536, 1, 131091, 65536, 1, 196627, 65536, 1, 65556, 65536, 1, 131092, 65536, 1, 196628, 65536, 1, 65557, 65536, 1, 131093, 65536, 1, 196629, 65536, 1, 65558, 65536, 1, 131094, 65536, 1, 196630, 65536, 1, 65559, 65536, 1, 131095, 65536, 1, 196631, 65536, 1, 65560, 65536, 1, 131096, 65536, 1, 196632, 65536, 1, 65561, 65536, 1, 131097, 65536, 1, 196633, 65536, 1, 65562, 65536, 1, 131098, 65536, 1, 196634, 65536, 1, 65563, 65536, 1, 131099, 65536, 1, 196635, 65536, 1, 65564, 65536, 1, 131100, 65536, 1, 196636, 65536, 1)
+
 [node name="Dialogue Box" type="RichTextLabel" parent="Dialogue Handler"]
-offset_left = 25.0
-offset_top = 790.0
-offset_right = 1907.0
-offset_bottom = 1062.0
+offset_left = 57.0
+offset_top = 825.0
+offset_right = 1862.0
+offset_bottom = 1030.0
 
 [node name="PauseMenu" type="PanelContainer" parent="."]
 visible = false
@@ -37,3 +63,33 @@ alignment = 1
 visible = false
 layout_mode = 2
 alignment = 1
+
+[node name="Inventory" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.119
+offset_left = 1152.0
+offset_top = 128.0
+offset_right = 1663.36
+offset_bottom = 767.48
+script = ExtResource("4_ajafu")
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="InventorySlots" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+layout_mode = 2
+columns = 5
+
+[node name="Outfit" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+layout_mode = 2

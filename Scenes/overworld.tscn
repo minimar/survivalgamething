@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://pdvg5i74c58p"]
+[gd_scene load_steps=7 format=3 uid="uid://pdvg5i74c58p"]
 
+[ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_18tcn"]
 [ext_resource type="Texture2D" uid="uid://dlk503n14kgo1" path="res://Assets/Sprites/worldSpriteSheet.png" id="1_elug6"]
 [ext_resource type="PackedScene" uid="uid://brfafs40nxg43" path="res://Scenes/player.tscn" id="2_5v2tu"]
 [ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="3_xgsdj"]
@@ -24,7 +25,8 @@ texture = ExtResource("1_elug6")
 [sub_resource type="TileSet" id="TileSet_uf38w"]
 sources/0 = SubResource("TileSetAtlasSource_jw1s1")
 
-[node name="World" type="Node2D"]
+[node name="Overworld" type="Node2D"]
+script = ExtResource("1_18tcn")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_uf38w")
@@ -35,4 +37,13 @@ layer_0/tile_data = PackedInt32Array(196611, 65536, 14, 262147, 65536, 14, 32768
 position = Vector2(45, 69)
 scale = Vector2(1, 1)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-1, 2)
+zoom = Vector2(4, 4)
+
 [node name="UI" parent="." instance=ExtResource("3_xgsdj")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-32, 0, -32, 280, 296, 280, 296, -8, -32, -8, -32, -32, 320, -32, 320, 320, -64, 320, -64, 0)

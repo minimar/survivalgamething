@@ -44,9 +44,16 @@ sprite_frames = SubResource("SpriteFrames_7k0fh")
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_1bo3f")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DialogueArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="Dialog Hitbox" type="CollisionShape2D" parent="Area2D"]
+[node name="Dialog Hitbox" type="CollisionShape2D" parent="DialogueArea"]
+shape = SubResource("RectangleShape2D_ec67u")
+
+[node name="ContainersArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="ContainersHitbox" type="CollisionShape2D" parent="ContainersArea"]
 shape = SubResource("RectangleShape2D_ec67u")

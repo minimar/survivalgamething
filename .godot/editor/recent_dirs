@@ -1,6 +1,7 @@
-res://Scripts
+res://Scripts/UI
 res://Scenes/Instanced Objects
 res://Assets/Sprites
-res://Scripts/UI
-res://Scenes
+res://Scenes/Instanced Objects/World Objects
 res://Scripts/Autoload
+res://Scripts
+res://Scenes

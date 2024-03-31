@@ -1,14 +1,21 @@
-res://Scenes/overworld.tscn
-res://Scripts/Player.gd
-res://Scripts/Autoload/settings.gd
-res://Scenes/cabin.tscn
-res://Scenes/ui.tscn
-res://Scripts/UI/PauseMenu.gd
-res://Scenes/Instanced Objects/menu_button.tscn
-res://Scripts/worldHandler.gd
-res://item.gd
-res://Scripts/item classes/food.gd
 res://Scenes/Instanced Objects/item.tscn
 res://Assets/Sprites/itemSpriteFrames.tres
+res://Scripts/item classes/item.gd
+res://Scripts/Player.gd
+res://Scripts/worldHandler.gd
+res://Scripts/item classes/clothing.gd
+res://Scenes/overworld.tscn
+res://Scenes/cabin.tscn
+res://Scenes/ui.tscn
+res://Scenes/Instanced Objects/menu_button.tscn
+res://Scenes/Instanced Objects/dialogue_area.tscn
 res://Scenes/Instanced Objects/container_area.tscn
+res://Scenes/Instanced Objects/World Objects/crate.tscn
 res://Scripts/container_area.gd
+res://Scenes/player.tscn
+res://Scripts/Autoload/item_generator.gd
+res://Scripts/dialogue.gd
+res://Scenes/Instanced Objects/World Objects/itemLoose.tscn
+res://Scripts/Inventory.gd
+res://Scenes/Instanced Objects/item_slot.tscn
+res://Scripts/UI/item_slot.gd

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx0ecet0xu1dv"]
+
+[ext_resource type="Texture2D" uid="uid://diwwei6ppa8ft" path="res://Assets/Sprites/World Objects/crate.png" id="1_g2nli"]
+[ext_resource type="PackedScene" uid="uid://csry4kf1bqyam" path="res://Scenes/Instanced Objects/container_area.tscn" id="2_ao187"]
+[ext_resource type="PackedScene" uid="uid://n6r0marigtb4" path="res://Scenes/Instanced Objects/dialogue_area.tscn" id="3_iamaa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gdy6"]
+size = Vector2(16, 16)
+
+[node name="Crate" type="Sprite2D"]
+texture = ExtResource("1_g2nli")
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("RectangleShape2D_8gdy6")
+
+[node name="ContainerArea" parent="." instance=ExtResource("2_ao187")]
+
+[node name="dialogueArea" parent="." instance=ExtResource("3_iamaa")]
+dialogueText = "An empty crate."

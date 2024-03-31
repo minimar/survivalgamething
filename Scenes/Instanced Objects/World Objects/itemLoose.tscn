@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://qwvrfxf8fyr7"]
+
+[ext_resource type="SpriteFrames" uid="uid://c3dhlm8kr5l4o" path="res://Assets/Sprites/itemSpriteFrames.tres" id="1_127tt"]
+[ext_resource type="PackedScene" uid="uid://csry4kf1bqyam" path="res://Scenes/Instanced Objects/container_area.tscn" id="2_g0x5d"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_127tt")
+animation = &"items"
+speed_scale = 0.0
+
+[node name="ContainerArea" parent="." instance=ExtResource("2_g0x5d")]
+isItemLoose = true

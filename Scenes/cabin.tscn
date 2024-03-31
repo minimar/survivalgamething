@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0bpd1fovyfi0"]
+[gd_scene load_steps=9 format=3 uid="uid://d0bpd1fovyfi0"]
 
 [ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_i2bk3"]
 [ext_resource type="Texture2D" uid="uid://ynrq185ctnc7" path="res://Assets/Sprites/CabinSpriteSheet.png" id="1_t2tc3"]
 [ext_resource type="PackedScene" uid="uid://brfafs40nxg43" path="res://Scenes/player.tscn" id="2_vf2bq"]
+[ext_resource type="PackedScene" uid="uid://cx0ecet0xu1dv" path="res://Scenes/Instanced Objects/World Objects/crate.tscn" id="5_d1suf"]
+[ext_resource type="PackedScene" uid="uid://qwvrfxf8fyr7" path="res://Scenes/Instanced Objects/World Objects/itemLoose.tscn" id="6_a4wt0"]
 [ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="6_qqhm1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bymky"]
@@ -46,6 +48,38 @@ zoom = Vector2(4, 4)
 [node name="Boundary" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
-polygon = PackedVector2Array(96, 192, 0, 192, 0, 80, -64, 80, -64, 0, 272, 0, 272, 80, 208, 80, 208, 192, 112, 192, 112, 208, 224, 208, 288, 96, 288, -48, -80, -48, -80, 96, 0, 208, 96, 208)
+polygon = PackedVector2Array(88, 192, 0, 192, 0, 80, -64, 80, -64, 0, 272, 0, 272, 80, 208, 80, 208, 192, 120, 192, 120, 208, 224, 208, 288, 96, 288, -48, -80, -48, -80, 96, 0, 208, 88, 208)
 
-[connection signal="dialogueSignal" from="Player" to="." method="_on_player_dialogue_signal"]
+[node name="Crate" parent="." instance=ExtResource("5_d1suf")]
+position = Vector2(24, 8)
+
+[node name="ContainerArea" parent="Crate" index="1"]
+containerItems = {
+"rock": null,
+"wood": 5
+}
+
+[node name="Crate2" parent="." instance=ExtResource("5_d1suf")]
+position = Vector2(80, 8)
+
+[node name="ContainerArea" parent="Crate2" index="1"]
+containerItems = {
+"rock": null,
+"wood": 10
+}
+
+[node name="dialogueArea" parent="Crate2" index="2"]
+dialogueID = "scene1"
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("6_a4wt0")]
+position = Vector2(152, 32)
+frame = 1
+
+[node name="ContainerArea" parent="AnimatedSprite2D" index="0"]
+containerItems = {
+"wood": 5
+}
+
+[editable path="Crate"]
+[editable path="Crate2"]
+[editable path="AnimatedSprite2D"]
