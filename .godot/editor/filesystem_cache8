@@ -1,11 +1,19 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1711840209
+::res://::1711845921
 icon.svg::CompressedTexture2D::8210593632865836435::1711839439::1711839501::1::::<><>::
 ::res://Assets/::1711839512
-::res://Assets/Sprites/::1711840698
-playerTemp.png::CompressedTexture2D::4909822712944327113::1711840698::1711840896::1::::<><>::
+::res://Assets/Sprites/::1711848510
+CabinSpriteSheet.png::CompressedTexture2D::1712431337647209296::1711849080::1711849081::1::::<><>::
+playerTemp.png::CompressedTexture2D::4909822712944327113::1711840698::1711845413::1::::<><>::
 worldSpriteSheet.png::CompressedTexture2D::7953850755225610158::1711839997::1711840004::1::::<><>::
-::res://Scenes/::1711840198
-overworld.tscn::PackedScene::1060313148995931593::1711840198::0::1::::<><>::uid://dlk503n14kgo1::::res://Assets/Sprites/worldSpriteSheet.png
+::res://Scenes/::1711848547
+overworld.tscn::PackedScene::1060313148995931593::1711848547::0::1::::<><>::uid://dlk503n14kgo1::::res://Assets/Sprites/worldSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn<>uid://dt2omxug7nikb::::res://Scenes/ui.tscn
+player.tscn::PackedScene::3589962834653275510::1711845578::0::1::::<><>::res://Scripts/Player.gd<>uid://cb7mcesitkwdl::::res://Assets/Sprites/playerTemp.png
+cabin.tscn::PackedScene::8916965006053618381::1711848547::0::1::::<><>::uid://ynrq185ctnc7::::res://Assets/Sprites/CabinSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn
+ui.tscn::PackedScene::8549460986236159133::1711845592::0::1::::<><>::res://Scripts/dialogue.gd
 ::res://Scenes/Instanced Objects/::1711839542
-::res://Scripts/::1711839525
+::res://Scripts/::1711847825
+dialogue.gd::GDScript::-1::1711845369::0::1::::<>Node<>::
+Player.gd::GDScript::-1::1711847825::0::1::::<>CharacterBody2D<>::
+::res://Scripts/Autoload/::1711845351
+settings.gd::GDScript::-1::1711845351::0::1::::<>Node<>::

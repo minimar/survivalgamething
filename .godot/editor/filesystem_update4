@@ -1,3 +1,4 @@
 res://Scenes/overworld.tscn
 res://Scripts/Player.gd
 res://Scripts/Autoload/settings.gd
+res://Scenes/cabin.tscn

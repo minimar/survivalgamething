@@ -1,3 +1,5 @@
+Camera2D
+TileMap
 RichTextLabel
 Node
 CanvasLayer
@@ -5,6 +7,5 @@ CollisionShape2D
 CharacterBody2D
 AnimationPlayer
 AnimatedSprite2D
-TileMap
 Sprite2D
 Button
