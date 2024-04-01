@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvn72jyfd4k6l"]
+
+[ext_resource type="PackedScene" uid="uid://5xxet7d3hwvm" path="res://Scenes/Instanced Objects/NPCS/Enemies/enemy.tscn" id="1_ak73m"]
+[ext_resource type="Texture2D" uid="uid://mxmptelj3bty" path="res://Assets/Sprites/NPCS/Enemies/rat.png" id="2_wpnvl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr7ss"]
+atlas = ExtResource("2_wpnvl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypqjn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr7ss")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Rat" instance=ExtResource("1_ak73m")]
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ypqjn")

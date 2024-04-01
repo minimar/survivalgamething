@@ -1,21 +1,35 @@
-res://Scenes/Instanced Objects/item.tscn
+res://Scenes/player.tscn
 res://Assets/Sprites/itemSpriteFrames.tres
-res://Scripts/item classes/item.gd
 res://Scripts/Player.gd
-res://Scripts/worldHandler.gd
-res://Scripts/item classes/clothing.gd
+res://Scripts/Autoload/settings.gd
 res://Scenes/overworld.tscn
 res://Scenes/cabin.tscn
 res://Scenes/ui.tscn
 res://Scenes/Instanced Objects/menu_button.tscn
+res://Scenes/Instanced Objects/item.tscn
 res://Scenes/Instanced Objects/dialogue_area.tscn
 res://Scenes/Instanced Objects/container_area.tscn
 res://Scenes/Instanced Objects/World Objects/crate.tscn
-res://Scripts/container_area.gd
-res://Scenes/player.tscn
-res://Scripts/Autoload/item_generator.gd
-res://Scripts/dialogue.gd
 res://Scenes/Instanced Objects/World Objects/itemLoose.tscn
-res://Scripts/Inventory.gd
 res://Scenes/Instanced Objects/item_slot.tscn
-res://Scripts/UI/item_slot.gd
+res://Scenes/Instanced Objects/bullet.tscn
+res://Scripts/worldHandler.gd
+res://test.tscn
+res://dummy.gd
+res://Scripts/Autoload/item_generator.gd
+res://Scripts/Inventory.gd
+res://Scenes/Instanced Objects/NPCS/Enemies/enemy.tscn
+res://Scripts/States/state.gd
+res://Scripts/States/enemyIdle.gd
+res://Scripts/States/stateMachine.gd
+res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd
+res://Scripts/States/enemyChase.gd
+res://Scripts/States/EnemySearch.gd
+res://Scripts/States/EnemyAttack.gd
+res://Scenes/Instanced Objects/NPCS/Enemies/rat.tscn
+res://Scenes/Instanced Objects/NPCS/girl.tscn
+res://Scripts/area_warp.gd
+res://Scenes/Instanced Objects/World Objects/area_warp.tscn
+res://Scripts/Autoload/scene_switcher.gd
+res://Scripts/item classes/item.gd
+res://Scripts/container_area.gd

@@ -12,6 +12,18 @@ var items: Array:
 				itemSlot.item = items[itemSlotToFill]
 				itemSlotToFill += 1
 
+var outfit: Array
+var hasGun: bool
+var bullets: Item:
+	set(value):
+		bullets = value
+		for slot in get_tree().get_nodes_in_group("Outfit Slots"):
+			if slot.name == 'outfit4':
+				slot.item = bullets
+		
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var itemSlot = preload("res://Scenes/Instanced Objects/item_slot.tscn")
@@ -21,10 +33,11 @@ func _ready():
 		itemSlotNode.pressed.connect(_on_slot_pressed.bind(itemSlotNode.name))
 		itemSlotNode.add_to_group("Item Slots")
 		$MarginContainer/HBoxContainer/InventorySlots.add_child(itemSlotNode)
-	for i in 4:
+	for i in 5:
 		var itemSlotNode = itemSlot.instantiate()
 		itemSlotNode.name = 'outfit'+str(i)
 		itemSlotNode.pressed.connect(_on_slot_pressed.bind(itemSlotNode.name))
+		itemSlotNode.add_to_group("Outfit Slots")
 		$MarginContainer/HBoxContainer/Outfit.add_child(itemSlotNode)
 
 func _on_slot_pressed(slotName):
