@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3t83v8ufuh5v"]
+[gd_scene load_steps=3 format=3 uid="uid://c3t83v8ufuh5v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vslwj"]
-size = Vector2(16, 16)
+[ext_resource type="Texture2D" uid="uid://b824jr26sru8g" path="res://Assets/Sprites/World Objects/cabin.png" id="1_yxyjq"]
 
-[node name="Object" type="StaticBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4n7t"]
+size = Vector2(160, 96)
+
+[node name="Cabin" type="StaticBody2D"]
 position = Vector2(32, 72)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_vslwj")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yxyjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_v4n7t")

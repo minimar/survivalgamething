@@ -90,7 +90,7 @@ position = Vector2(112, 0)
 
 [node name="AreaWarp" parent="." instance=ExtResource("8_0fkw3")]
 position = Vector2(104, 200)
-warpCoordinates = Vector2(72, 72)
+warpCoordinates = Vector2(88, 152)
 targetScene = "res://Scenes/overworld.tscn"
 
 [editable path="Crate"]
