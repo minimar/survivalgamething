@@ -15,4 +15,4 @@ func physicsUpdate(delta:float):
 	if direction.length() < 5:
 		Transition.emit(self,'EnemyIdle')
 	else:
-		enemy.velocity = direction.normalized() * enemy.moveSpeed
+		enemy.velocity = direction.normalized() * enemy.movementSpeed

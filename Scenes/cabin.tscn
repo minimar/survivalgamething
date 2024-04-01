@@ -96,3 +96,4 @@ targetScene = "res://Scenes/overworld.tscn"
 [editable path="Crate"]
 [editable path="Crate2"]
 [editable path="AnimatedSprite2D"]
+[editable path="Girl"]
