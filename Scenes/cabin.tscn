@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0bpd1fovyfi0"]
+[gd_scene load_steps=12 format=3 uid="uid://d0bpd1fovyfi0"]
 
 [ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_i2bk3"]
 [ext_resource type="Texture2D" uid="uid://ynrq185ctnc7" path="res://Assets/Sprites/CabinSpriteSheet.png" id="1_t2tc3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="6_qqhm1"]
 [ext_resource type="PackedScene" uid="uid://ce1oibigtalrs" path="res://Scenes/Instanced Objects/NPCS/girl.tscn" id="7_n0lhw"]
 [ext_resource type="PackedScene" uid="uid://dtftppak8ll7" path="res://Scenes/Instanced Objects/World Objects/area_warp.tscn" id="8_0fkw3"]
+[ext_resource type="PackedScene" uid="uid://n6r0marigtb4" path="res://Scenes/Instanced Objects/dialogue_area.tscn" id="9_shkdv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bymky"]
 texture = ExtResource("1_t2tc3")
@@ -92,6 +93,11 @@ dialoguePriority = 5
 position = Vector2(104, 200)
 warpCoordinates = Vector2(88, 152)
 targetScene = "res://Scenes/overworld.tscn"
+
+[node name="dialogueArea" parent="." instance=ExtResource("9_shkdv")]
+position = Vector2(104, 184)
+sceneID = "scene1"
+isDialogueTrigger = true
 
 [editable path="Crate"]
 [editable path="Crate2"]

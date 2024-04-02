@@ -1,10 +1,10 @@
 extends Node2D
 
-var timeOfDay = 540
+var timeOfDay := 540
 var day = 1
 var weather = "clear"
 const weatherTypes = ["clear","rain","postRain"]
-@export var minuteLengthInSeconds:= 10.0
+@export var minuteLengthInSeconds := 10.0
 @export var oddsOfRain := 4
 
 
@@ -51,6 +51,8 @@ func _process(delta):
 	if minuteCountdown <= 0:
 		timeOfDay += 1
 		minuteCountdown = minuteLengthInSeconds
+		if timeOfDay % 60 == 0:
+			player.hunger -= 4
 		if timeOfDay >= 1440:
 			timeOfDay = 0
 			day += 1
@@ -68,7 +70,7 @@ func _on_dialogue_scene_pause(pause):
 func _on_player_advance_scene():
 	$"UI/Dialogue Handler".playerAdvanced()
 
-func _on_player_dialogue_signal(resultNode:dialogueNode):
+func _on_player_dialogue_signal(resultNode:dialogueArea):
 	print('test: ' + resultNode.sceneID)
 	$"UI/Dialogue Handler".processDialogue(resultNode.sceneID, resultNode.dialogueText)
 

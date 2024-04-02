@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwulw3arx5chv"]
+[gd_scene load_steps=5 format=3 uid="uid://bwulw3arx5chv"]
 
 [ext_resource type="Texture2D" uid="uid://c0kfxea2bhx0c" path="res://Assets/Sprites/itemSlot.png" id="1_5np8s"]
 [ext_resource type="Script" path="res://Scripts/UI/item_slot.gd" id="2_2syv3"]
 [ext_resource type="SpriteFrames" uid="uid://c3dhlm8kr5l4o" path="res://Assets/Sprites/itemSpriteFrames.tres" id="3_fk2pl"]
+[ext_resource type="Texture2D" uid="uid://bv2bq0th5atex" path="res://Assets/Sprites/itemSlotSelected.png" id="4_fqapb"]
 
 [node name="ItemSlot" type="TextureButton"]
 offset_right = 26.0
@@ -27,4 +28,7 @@ offset_top = 26.0
 offset_right = 54.0
 offset_bottom = 49.0
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[node name="SelectedSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_fqapb")
+centered = false

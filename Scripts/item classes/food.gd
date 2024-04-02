@@ -2,7 +2,6 @@ extends Item
 class_name Food
 
 var usable = true
-var edible = true
 var foodSaturation: int
 var type: String: 
 	set(value):

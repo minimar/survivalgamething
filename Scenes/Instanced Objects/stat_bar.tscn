@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://j8afnmh7wc0u"]
+
+[ext_resource type="Script" path="res://Scripts/UI/stat_bar.gd" id="1_1744a"]
+[ext_resource type="SpriteFrames" uid="uid://dyuid4lg0aio3" path="res://Assets/Sprites/statBarsSpriteFrames.tres" id="1_kmbh7"]
+
+[node name="StatBar" type="Control"]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1744a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 4)
+sprite_frames = ExtResource("1_kmbh7")
+speed_scale = 0.0

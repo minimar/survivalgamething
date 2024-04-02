@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dyuid4lg0aio3"]
+
+[ext_resource type="Texture2D" uid="uid://dks3t2hhtro8p" path="res://Assets/Sprites/StatBars.png" id="1_ygl2d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d275"]
+atlas = ExtResource("1_ygl2d")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io8v7"]
+atlas = ExtResource("1_ygl2d")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txne8"]
+atlas = ExtResource("1_ygl2d")
+region = Rect2(16, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85ob4"]
+atlas = ExtResource("1_ygl2d")
+region = Rect2(16, 8, 16, 8)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d275")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io8v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txne8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85ob4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

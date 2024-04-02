@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="2_giw67"]
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="2_y7we4"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
-[ext_resource type="Texture2D" uid="uid://bovhv4cup1eh6" path="res://Assets/Sprites/itemInteractButton.png" id="5_qkyfy"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerStats.gd" id="5_yiis5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2snxt"]
 texture = ExtResource("2_giw67")
@@ -67,6 +67,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Inventory" type="PanelContainer" parent="."]
+visible = false
 anchors_preset = -1
 anchor_right = 0.067
 anchor_bottom = 0.119
@@ -85,6 +86,11 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
 
 [node name="Slots" type="HBoxContainer" parent="Inventory/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -115,11 +121,6 @@ theme_override_constants/margin_top = 4
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="ItemInteractionButton" type="TextureButton" parent="Inventory/MarginContainer/VBoxContainer/Interaction and Info/Interaction/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_qkyfy")
-stretch_mode = 3
-
 [node name="Info" type="PanelContainer" parent="Inventory/MarginContainer/VBoxContainer/Interaction and Info"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -129,3 +130,17 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer/VBoxContainer/Interaction and Info/Info/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PlayerStats" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_yiis5")
+
+[node name="HealthBar" type="HBoxContainer" parent="PlayerStats"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HungerBar" type="HBoxContainer" parent="PlayerStats"]
+layout_mode = 2
+theme_override_constants/separation = 0

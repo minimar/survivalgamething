@@ -8,7 +8,3 @@ const controlModes = ['kb&m','controller']
 func _ready():
 	Engine.set_max_fps(target_fps)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

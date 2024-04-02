@@ -29,7 +29,7 @@ var sceneDict = {
 
 var eventHold = false
 
-func _process(delta):
+func _process(_delta):
 	if dialogueText != "":
 		dialogueTextBox.text = writeText(dialogueText, dialoguePos)
 		dialoguePos += 1

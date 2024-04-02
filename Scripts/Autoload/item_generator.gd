@@ -25,6 +25,21 @@ var basicDict = {
 		'sprite': 2,
 		'stackable': true,
 		'maxStack': 99
+	},
+	'test': {
+		'itemID': 'test',
+		'itemName': 'TESTING ITEM',
+		'description': 'TEST',
+		'sprite': 2,
+		'stackable': true,
+		'maxStack': 99
+	},
+	'gun': {
+		'itemID': 'gun',
+		'itemName': 'Handgun',
+		'description': 'Your handgun.',
+		'sprite': 3,
+		'stackable': false
 	}
 }
 
@@ -61,11 +76,54 @@ var clothingDict = {
 		'type': 'legs',
 		'armorRating': 0,
 		'movementReduction': 0
+	},
+	'testHead': {
+		"itemID": "testHead",
+		"itemName": "TEST Hat",
+		"description": "TEST.",
+		'sprite': 0,
+		'usable': true,
+		'stackable': false,
+		'type': 'head',
+		'armorRating': 0,
+		'movementReduction': 0
+	},
+	'testTorso': {
+		"itemID": "testTorso",
+		"itemName": "TEST Shirt",
+		"description": "TEST.",
+		'sprite': 1,
+		'usable': true,
+		'stackable': false,
+		'type': 'torso',
+		'armorRating': 0,
+		'movementReduction': 0
+	},
+	'testLegs': {
+		"itemID": "testLegs",
+		"itemName": "TEST Pants",
+		"description": "TEST.",
+		'sprite': 2,
+		'usable': true,
+		'stackable': false,
+		'type': 'legs',
+		'armorRating': 0,
+		'movementReduction': 0
 	}
 }
 
 var foodDict = {
-	
+	'steak': {
+		'itemID': 'steak',
+		'itemName': 'Cooked Steak',
+		'description': 'A cooked steak.',
+		'sprite': 0,
+		'stackable': true,
+		'maxStack': 5,
+		'usable': true,
+		'foodSaturation': 50,
+		'type': 'cooked'
+	},
 }
 
 func makeItem(itemName):
@@ -94,8 +152,21 @@ func makeItem(itemName):
 				'armorRating': newItem.armorRating = clothingDict[itemName][key]
 				'movementReduction': newItem.movementReduction = clothingDict[itemName][key]
 				'usable': newItem.usable = clothingDict[itemName][key]
-	
+	elif foodDict.has(itemName):
+		newItem = Food.new()
+		for key in foodDict[itemName]:
+			match key:
+				'itemID': newItem.itemID = foodDict[itemName][key]
+				'itemName': newItem.itemName = foodDict[itemName][key]
+				'description': newItem.description = foodDict[itemName][key]
+				'sprite': newItem.sprite = foodDict[itemName][key]
+				'stackable': newItem.stackable = foodDict[itemName][key]
+				'maxStack': newItem.maxStack = foodDict[itemName][key]
+				'usable': newItem.usable = foodDict[itemName][key]
+				'foodSaturation': newItem.foodSaturation = foodDict[itemName][key]
+				'type': newItem.type = foodDict[itemName][key]
 	
 	if not newItem:
 		printerr("Failed to make item: "+str(itemName))
+	newItem.quantity = 1
 	return newItem

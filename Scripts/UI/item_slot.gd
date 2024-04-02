@@ -5,10 +5,13 @@ var item:
 		if item:
 			$Sprite.visible = true
 			$Sprite.frame = item.sprite
-			$Quantity.text = str(item.quantity)
+			if item.stackable:
+				$Quantity.text = str(item.quantity)
 		else:
 			$Sprite.visible = false
 			$Quantity.text = ""
 
-
-
+var selected:
+	set(value):
+		selected = value
+		$SelectedSprite.visible = selected

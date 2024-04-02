@@ -16,16 +16,42 @@ signal updateInv
 var health = 100: 
 	set(value):
 		health = value
+		if health > 100:
+			health = 100
 		print("Player Health: "+str(health))
 		if health < 1:
 			print("game over")
-var hunger = 100
-var items = []:
+var hunger = 50:
 	set(value):
-		print('player items set')
-		items = value
-		print("Help: " + str(updateInv.get_connections()))
+		hunger = value
+		if hunger > 100:
+			hunger = 100
+		print("Player Hunger: "+str(hunger))
+		if hunger < 1:
+			print("game over")
+var items = []
+
+func updateItems():
+	var newItems = []
+	for item in items:
 		
+		for addedItem in newItems:
+			#print(addedItem)
+			if item.itemName == addedItem.itemName and addedItem.stackable:
+				if addedItem.quantity + item.quantity > addedItem.maxStack:
+					item.quantity = item.quantity - (addedItem.maxStack - addedItem.quantity)
+					addedItem.quantity = addedItem.maxStack
+				else:
+					addedItem.quantity += item.quantity
+					item.quantity = 0
+			if item.quantity == 0:
+				break
+		if item.quantity > 0:
+			newItems.append(item)
+	items = newItems
+	updateInv.emit([items,outfit,hasGun,bullets])
+
+
 var bulletsInGun = 6
 var bullets: Item
 var outfit = []
@@ -41,6 +67,23 @@ func sortOutfit():
 			'legs': legs = outfitPiece
 	outfit = [head,torso,legs]
 
+func equip(item):
+	var itemIndex = items.find(item)
+	var oldOutfitItem
+	match item.type:
+		'head': 
+			oldOutfitItem = outfit[0]
+			outfit[0] = item
+			items[itemIndex] = oldOutfitItem
+		'torso':
+			oldOutfitItem = outfit[1]
+			outfit[1] = item
+			items[itemIndex] = oldOutfitItem
+		'legs':
+			oldOutfitItem = outfit[2]
+			outfit[2] = item
+			items[itemIndex] = oldOutfitItem
+	updateItems()
 var hasGun = true
 
 var movementSpeed = defaultMovementSpeed
@@ -59,11 +102,50 @@ func _ready():
 	itemGenerator = $"/root/ItemGenerator"
 	if outfit == []:
 		outfit = [itemGenerator.makeItem('basicHead'),itemGenerator.makeItem('basicTorso'),itemGenerator.makeItem('basicLegs')]
+	for piece in outfit:
+		print(piece.itemName)
 	add_to_group("Player")
 
 
+func eat(foodItem = 'quick'):
+	if foodItem is String:
+		if hunger >= 95:
+			return "Too full"
+		var foodItems = []
+		for item in items:
+			if item is Food:
+				foodItems.append(item)
+		if foodItems == []:
+			return "No food."
+		for food in foodItems:
+			if food.type == 'cooked' and food.foodSaturation + hunger <= 100:
+				food.quantity -= 1
+				hunger += food.foodSaturation
+				updateItems()
+				return "Ate "+food.itemName
+		for food in foodItems:
+			if food.type == 'basic' and food.foodSaturation + hunger <= 100:
+				food.quantity -= 1
+				hunger += food.foodSaturation
+				updateItems()
+				return "Ate "+food.itemName
+		for food in foodItems:
+			if food.type == 'raw' and food.foodSaturation + hunger <= 100:
+				food.quantity -= 1
+				hunger += food.foodSaturation
+				updateItems()
+				return "Ate "+food.itemName
+		return "Too full."
+	
+	for item in items:
+		if item == foodItem:
+			item.quantity -= 1
+			hunger += item.foodSaturation
+			updateItems()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !scenePause:
 		velocity = Vector2(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
 		velocity = velocity.normalized()*movementSpeed
@@ -78,19 +160,26 @@ signal advanceScene
 var fastReload = false
 var normalReload = false
 var reloadTimer = 0.0
+var debugHealthTimer = 0.0
 func _process(delta):
+	#debugHealthTimer += delta
+	#if debugHealthTimer > 1.0:
+	#	debugHealthTimer = 0.0
+	#	health -= 5
+	#	hunger -= 3
+	
 	reloadTimer += delta
 	if fastReload and reloadTimer > 2.0:
 		if bullets and bullets.quantity > 0:
 			bulletsInGun = min(bullets.quantity,6)
 			bullets.quantity -= bulletsInGun
-			updateInv.emit([items,outfit,hasGun,bullets])
+			updateItems()
 		fastReload = false
 	if normalReload and reloadTimer > 1.0:
 		if (bulletsInGun < 6) and bullets and bullets.quantity > 0:
 			bulletsInGun += 1
 			bullets.quantity -= 1
-			updateInv.emit([items,outfit,hasGun,bullets])
+			updateItems()
 			reloadTimer = 0
 		else:
 			normalReload = false
@@ -98,12 +187,15 @@ func _process(delta):
 	if Input.is_action_just_pressed("Reload"):
 		reload()
 	
+	if Input.is_action_just_pressed("Quick Eat"):
+		print(eat())
+	
 	#Debug give player bullets item
 	if Input.is_action_just_pressed('Inventory'):
 		var bulletItem = itemGenerator.makeItem('bullet')
 		bulletItem.quantity = 99
 		bullets = bulletItem
-		updateInv.emit([items,outfit,hasGun,bullets])
+		updateItems()
 		print(bullets.itemName + str(bullets.quantity))
 	
 	
@@ -196,7 +288,7 @@ func checkContainers() -> bool:
 		itemTextList += item.itemName +" ("+str(item.quantity)+")\n"
 		for checkItem in items:
 			print(checkItem)
-			if item.itemName == checkItem.itemName:
+			if item.itemName == checkItem.itemName and checkItem.stackable:
 				if checkItem.quantity + item.quantity > checkItem.maxStack:
 					item.quantity = item.quantity - (checkItem.maxStack - checkItem.quantity)
 					checkItem.quantity = checkItem.maxStack
@@ -207,13 +299,14 @@ func checkContainers() -> bool:
 				break
 		if item.quantity != 0:
 			items.append(item)
+	var text
 	if items.size() > maxInvSlots:
 		items = backupItems
-		var text = "You do not have enough room for these items:\n"
+		text = "You do not have enough room for these items:\n"
 		text += itemTextList
 		showGenericText.emit(text)
 		return true
-	var text = "You find:\n"
+	text = "You find:\n"
 	text += itemTextList
 	showGenericText.emit(text)
 	container.containerOpened = true

@@ -13,3 +13,5 @@ script = ExtResource("1_pvrpc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xod6k")
 debug_color = Color(0.729412, 0.466667, 0.172549, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

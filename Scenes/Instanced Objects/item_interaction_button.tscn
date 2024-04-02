@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv7dsglxbqm8m"]
+
+[ext_resource type="Texture2D" uid="uid://bovhv4cup1eh6" path="res://Assets/Sprites/itemInteractButton.png" id="1_ns2nr"]
+
+[node name="ItemInteractionButton" type="TextureButton"]
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_ns2nr")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 16
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
