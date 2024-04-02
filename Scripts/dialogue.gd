@@ -13,6 +13,11 @@ var dialogueText:String:
 var dialoguePos:int
 
 var sceneDict = {
+	'scene1' = {
+		'dialogue': [
+			'test'
+		]
+	},
 	'meek0' = {
 		'dialogue': [
 			'"Hey, you\'re back! D-did you find anything cool?"'
@@ -24,7 +29,12 @@ var sceneDict = {
 	'soon0' = {
 		'dialogue': [
 			'"Hmm, did you forget something?"'
-		]},
+		],
+		'confidence':
+			[
+				20
+			]
+		},
 	'soon1' = {
 		'dialogue': [
 			'"Hey! Are you teasing me?"'
@@ -100,13 +110,14 @@ func findGirl()->Node:
 		return Node.new()
 
 func test():
-	eventHold = true
-	var girl := findGirl()
-	var tween = create_tween()
-	tween.tween_property(girl,"position",Vector2(10,10),2)
-	tween.tween_callback(advanceScene)
-	tween.tween_property(self,"eventHold",false,0)
-	tween.tween_property(girl.find_child("dialogueArea"),"sceneID","scene2",0)
+	evalDialogue()
+	#eventHold = true
+	#var girl := findGirl()
+	#var tween = create_tween()
+	#tween.tween_property(girl,"position",Vector2(10,10),2)
+	#tween.tween_callback(advanceScene)
+	#tween.tween_property(self,"eventHold",false,0)
+	#tween.tween_property(girl.find_child("dialogueArea"),"sceneID","scene2",0)
 
 func evalDialogue():
 	var girl := findGirl()
@@ -114,4 +125,5 @@ func evalDialogue():
 	var mood = girl.mood
 	var confidence = girl.confidence
 	for scenes in sceneDict:
-		pass
+		var sceneList = scenes[confidence]
+		print(sceneList)
