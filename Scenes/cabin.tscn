@@ -72,9 +72,6 @@ containerItems = {
 "wood": 10
 }
 
-[node name="dialogueArea" parent="Crate2" index="2"]
-dialogueID = "scene1"
-
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("6_a4wt0")]
 position = Vector2(152, 32)
 frame = 1
@@ -87,6 +84,9 @@ containerItems = {
 
 [node name="Girl" parent="." instance=ExtResource("7_n0lhw")]
 position = Vector2(112, 0)
+
+[node name="dialogueArea" parent="Girl" index="2"]
+dialogueID = "scene1"
 
 [node name="AreaWarp" parent="." instance=ExtResource("8_0fkw3")]
 position = Vector2(104, 200)
