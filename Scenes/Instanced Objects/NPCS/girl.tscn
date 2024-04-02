@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce1oibigtalrs"]
+[gd_scene load_steps=8 format=3 uid="uid://ce1oibigtalrs"]
 
+[ext_resource type="Script" path="res://Scripts/girl.gd" id="1_nus01"]
 [ext_resource type="Texture2D" uid="uid://bs7noufq1tg53" path="res://Assets/Sprites/girlTemp.png" id="1_xfbuy"]
 [ext_resource type="PackedScene" uid="uid://n6r0marigtb4" path="res://Scenes/Instanced Objects/dialogue_area.tscn" id="2_2pqsh"]
 [ext_resource type="PackedScene" uid="uid://bovm0gljtusgb" path="res://Scenes/Instanced Objects/cutscene_object.tscn" id="3_tune5"]
@@ -23,6 +24,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Girl" type="CharacterBody2D"]
+script = ExtResource("1_nus01")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hj34l")

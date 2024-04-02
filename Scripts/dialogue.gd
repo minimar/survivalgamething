@@ -13,18 +13,22 @@ var dialogueText:String:
 var dialoguePos:int
 
 var sceneDict = {
-	'scene1' = {
+	'meek0' = {
 		'dialogue': [
-			'Hi I\'m gonna go over here now',
-			'###test',
-			'wee that was fun'
-		]
-	},
-	'scene2' = {
+			'"Hey, you\'re back! D-did you find anything cool?"'
+		]},
+	'meek1' = {
 		'dialogue': [
-			'Did you like my zoomin'
-		]
-	}
+			'"Oh! You startled me.."'
+		]},
+	'soon0' = {
+		'dialogue': [
+			'"Hmm, did you forget something?"'
+		]},
+	'soon1' = {
+		'dialogue': [
+			'"Hey! Are you teasing me?"'
+		]}
 }
 
 var eventHold = false
@@ -101,3 +105,11 @@ func test():
 	tween.tween_callback(advanceScene)
 	tween.tween_property(self,"eventHold",false,0)
 	tween.tween_property(girl.find_child("dialogueArea"),"sceneID","scene2",0)
+
+func evalDialogue():
+	var girl := findGirl()
+	var tween = create_tween()
+	var mood = girl.mood
+	var confidence = girl.confidence
+	for scenes in sceneDict:
+		pass
