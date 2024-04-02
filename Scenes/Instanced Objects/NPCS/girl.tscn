@@ -24,17 +24,20 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Girl" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_nus01")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hj34l")
+offset = Vector2(0, -16)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_4ht0x")
 
 [node name="dialogueArea" parent="." instance=ExtResource("2_2pqsh")]
-position = Vector2(0, 8)
+position = Vector2(0, -8)
 sceneID = "scene1"
 
 [node name="Cutscene Object" parent="." instance=ExtResource("3_tune5")]

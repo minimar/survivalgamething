@@ -44,9 +44,11 @@ var sceneStarted = ""
 var sceneLine = 0
 signal scenePause
 func startScene(ID):
+	#print('Help me: '+str(sceneDict.has(ID)))
 	if !sceneDict.has(ID):
-		printerr('Scene not found: '+str(ID))
-	print('test')
+		push_error('Scene not found: '+str(ID))
+		return
+	#print('test')
 	scenePause.emit(true)
 	sceneStarted = ID
 	sceneLine = 0

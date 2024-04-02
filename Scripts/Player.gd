@@ -237,9 +237,9 @@ func _process(delta):
 func updateGunRay():
 	var playerPosition = global_position
 	var reticlePosition = $"Aiming Reticle".global_position
-	$GunRay.target_position = Vector2.from_angle(playerPosition.angle_to_point(reticlePosition))*gunRange
+	$GunRay.target_position = (reticlePosition-playerPosition).normalized()*gunRange
 	#ENABLE THIS TO VISUALIZE GUN RAYCAST
-	#$GunRayDebug.points[1] = $GunRay.target_position
+	$GunRay/GunRayDebug.points[1] = $GunRay.target_position
 
 func fireGun():
 	reload('cancel')

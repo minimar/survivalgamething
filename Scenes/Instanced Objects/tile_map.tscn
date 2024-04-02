@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://0ynntogy7vmw"]
+
+[ext_resource type="Texture2D" uid="uid://dlk503n14kgo1" path="res://Assets/Sprites/worldSpriteSheet.png" id="1_cjs8t"]
+[ext_resource type="Texture2D" uid="uid://ynrq185ctnc7" path="res://Assets/Sprites/CabinSpriteSheet.png" id="2_r5m24"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jw1s1"]
+texture = ExtResource("1_cjs8t")
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+5:14/0 = 0
+4:14/0 = 0
+3:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+8:14/0 = 0
+7:14/0 = 0
+6:14/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_57whv"]
+texture = ExtResource("2_r5m24")
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+1:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_uf38w"]
+sources/0 = SubResource("TileSetAtlasSource_jw1s1")
+sources/1 = SubResource("TileSetAtlasSource_57whv")
+
+[node name="TileMap" type="TileMap"]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_uf38w")
+format = 2
+layer_0/name = "Background"
+layer_1/name = "Foreground"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()

@@ -1,91 +1,92 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1712030115
-to-do.txt::TextFile::-1::1712030115::0::1::::<><>::
-icon.svg::CompressedTexture2D::8210593632865836435::1711839439::1712029908::1::::<><>::
-::res://Assets/::1711839512
-::res://Assets/Sprites/::1712040690
-CabinSpriteSheet.png::CompressedTexture2D::1712431337647209296::1711849080::1711849081::1::::<><>::
-girlTemp.png::CompressedTexture2D::3716695338281720616::1711949805::1711949808::1::::<><>::
-itemInteractButton.png::CompressedTexture2D::3412880475278721117::1712030374::1712030375::1::::<><>::
-itemSlot.png::CompressedTexture2D::6548551105423050328::1712032049::1712032050::1::::<><>::
-itemSlotSelected.png::CompressedTexture2D::3916215231939837547::1712032099::1712032101::1::::<><>::
-itemSpriteFrames.tres::SpriteFrames::6744767466932619540::1712039476::0::1::::<><>::uid://bhj0t0mgcletc::::res://Assets/Sprites/itemSpriteSheet.png
-itemSpriteSheet.png::CompressedTexture2D::2897875175746349776::1712039323::1712039324::1::::<><>::
-menuButton.png::CompressedTexture2D::5329329164441193519::1711856668::1711856674::1::::<><>::
-playerTemp.png::CompressedTexture2D::4909822712944327113::1711840698::1711845413::1::::<><>::
-statBarsSpriteFrames.tres::SpriteFrames::8885574487273155752::1712040690::0::1::::<><>::uid://dks3t2hhtro8p::::res://Assets/Sprites/StatBars.png
-reticle.png::CompressedTexture2D::7053907018652848603::1711934503::1711934505::1::::<><>::
-StatBars.png::CompressedTexture2D::7900044722202565633::1712041539::1712041550::1::::<><>::
-test.png::CompressedTexture2D::3133271105970179871::1711853543::1711853548::1::::<><>::
-window.png::CompressedTexture2D::4933937702036970305::1711856668::1711856674::1::::<><>::
-worldSpriteSheet.png::CompressedTexture2D::7953850755225610158::1712028853::1711840004::1::::<><>::
-::res://Assets/Sprites/NPCS/::1711942274
-::res://Assets/Sprites/NPCS/Enemies/::1711942320
-rat.png::CompressedTexture2D::890503207457323890::1711942314::1711942320::1::::<><>::
-::res://Assets/Sprites/Prompts/::1711856674
-Gamepad Prompts.png::CompressedTexture2D::970698809433423249::1711856668::1711856674::1::::<><>::
-Keyboard Prompts.png::CompressedTexture2D::5614360419994199632::1711856668::1711856674::1::::<><>::
-::res://Assets/Sprites/World Objects/::1712028853
-cabin.png::CompressedTexture2D::4760168524083071488::1712028853::1712028853::1::::<><>::
-crate.png::CompressedTexture2D::7767532496566711889::1711934184::1711934184::1::::<><>::
-door.png::CompressedTexture2D::6238908047229478901::1711950361::1711950365::1::::<><>::
-tree.png::CompressedTexture2D::8724781560991644938::1712028853::1712028853::1::::<><>::
-::res://Scenes/::1712040886
-cabin.tscn::PackedScene::8916965006053618381::1712040042::0::1::::<><>::res://Scripts/worldHandler.gd<>uid://ynrq185ctnc7::::res://Assets/Sprites/CabinSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn<>uid://cx0ecet0xu1dv::::res://Scenes/Instanced Objects/World Objects/crate.tscn<>uid://qwvrfxf8fyr7::::res://Scenes/Instanced Objects/World Objects/itemLoose.tscn<>uid://dt2omxug7nikb::::res://Scenes/ui.tscn<>uid://ce1oibigtalrs::::res://Scenes/Instanced Objects/NPCS/girl.tscn<>uid://dtftppak8ll7::::res://Scenes/Instanced Objects/World Objects/area_warp.tscn
-overworld.tscn::PackedScene::1060313148995931593::1712040042::0::1::::<><>::res://Scripts/worldHandler.gd<>uid://dlk503n14kgo1::::res://Assets/Sprites/worldSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn<>uid://dt2omxug7nikb::::res://Scenes/ui.tscn<>uid://dtftppak8ll7::::res://Scenes/Instanced Objects/World Objects/area_warp.tscn<>uid://cu5f50bxex44p::::res://Assets/Sprites/World Objects/door.png<>uid://c3t83v8ufuh5v::::res://Scenes/Instanced Objects/World Objects/object.tscn
-player.tscn::PackedScene::3589962834653275510::1712040043::0::1::::<><>::res://Scripts/Player.gd<>uid://cb7mcesitkwdl::::res://Assets/Sprites/playerTemp.png<>uid://c7q722vag83u2::::res://Assets/Sprites/reticle.png
-ui.tscn::PackedScene::8549460986236159133::1712040886::0::1::::<><>::res://Scripts/dialogue.gd<>uid://ch6tjji0asvx4::::res://Assets/Sprites/menuButton.png<>res://Scripts/UI/PauseMenu.gd<>res://Scripts/Inventory.gd<>res://Scripts/UI/PlayerStats.gd
-::res://Scenes/Instanced Objects/::1712041453
-container_area.tscn::PackedScene::6072844504680275836::1711941366::0::1::::<><>::res://Scripts/container_area.gd
-cutscene_object.tscn::PackedScene::3413190008789695429::1712028853::0::1::::<><>::res://Scripts/Cutscene Object.gd
-dialogue_area.tscn::PackedScene::977528142458478811::1711941365::0::1::::<><>::res://Scripts/dialogue_area.gd
-item.tscn::PackedScene::3731359734523120290::1712040043::0::1::::<><>::uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres
-item_slot.tscn::PackedScene::3972571444655471499::1712040711::0::1::::<><>::uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/UI/item_slot.gd<>uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres<>uid://bv2bq0th5atex::::res://Assets/Sprites/itemSlotSelected.png
-menu_button.tscn::PackedScene::4551422849620371604::1712040043::0::1::::<><>::uid://ch6tjji0asvx4::::res://Assets/Sprites/menuButton.png
-item_interaction_button.tscn::PackedScene::8699502484056427982::1712040043::0::1::::<><>::uid://bovhv4cup1eh6::::res://Assets/Sprites/itemInteractButton.png
-item_info_label.tscn::PackedScene::6329520304565786341::1712031385::0::1::::<><>::
-stat_bar.tscn::PackedScene::699833689298671998::1712041453::0::1::::<><>::res://Scripts/UI/stat_bar.gd<>uid://dyuid4lg0aio3::::res://Assets/Sprites/statBarsSpriteFrames.tres
-::res://Scenes/Instanced Objects/NPCS/::1712040043
-girl.tscn::PackedScene::5108134952973657200::1712040043::0::1::::<><>::uid://bs7noufq1tg53::::res://Assets/Sprites/girlTemp.png<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn<>uid://bovm0gljtusgb::::res://Scenes/Instanced Objects/cutscene_object.tscn
-::res://Scenes/Instanced Objects/NPCS/Enemies/::1712040043
-enemy.gd::GDScript::-1::1711949593::0::1::::Enemy<>CharacterBody2D<>::
-enemy.tscn::PackedScene::2154550679045013638::1712040043::0::1::::<><>::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd<>res://Scripts/States/stateMachine.gd<>res://Scripts/States/enemyIdle.gd<>uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/States/enemyChase.gd<>res://Scripts/States/EnemySearch.gd<>res://Scripts/States/EnemyAttack.gd
-rat.tscn::PackedScene::8662056348502515209::1712040043::0::1::::<><>::uid://5xxet7d3hwvm::::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.tscn<>uid://mxmptelj3bty::::res://Assets/Sprites/NPCS/Enemies/rat.png
-testenemy.tscn::PackedScene::3497641208981697231::1712028853::0::1::::<><>::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd<>uid://do8jjo332jk8r::::res://icon.svg<>uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/States/stateMachine.gd<>res://Scripts/States/enemyIdle.gd<>res://Scripts/States/enemyChase.gd<>res://Scripts/States/EnemySearch.gd<>res://Scripts/States/EnemyAttack.gd
-::res://Scenes/Instanced Objects/World Objects/::1712040043
-area_warp.tscn::PackedScene::250128034326250154::1712040043::0::1::::<><>::res://Scripts/area_warp.gd
-container.tscn::PackedScene::8424209078963509349::1712028853::0::1::::<><>::uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn
-crate.tscn::PackedScene::6439040895083439059::1711941366::0::1::::<><>::uid://diwwei6ppa8ft::::res://Assets/Sprites/World Objects/crate.png<>uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn
-itemLoose.tscn::PackedScene::1169743522561065562::1711941366::0::1::::<><>::uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres<>uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn
-object.tscn::PackedScene::6779406984453959133::1712028853::0::1::::<><>::uid://b824jr26sru8g::::res://Assets/Sprites/World Objects/cabin.png
-pillar.tscn::PackedScene::6430370091166003379::1712028853::0::1::::<><>::uid://do8jjo332jk8r::::res://icon.svg
-testcontainer.tscn::PackedScene::7944271511660936127::1712028853::0::1::::<><>::uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn<>uid://do8jjo332jk8r::::res://icon.svg
-::res://Scripts/::1712040690
-area_warp.gd::GDScript::-1::1711954803::0::1::::Warp<>Area2D<>::
-container_area.gd::GDScript::-1::1711959769::0::1::::ContainerNode<>Area2D<>::
-Cutscene Object.gd::GDScript::-1::1712028853::0::1::::<>Node<>::
-dialogue.gd::GDScript::-1::1712030860::0::1::::<>Node<>::
-dialogue_area.gd::GDScript::-1::1712030860::0::1::::dialogueArea<>Area2D<>::
-Inventory.gd::GDScript::-1::1712040012::0::1::::<>PanelContainer<>::
-Player.gd::GDScript::-1::1712038684::0::1::::Player<>CharacterBody2D<>::
-worldHandler.gd::GDScript::-1::1712040690::0::1::::<>Node2D<>::
-::res://Scripts/Autoload/::1712039476
-item_generator.gd::GDScript::-1::1712039476::0::1::::<>Node<>::
-scene_switcher.gd::GDScript::-1::1711955274::0::1::::<>Node<>::
-settings.gd::GDScript::-1::1712030918::0::1::::<>Node<>::
-::res://Scripts/item classes/::1711957038
-clothing.gd::GDScript::-1::1711934184::0::1::::Clothing<>Item<>::
-food.gd::GDScript::-1::1711859340::0::1::::Food<>Item<>::
-item.gd::GDScript::-1::1711957038::0::1::::Item<>RefCounted<>::
-::res://Scripts/States/::1712028853
-EnemyAttack.gd::GDScript::-1::1711948915::0::1::::EnemyAttack<>State<>::
-enemyChase.gd::GDScript::-1::1711949540::0::1::::EnemyChase<>State<>::
-enemyIdle.gd::GDScript::-1::1711949532::0::1::::EnemyIdle<>State<>::
-EnemySearch.gd::GDScript::-1::1712028853::0::1::::EnemySearch<>State<>::
-state.gd::GDScript::-1::1711944942::0::1::::State<>Node<>::
-stateMachine.gd::GDScript::-1::1711945175::0::1::::<>Node<>::
-::res://Scripts/UI/::1712041453
-item_slot.gd::GDScript::-1::1712040040::0::1::::<>TextureButton<>::
-PauseMenu.gd::GDScript::-1::1711857987::0::1::::<>PanelContainer<>::
-PlayerStats.gd::GDScript::-1::1712041453::0::1::::<>VBoxContainer<>::
-stat_bar.gd::GDScript::-1::1712041453::0::1::::<>Control<>::
+::res://::1712087490
+icon.svg::CompressedTexture2D::8210593632865836435::1711862759::1712087490::1::::<><>::
+to-do.txt::TextFile::-1::1712087271::0::1::::<><>::
+::res://Assets/::1711862759
+::res://Assets/Sprites/::1712087271
+CabinSpriteSheet.png::CompressedTexture2D::1712431337647209296::1711862759::1711862759::1::::<><>::
+girlTemp.png::CompressedTexture2D::3716695338281720616::1712019909::1712019909::1::::<><>::
+itemInteractButton.png::CompressedTexture2D::3412880475278721117::1712087271::1712022335::1::::<><>::
+itemSlot.png::CompressedTexture2D::6548551105423050328::1711875950::1711875952::1::::<><>::
+itemSlotSelected.png::CompressedTexture2D::3916215231939837547::1712087271::1712087271::1::::<><>::
+itemSpriteFrames.tres::SpriteFrames::6744767466932619540::1712087271::0::1::::<><>::uid://bhj0t0mgcletc::::res://Assets/Sprites/itemSpriteSheet.png
+itemSpriteSheet.png::CompressedTexture2D::2897875175746349776::1712087271::1711862759::1::::<><>::
+menuButton.png::CompressedTexture2D::5329329164441193519::1711862759::1711862759::1::::<><>::
+playerTemp.png::CompressedTexture2D::4909822712944327113::1711862759::1711862759::1::::<><>::
+reticle.png::CompressedTexture2D::7053907018652848603::1712019909::1712019909::1::::<><>::
+StatBars.png::CompressedTexture2D::7900044722202565633::1712087271::1712087271::1::::<><>::
+statBarsSpriteFrames.tres::SpriteFrames::8885574487273155752::1712087271::0::1::::<><>::uid://dks3t2hhtro8p::::res://Assets/Sprites/StatBars.png
+test.png::CompressedTexture2D::3133271105970179871::1711862759::1711862759::1::::<><>::
+window.png::CompressedTexture2D::4933937702036970305::1711862759::1711862759::1::::<><>::
+worldSpriteSheet.png::CompressedTexture2D::7953850755225610158::1712019909::1712019927::1::::<><>::
+::res://Assets/Sprites/NPCS/::1712019909
+::res://Assets/Sprites/NPCS/Enemies/::1712019909
+rat.png::CompressedTexture2D::890503207457323890::1712019909::1712019909::1::::<><>::
+::res://Assets/Sprites/Prompts/::1711862759
+Gamepad Prompts.png::CompressedTexture2D::970698809433423249::1711862759::1711862759::1::::<><>::
+Keyboard Prompts.png::CompressedTexture2D::5614360419994199632::1711862759::1711862759::1::::<><>::
+::res://Assets/Sprites/World Objects/::1712019927
+cabin.png::CompressedTexture2D::4760168524083071488::1712019909::1712019927::1::::<><>::
+crate.png::CompressedTexture2D::7767532496566711889::1711867201::1711867208::1::::<><>::
+door.png::CompressedTexture2D::6238908047229478901::1712019909::1712019909::1::::<><>::
+tree.png::CompressedTexture2D::8724781560991644938::1712019909::1712019927::1::::<><>::
+::res://Scenes/::1712087271
+cabin.tscn::PackedScene::8916965006053618381::1712087271::0::1::::<><>::res://Scripts/worldHandler.gd<>uid://ynrq185ctnc7::::res://Assets/Sprites/CabinSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn<>uid://cx0ecet0xu1dv::::res://Scenes/Instanced Objects/World Objects/crate.tscn<>uid://qwvrfxf8fyr7::::res://Scenes/Instanced Objects/World Objects/itemLoose.tscn<>uid://dt2omxug7nikb::::res://Scenes/ui.tscn<>uid://ce1oibigtalrs::::res://Scenes/Instanced Objects/NPCS/girl.tscn<>uid://dtftppak8ll7::::res://Scenes/Instanced Objects/World Objects/area_warp.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn
+overworld.tscn::PackedScene::1060313148995931593::1712087271::0::1::::<><>::res://Scripts/worldHandler.gd<>uid://dlk503n14kgo1::::res://Assets/Sprites/worldSpriteSheet.png<>uid://brfafs40nxg43::::res://Scenes/player.tscn<>uid://dt2omxug7nikb::::res://Scenes/ui.tscn<>uid://dtftppak8ll7::::res://Scenes/Instanced Objects/World Objects/area_warp.tscn<>uid://cu5f50bxex44p::::res://Assets/Sprites/World Objects/door.png<>uid://c3t83v8ufuh5v::::res://Scenes/Instanced Objects/World Objects/object.tscn
+player.tscn::PackedScene::3589962834653275510::1712020240::0::1::::<><>::res://Scripts/Player.gd<>uid://cb7mcesitkwdl::::res://Assets/Sprites/playerTemp.png<>uid://c7q722vag83u2::::res://Assets/Sprites/reticle.png
+ui.tscn::PackedScene::8549460986236159133::1712087271::0::1::::<><>::res://Scripts/dialogue.gd<>uid://ch6tjji0asvx4::::res://Assets/Sprites/menuButton.png<>res://Scripts/UI/PauseMenu.gd<>res://Scripts/Inventory.gd<>res://Scripts/UI/PlayerStats.gd
+::res://Scenes/Instanced Objects/::1712087271
+container_area.tscn::PackedScene::6072844504680275836::1711877156::0::1::::<><>::res://Scripts/container_area.gd
+cutscene_object.tscn::PackedScene::3413190008789695429::1712019909::0::1::::<><>::res://Scripts/Cutscene Object.gd
+dialogue_area.tscn::PackedScene::977528142458478811::1712087271::0::1::::<><>::res://Scripts/dialogue_area.gd
+item.tscn::PackedScene::3731359734523120290::1712020240::0::1::::<><>::uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres
+item_info_label.tscn::PackedScene::6329520304565786341::1712087271::0::1::::<><>::
+item_interaction_button.tscn::PackedScene::8699502484056427982::1712087271::0::1::::<><>::uid://bovhv4cup1eh6::::res://Assets/Sprites/itemInteractButton.png
+item_slot.tscn::PackedScene::3972571444655471499::1712087271::0::1::::<><>::uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/UI/item_slot.gd<>uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres<>uid://bv2bq0th5atex::::res://Assets/Sprites/itemSlotSelected.png
+menu_button.tscn::PackedScene::4551422849620371604::1712020240::0::1::::<><>::uid://ch6tjji0asvx4::::res://Assets/Sprites/menuButton.png
+stat_bar.tscn::PackedScene::699833689298671998::1712087271::0::1::::<><>::res://Scripts/UI/stat_bar.gd<>uid://dyuid4lg0aio3::::res://Assets/Sprites/statBarsSpriteFrames.tres
+::res://Scenes/Instanced Objects/NPCS/::1712087474
+girl.tscn::PackedScene::5108134952973657200::1712087474::0::1::::<><>::res://Scripts/girl.gd<>uid://bs7noufq1tg53::::res://Assets/Sprites/girlTemp.png<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn<>uid://bovm0gljtusgb::::res://Scenes/Instanced Objects/cutscene_object.tscn
+::res://Scenes/Instanced Objects/NPCS/Enemies/::1712020240
+enemy.gd::GDScript::-1::1712019909::0::1::::Enemy<>CharacterBody2D<>::
+enemy.tscn::PackedScene::2154550679045013638::1712020240::0::1::::<><>::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd<>res://Scripts/States/stateMachine.gd<>res://Scripts/States/enemyIdle.gd<>uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/States/enemyChase.gd<>res://Scripts/States/EnemySearch.gd<>res://Scripts/States/EnemyAttack.gd
+rat.tscn::PackedScene::8662056348502515209::1712020240::0::1::::<><>::uid://5xxet7d3hwvm::::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.tscn<>uid://mxmptelj3bty::::res://Assets/Sprites/NPCS/Enemies/rat.png
+testenemy.tscn::PackedScene::3497641208981697231::1712019909::0::1::::<><>::res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd<>uid://do8jjo332jk8r::::res://icon.svg<>uid://c0kfxea2bhx0c::::res://Assets/Sprites/itemSlot.png<>res://Scripts/States/stateMachine.gd<>res://Scripts/States/enemyIdle.gd<>res://Scripts/States/enemyChase.gd<>res://Scripts/States/EnemySearch.gd<>res://Scripts/States/EnemyAttack.gd
+::res://Scenes/Instanced Objects/World Objects/::1712020240
+area_warp.tscn::PackedScene::250128034326250154::1712020240::0::1::::<><>::res://Scripts/area_warp.gd
+container.tscn::PackedScene::8424209078963509349::1712019909::0::1::::<><>::uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn
+crate.tscn::PackedScene::6439040895083439059::1711877157::0::1::::<><>::uid://diwwei6ppa8ft::::res://Assets/Sprites/World Objects/crate.png<>uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn
+itemLoose.tscn::PackedScene::1169743522561065562::1711877157::0::1::::<><>::uid://c3dhlm8kr5l4o::::res://Assets/Sprites/itemSpriteFrames.tres<>uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn
+object.tscn::PackedScene::6779406984453959133::1712019909::0::1::::<><>::uid://b824jr26sru8g::::res://Assets/Sprites/World Objects/cabin.png
+pillar.tscn::PackedScene::6430370091166003379::1712019909::0::1::::<><>::uid://do8jjo332jk8r::::res://icon.svg
+testcontainer.tscn::PackedScene::7944271511660936127::1712019909::0::1::::<><>::uid://csry4kf1bqyam::::res://Scenes/Instanced Objects/container_area.tscn<>uid://n6r0marigtb4::::res://Scenes/Instanced Objects/dialogue_area.tscn<>uid://do8jjo332jk8r::::res://icon.svg
+::res://Scripts/::1712087474
+area_warp.gd::GDScript::-1::1712019909::0::1::::Warp<>Area2D<>::
+container_area.gd::GDScript::-1::1712019909::0::1::::ContainerNode<>Area2D<>::
+Cutscene Object.gd::GDScript::-1::1712019909::0::1::::<>Node<>::
+dialogue.gd::GDScript::-1::1712087474::0::1::::<>Node<>::
+dialogue_area.gd::GDScript::-1::1712087271::0::1::::dialogueArea<>Area2D<>::
+girl.gd::GDScript::-1::1712087474::0::1::::<>RefCounted<>::
+Inventory.gd::GDScript::-1::1712087271::0::1::::<>PanelContainer<>::
+Player.gd::GDScript::-1::1712087271::0::1::::Player<>CharacterBody2D<>::
+worldHandler.gd::GDScript::-1::1712087271::0::1::::<>Node2D<>::
+::res://Scripts/Autoload/::1712087271
+item_generator.gd::GDScript::-1::1712087271::0::1::::<>Node<>::
+scene_switcher.gd::GDScript::-1::1712019909::0::1::::<>Node<>::
+settings.gd::GDScript::-1::1712087271::0::1::::<>Node<>::
+::res://Scripts/item classes/::1712087271
+clothing.gd::GDScript::-1::1711863766::0::1::::Clothing<>Item<>::
+food.gd::GDScript::-1::1712087271::0::1::::Food<>Item<>::
+item.gd::GDScript::-1::1712019909::0::1::::Item<>RefCounted<>::
+::res://Scripts/States/::1712019909
+EnemyAttack.gd::GDScript::-1::1712019909::0::1::::EnemyAttack<>State<>::
+enemyChase.gd::GDScript::-1::1712019909::0::1::::EnemyChase<>State<>::
+enemyIdle.gd::GDScript::-1::1712019909::0::1::::EnemyIdle<>State<>::
+EnemySearch.gd::GDScript::-1::1712019909::0::1::::EnemySearch<>State<>::
+state.gd::GDScript::-1::1712019909::0::1::::State<>Node<>::
+stateMachine.gd::GDScript::-1::1712019909::0::1::::<>Node<>::
+::res://Scripts/UI/::1712087271
+item_slot.gd::GDScript::-1::1712087271::0::1::::<>TextureButton<>::
+PauseMenu.gd::GDScript::-1::1711862759::0::1::::<>PanelContainer<>::
+PlayerStats.gd::GDScript::-1::1712087271::0::1::::<>VBoxContainer<>::
+stat_bar.gd::GDScript::-1::1712087271::0::1::::<>Control<>::

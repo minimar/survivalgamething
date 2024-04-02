@@ -8,14 +8,20 @@
 size = Vector2(16, 16)
 
 [node name="Crate" type="Sprite2D"]
+z_index = 1
+y_sort_enabled = true
 texture = ExtResource("1_g2nli")
+offset = Vector2(0, -8)
 
 [node name="Collision" type="StaticBody2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("RectangleShape2D_8gdy6")
 
 [node name="ContainerArea" parent="." instance=ExtResource("2_ao187")]
+position = Vector2(10, 2)
 
 [node name="dialogueArea" parent="." instance=ExtResource("3_iamaa")]
+position = Vector2(0, -8)
 dialogueText = "An empty crate."

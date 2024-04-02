@@ -1,28 +1,20 @@
-res://Scenes/ui.tscn
+res://Scenes/Instanced Objects/tile_map.tscn
+res://Assets/Sprites/statBarsSpriteFrames.tres
 res://Assets/Sprites/itemSpriteFrames.tres
-res://Scripts/Inventory.gd
-res://to-do.txt
-res://Scenes/Instanced Objects/item_interaction_button.tscn
 res://Scenes/overworld.tscn
+res://Scenes/player.tscn
 res://Scenes/cabin.tscn
+res://Scenes/ui.tscn
 res://Scenes/Instanced Objects/menu_button.tscn
 res://Scenes/Instanced Objects/item.tscn
-res://Scenes/player.tscn
-res://Scenes/Instanced Objects/NPCS/Enemies/enemy.tscn
-res://Scenes/Instanced Objects/NPCS/Enemies/rat.tscn
 res://Scenes/Instanced Objects/NPCS/girl.tscn
 res://Scenes/Instanced Objects/World Objects/area_warp.tscn
 res://Scenes/Instanced Objects/item_slot.tscn
-res://Scripts/dialogue.gd
-res://Scripts/dialogue_area.gd
-res://Scripts/Player.gd
-res://Scripts/Autoload/settings.gd
-res://Scripts/worldHandler.gd
-res://Scripts/UI/item_slot.gd
-res://Scripts/Autoload/item_generator.gd
+res://Scenes/Instanced Objects/item_interaction_button.tscn
 res://Scenes/Instanced Objects/stat_bar.tscn
-res://Assets/Sprites/statBarsSpriteFrames.tres
-res://Scripts/UI/stat_bar.gd
-res://Scripts/UI/PlayerStats.gd
-res://Scripts/item classes/food.gd
 res://Scenes/Instanced Objects/dialogue_area.tscn
+res://Scripts/girl.gd
+res://Scripts/Player.gd
+res://Scenes/Instanced Objects/World Objects/crate.tscn
+res://Scripts/dialogue.gd
+res://Scenes/Instanced Objects/World Objects/object.tscn

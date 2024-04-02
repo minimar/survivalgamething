@@ -31,7 +31,7 @@ size = Vector2(16, 16)
 size = Vector2(19, 16)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(347, 185)
+z_index = 1
 scale = Vector2(2, 2)
 collision_layer = 9
 collision_mask = 9
@@ -41,14 +41,16 @@ script = ExtResource("1_plsyy")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7k0fh")
+offset = Vector2(0, -16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_1bo3f")
 
 [node name="DialogueArea" type="Area2D" parent="."]
+position = Vector2(0, -8)
 collision_layer = 2
 collision_mask = 2
 
@@ -56,6 +58,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_ec67u")
 
 [node name="ContainersArea" type="Area2D" parent="."]
+position = Vector2(0, -8)
 collision_layer = 4
 collision_mask = 4
 
@@ -63,11 +66,11 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_ec67u")
 
 [node name="Aiming Reticle" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("3_ebdcu")
 
 [node name="GunRay" type="RayCast2D" parent="."]
 target_position = Vector2(0, 700)
 
-[node name="GunRayDebug" type="Line2D" parent="."]
-visible = false
+[node name="GunRayDebug" type="Line2D" parent="GunRay"]
 points = PackedVector2Array(0, 0, 0, 0)
