@@ -26,3 +26,5 @@ offset_left = 37.0
 offset_top = 26.0
 offset_right = 54.0
 offset_bottom = 49.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

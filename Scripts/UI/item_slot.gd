@@ -10,3 +10,5 @@ var item:
 			$Sprite.visible = false
 			$Quantity.text = ""
 
+
+

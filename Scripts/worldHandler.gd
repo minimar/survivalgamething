@@ -69,7 +69,8 @@ func _on_player_advance_scene():
 	$"UI/Dialogue Handler".playerAdvanced()
 
 func _on_player_dialogue_signal(resultNode:dialogueNode):
-	$"UI/Dialogue Handler".processDialogue(resultNode.dialogueID, resultNode.dialogueText)
+	print('test: ' + resultNode.sceneID)
+	$"UI/Dialogue Handler".processDialogue(resultNode.sceneID, resultNode.dialogueText)
 
 func _on_player_show_generic_text(text):
 	$"UI/Dialogue Handler".dialogueText = text

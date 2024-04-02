@@ -86,7 +86,7 @@ containerItems = {
 position = Vector2(112, 0)
 
 [node name="dialogueArea" parent="Girl" index="2"]
-dialogueID = "scene1"
+dialoguePriority = 5
 
 [node name="AreaWarp" parent="." instance=ExtResource("8_0fkw3")]
 position = Vector2(104, 200)

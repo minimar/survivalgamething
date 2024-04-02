@@ -1,3 +1,8 @@
+TextureButton
+PanelContainer
+VBoxContainer
+MarginContainer
+HBoxContainer
 Sprite2D
 CollisionShape2D
 Area2D
@@ -8,7 +13,3 @@ EnemyAttack
 EnemySearch
 EnemyChase
 Line2D
-CollisionPolygon2D
-ShapeCast2D
-Node
-NavigationAgent2D
