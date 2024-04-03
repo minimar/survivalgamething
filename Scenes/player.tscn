@@ -59,6 +59,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_ec67u")
 
 [node name="Debug Hitbox Sprite" type="Sprite2D" parent="DialogueArea"]
+visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_jl8b1")
 
@@ -78,4 +79,5 @@ texture = ExtResource("3_ebdcu")
 target_position = Vector2(0, 700)
 
 [node name="GunRayDebug" type="Line2D" parent="GunRay"]
+visible = false
 points = PackedVector2Array(0, 0, 0, 0)
