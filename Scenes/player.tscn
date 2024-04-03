@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://brfafs40nxg43"]
+[gd_scene load_steps=9 format=3 uid="uid://brfafs40nxg43"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_plsyy"]
 [ext_resource type="Texture2D" uid="uid://cb7mcesitkwdl" path="res://Assets/Sprites/playerTemp.png" id="2_e1k7d"]
 [ext_resource type="Texture2D" uid="uid://c7q722vag83u2" path="res://Assets/Sprites/reticle.png" id="3_ebdcu"]
+[ext_resource type="Texture2D" uid="uid://c0kfxea2bhx0c" path="res://Assets/Sprites/itemSlot.png" id="3_jl8b1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tw5jg"]
 atlas = ExtResource("2_e1k7d")
@@ -56,6 +57,10 @@ collision_mask = 2
 
 [node name="Dialog Hitbox" type="CollisionShape2D" parent="DialogueArea"]
 shape = SubResource("RectangleShape2D_ec67u")
+
+[node name="Debug Hitbox Sprite" type="Sprite2D" parent="DialogueArea"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_jl8b1")
 
 [node name="ContainersArea" type="Area2D" parent="."]
 position = Vector2(0, -8)

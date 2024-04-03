@@ -1,8 +1,7 @@
-res://Scenes/Instanced Objects/tile_map.tscn
-res://Assets/Sprites/statBarsSpriteFrames.tres
-res://Assets/Sprites/itemSpriteFrames.tres
-res://Scenes/overworld.tscn
 res://Scenes/player.tscn
+res://Assets/Sprites/itemSpriteFrames.tres
+res://Assets/Sprites/statBarsSpriteFrames.tres
+res://Scenes/overworld.tscn
 res://Scenes/cabin.tscn
 res://Scenes/ui.tscn
 res://Scenes/Instanced Objects/menu_button.tscn
@@ -13,8 +12,7 @@ res://Scenes/Instanced Objects/item_slot.tscn
 res://Scenes/Instanced Objects/item_interaction_button.tscn
 res://Scenes/Instanced Objects/stat_bar.tscn
 res://Scenes/Instanced Objects/dialogue_area.tscn
-res://Scripts/girl.gd
-res://Scripts/Player.gd
+res://Scenes/Instanced Objects/tile_map.tscn
 res://Scenes/Instanced Objects/World Objects/crate.tscn
-res://Scripts/dialogue.gd
 res://Scenes/Instanced Objects/World Objects/object.tscn
+res://Scripts/Player.gd

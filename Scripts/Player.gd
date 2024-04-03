@@ -151,9 +151,9 @@ func _physics_process(_delta):
 		velocity = velocity.normalized()*movementSpeed
 		move_and_slide()
 		if velocity != Vector2(0,0):
-			dialogueArea.position = Vector2(0,12)
+			dialogueArea.position = Vector2(0,-4)
 			dialogueArea.position += velocity * hitboxOffset
-			containersArea.position = Vector2(0,12)
+			containersArea.position = Vector2(0,-4)
 			containersArea.position += velocity * hitboxOffset
 
 signal advanceScene

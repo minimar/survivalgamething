@@ -12,6 +12,7 @@
 size = Vector2(26, 1136.5)
 
 [node name="Overworld" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_18tcn")
 minuteLengthInSeconds = 0.1
 
@@ -29,6 +30,7 @@ position = Vector2(302, -583.25)
 shape = SubResource("RectangleShape2D_50eoj")
 
 [node name="Cabin" parent="TileMap" instance=ExtResource("8_b46nv")]
+z_index = 0
 position = Vector2(88, 136)
 
 [node name="AreaWarp" parent="TileMap/Cabin" instance=ExtResource("6_87ip7")]
@@ -41,7 +43,7 @@ texture = ExtResource("7_1uym7")
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_5v2tu")]
 y_sort_enabled = true
-position = Vector2(88, 160)
+position = Vector2(112, 160)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="TileMap/Player"]
