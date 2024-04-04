@@ -24,6 +24,7 @@ var minuteCountdown = .01
 var warpCoordinates: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	if name == 'Overworld':
 		nightShader = player.find_child("Camera2D").find_child('nightShader')
 	

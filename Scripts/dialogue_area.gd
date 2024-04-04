@@ -12,7 +12,7 @@ class_name dialogueArea
 		else:
 			collision_layer = 2
 			collision_mask = 2
-
+@export var dialogueTriggerOnceOnly := false
 #var initialCheck = true
 #func _process(_delta):
 	#if initialCheck and has_overlapping_bodies():
@@ -22,3 +22,6 @@ class_name dialogueArea
 func _on_body_entered(body):
 	if body is Player and isDialogueTrigger:
 		body.dialogueSignal.emit(self)
+		if dialogueTriggerOnceOnly:
+			collision_layer = 0
+			collision_mask = 0

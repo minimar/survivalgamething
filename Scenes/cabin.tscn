@@ -68,8 +68,9 @@ targetScene = "res://Scenes/overworld.tscn"
 
 [node name="dialogueArea" parent="TileMap" instance=ExtResource("9_shkdv")]
 position = Vector2(104, 184)
-sceneID = "scene1"
+sceneID = "cabinScene"
 isDialogueTrigger = true
+dialogueTriggerOnceOnly = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(104, 80)

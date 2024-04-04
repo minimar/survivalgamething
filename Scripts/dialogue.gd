@@ -1,6 +1,7 @@
 extends Node
 @onready var dialogueBox = $"Dialogue Box"
 @onready var dialogueTextBox = $"Dialogue Box/Dialogue Text Box"
+
 var dialogueText:String:
 	set(value):
 		dialogueText = value
@@ -13,9 +14,9 @@ var dialogueText:String:
 var dialoguePos:int
 
 var sceneDict = {
-	'scene1' = {
+	'cabinScene' = {
 		'dialogue': [
-			'###test'
+			'###cabinScene'
 		]
 	},
 	'meek0' = {
@@ -109,7 +110,7 @@ func findGirl()->Node:
 		return Node.new()
 
 func test():
-	evalDialogue()
+	listValidScenes()
 	#eventHold = true
 	#var girl := findGirl()
 	#var tween = create_tween()
@@ -118,32 +119,40 @@ func test():
 	#tween.tween_property(self,"eventHold",false,0)
 	#tween.tween_property(girl.find_child("dialogueArea"),"sceneID","scene2",0)
 
-func evalDialogue():
+func listValidScenes()->Array:
 	var girl := findGirl()
 	var validScenes = []
 	for key in sceneDict:
 		if checkConfAndMood(key): validScenes.append(key)
+	return validScenes
 
 
 func checkConfAndMood(key:String)->bool:
-	var goodConfidence = true
-	var goodMood = true
-	if sceneDict[key].has('confidence'):
-		goodConfidence = checkConf(key)
-	if sceneDict[key].has('mood'):
-		goodMood = checkMood(key)
+	var goodConfidence = checkConf(key)
+	var goodMood = checkMood(key)
+	print(goodConfidence)
 	return goodConfidence and goodMood
 
 func checkConf(key:String)->bool:
 	var girl := findGirl()
 	var confidence = girl.confidence
-	if sceneDict[key]["confidence"] <= confidence:
-		return true
-	return false
+	var goodConfidence = true
+	if sceneDict[key].has('confidence'):
+		if sceneDict[key]["confidence"] > confidence:
+			goodConfidence = false
+	return goodConfidence
 
 func checkMood(key:String)->bool:
 	var girl := findGirl()
 	var mood = girl.mood
-	if sceneDict[key]["mood"] <= mood:
-		return true
-	return false
+	var goodMood = true
+	if sceneDict[key].has('mood'):
+		if sceneDict[key]["mood"] > mood:
+			goodMood = false
+	return goodMood
+
+func cabinScene():
+	var validScenes = listValidScenes()
+	var randomScene = validScenes[randi_range(0,validScenes.size()-1)]
+	print(randomScene)
+	startScene(randomScene)
