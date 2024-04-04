@@ -1,1 +1,5 @@
-dialogue trigger zone
+-Daily Random Enemy Spawns
+-Armor
+-Player Death
+-Reloading Saves
+-Biomes
