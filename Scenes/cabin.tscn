@@ -58,7 +58,7 @@ position = Vector2(112, 16)
 dialoguePriority = 5
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_vf2bq")]
-position = Vector2(104, 168)
+position = Vector2(104, 191)
 scale = Vector2(1, 1)
 
 [node name="AreaWarp" parent="TileMap" instance=ExtResource("8_0fkw3")]

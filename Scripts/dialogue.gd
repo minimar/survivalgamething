@@ -41,6 +41,8 @@ var sceneDict = {
 		]}
 }
 
+var completedScenes = []
+
 var eventHold = false
 
 func _process(_delta):

@@ -30,6 +30,8 @@ var hunger = 50:
 		if hunger < 1:
 			print("game over")
 var items = []
+var hasLantern = true
+
 
 func updateItems():
 	var newItems = []
