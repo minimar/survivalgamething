@@ -15,7 +15,7 @@ var dialoguePos:int
 var sceneDict = {
 	'scene1' = {
 		'dialogue': [
-			'test'
+			'###test'
 		]
 	},
 	'meek0' = {
@@ -30,10 +30,7 @@ var sceneDict = {
 		'dialogue': [
 			'"Hmm, did you forget something?"'
 		],
-		'confidence':
-			[
-				20
-			]
+		'confidence': 20
 		},
 	'soon1' = {
 		'dialogue': [
@@ -123,9 +120,29 @@ func test():
 
 func evalDialogue():
 	var girl := findGirl()
-	var tween = create_tween()
-	var mood = girl.mood
+	var validScenes = []
+	for key in sceneDict:
+		var confidence = false
+		var mood = false
+		if sceneDict[key].has("confidence"):
+			confidence = checkConf(key)
+		else:
+			confidence = true
+		if sceneDict[key].has("mood"):
+			mood = checkMood(key)
+
+func checkConf(key)->bool:
+	var girl := findGirl()
 	var confidence = girl.confidence
-	for scenes in sceneDict:
-		var sceneList = scenes[confidence]
-		print(sceneList)
+	if sceneDict[key]["confidence"] <= confidence:
+		return true
+	else:
+		return false
+
+func checkMood(key)->bool:
+	var girl := findGirl()
+	var mood = girl.mood
+	if sceneDict[key]["mood"] <= mood:
+		return true
+	else:
+		return false
