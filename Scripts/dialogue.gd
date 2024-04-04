@@ -122,27 +122,28 @@ func evalDialogue():
 	var girl := findGirl()
 	var validScenes = []
 	for key in sceneDict:
-		var confidence = false
-		var mood = false
-		if sceneDict[key].has("confidence"):
-			confidence = checkConf(key)
-		else:
-			confidence = true
-		if sceneDict[key].has("mood"):
-			mood = checkMood(key)
+		if checkConfAndMood(key): validScenes.append(key)
 
-func checkConf(key)->bool:
+
+func checkConfAndMood(key:String)->bool:
+	var goodConfidence = true
+	var goodMood = true
+	if sceneDict[key].has('confidence'):
+		goodConfidence = checkConf(key)
+	if sceneDict[key].has('mood'):
+		goodMood = checkMood(key)
+	return goodConfidence and goodMood
+
+func checkConf(key:String)->bool:
 	var girl := findGirl()
 	var confidence = girl.confidence
 	if sceneDict[key]["confidence"] <= confidence:
 		return true
-	else:
-		return false
+	return false
 
-func checkMood(key)->bool:
+func checkMood(key:String)->bool:
 	var girl := findGirl()
 	var mood = girl.mood
 	if sceneDict[key]["mood"] <= mood:
 		return true
-	else:
-		return false
+	return false
