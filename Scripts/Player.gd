@@ -149,7 +149,7 @@ func eat(foodItem = 'quick'):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	if !scenePause:
-		velocity = Vector2(Input.get_axis("ui_left","ui_right"), Input.get_axis("ui_up","ui_down"))
+		velocity = Vector2(Input.get_axis("Left","Right"), Input.get_axis("Up","Down"))
 		velocity = velocity.normalized()*movementSpeed
 		move_and_slide()
 		if velocity != Vector2(0,0):

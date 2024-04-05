@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt2omxug7nikb"]
+[gd_scene load_steps=9 format=3 uid="uid://dt2omxug7nikb"]
 
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
 [ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="2_giw67"]
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="2_y7we4"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerChoices.gd" id="3_j5syh"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerStats.gd" id="5_yiis5"]
 
@@ -28,7 +29,6 @@ sources/0 = SubResource("TileSetAtlasSource_2snxt")
 script = ExtResource("1_jmj38")
 
 [node name="Dialogue Box" type="TileMap" parent="Dialogue Handler"]
-visible = false
 position = Vector2(0, 768)
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_bk5wx")
@@ -41,6 +41,15 @@ offset_top = 14.25
 offset_right = 1819.25
 offset_bottom = 219.25
 scale = Vector2(0.25, 0.25)
+
+[node name="Player Choices" type="VBoxContainer" parent="Dialogue Handler/Dialogue Box"]
+offset_left = 15.0
+offset_top = 14.0
+offset_right = 463.0
+offset_bottom = 66.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/separation = 5
+script = ExtResource("3_j5syh")
 
 [node name="PauseMenu" type="PanelContainer" parent="."]
 visible = false

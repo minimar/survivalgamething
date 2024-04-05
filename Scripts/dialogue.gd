@@ -99,7 +99,9 @@ func processDialogue(nodeDialogueID, nodeDialogueText):
 		
 func findGirl()->Node:
 	var girl 
+	print('test3')
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		print('test1'+node.name)
 		if node.get_meta("cutsceneObjID") == "girl":
 			girl = node
 			break
@@ -151,8 +153,47 @@ func checkMood(key:String)->bool:
 			goodMood = false
 	return goodMood
 
+func getRandomScene(scenes: Array) -> String:
+	return scenes[randi_range(0,scenes.size()-1)]
+
+func playerDialogueChoice(choices: Array) -> String:
+	dialogueBox.visible = true
+	var playerChoice:String
+	var playerChoices = $"Dialogue Box/Player Choices"
+	var labelSettings = LabelSettings.new()
+	#labelSettings.font_size = 16
+	for choice in choices:
+		var labelNode = Label.new()
+		labelNode.text = choice
+		labelNode.name = str(choices.find(choice))
+		labelNode.label_settings = labelSettings
+		print(labelNode.name)
+		playerChoices.add_child(labelNode)
+	var currentlySelectedChoice = 0
+	playerChoices.get_child(0).text = '> '+playerChoices.get_child(0).text
+	while true:
+		var inputResult = await playerChoices.playerChoiceInput
+		match inputResult:
+			"Up": currentlySelectedChoice -= 1
+			"Down": currentlySelectedChoice += 1
+			"Accept": break
+		for choice in choices:
+			playerChoices.get_child(choices.find(choice)).text = choice
+		print(choices)
+		print(choices.find(currentlySelectedChoice % 3))
+		print(currentlySelectedChoice)
+		print(choices[choices.find(currentlySelectedChoice % 3)])
+		playerChoices.get_child(currentlySelectedChoice % 3).text = '> '+choices[currentlySelectedChoice % 3]
+	for node in playerChoices.get_children():
+		node.queue_free()
+	dialogueBox.visible = false
+	playerChoice = choices[currentlySelectedChoice % 3]
+	return playerChoice
+
+
 func cabinScene():
 	var validScenes = listValidScenes()
-	var randomScene = validScenes[randi_range(0,validScenes.size()-1)]
-	print(randomScene)
-	startScene(randomScene)
+	var randomScene = getRandomScene(validScenes)
+	var choice = await playerDialogueChoice(['test1','test2','test3'])
+	print('choice: ' + choice)
+	#startScene(randomScene)

@@ -21,6 +21,7 @@ class_name dialogueArea
 
 func _on_body_entered(body):
 	if body is Player and isDialogueTrigger:
+		get_tree().create_timer(.1)
 		body.dialogueSignal.emit(self)
 		if dialogueTriggerOnceOnly:
 			collision_layer = 0

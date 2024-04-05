@@ -68,7 +68,7 @@ position = Vector2(-1, 2)
 zoom = Vector2(4, 4)
 
 [node name="nightShader" type="AnimatedSprite2D" parent="TileMap/Player/Camera2D"]
-modulate = Color(1, 1, 1, 0.572549)
+modulate = Color(1, 1, 1, 0)
 z_index = 5
 position = Vector2(-7, -9)
 sprite_frames = SubResource("SpriteFrames_fmeqq")
