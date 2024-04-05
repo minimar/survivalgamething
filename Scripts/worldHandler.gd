@@ -274,9 +274,10 @@ func loadUniversal():
 		player.bullets = newItem
 	player.sortOutfit()
 	#Dialogue Handler
-	for key in saveDict["dialogueHandler"]:
-		match key:
-			'completedScenes': dialogueHandler.completedScenes = saveDict["dialogueHandler"][key]
+	if saveDict.has("dialogueHandler"):
+		for key in saveDict["dialogueHandler"]:
+			match key:
+				'completedScenes': dialogueHandler.completedScenes = saveDict["dialogueHandler"][key]
 
 func saveScene():
 	print("SAVING SCENE")

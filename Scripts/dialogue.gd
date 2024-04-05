@@ -193,7 +193,7 @@ func playerDialogueChoice(choices: Array) -> String:
 
 func cabinScene():
 	var validScenes = listValidScenes()
+	randomize()
 	var randomScene = getRandomScene(validScenes)
-	var choice = await playerDialogueChoice(['test1','test2','test3'])
-	print('choice: ' + choice)
-	#startScene(randomScene)
+	print(randomScene)
+	startScene(randomScene)
