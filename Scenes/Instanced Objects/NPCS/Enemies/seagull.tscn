@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://cpw0f1fjv67t7"]
 
-[ext_resource type="Script" path="res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd" id="1_jf7i3"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_fi3cu"]
 [ext_resource type="Texture2D" uid="uid://c0kfxea2bhx0c" path="res://Assets/Sprites/itemSlot.png" id="2_0w5ra"]
 [ext_resource type="Texture2D" uid="uid://cyutrm3nqtt2u" path="res://Assets/Sprites/NPCS/Enemies/seagull.png" id="2_k84xb"]
 [ext_resource type="Script" path="res://Scripts/States/stateMachine.gd" id="3_o4g3m"]
@@ -292,7 +292,8 @@ size = Vector2(16, 8)
 [node name="Seagull" type="CharacterBody2D"]
 z_index = 1
 motion_mode = 1
-script = ExtResource("1_jf7i3")
+script = ExtResource("1_fi3cu")
+enemyName = "seagull"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, 0)

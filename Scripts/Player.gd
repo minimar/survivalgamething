@@ -8,6 +8,8 @@ const reticleOffset = 80
 const maxInvSlots = 30
 const gunRange = 700
 const gunDamage = 10
+#The distance at which enemies can spawn on a new day
+const minimumSpawnDistance = 300
 
 signal dialogueSignal
 signal showGenericText

@@ -121,6 +121,34 @@ tracks/1/keys = {
 "values": [&"walkDown"]
 }
 
+[sub_resource type="Animation" id="Animation_fe60t"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
 [sub_resource type="Animation" id="Animation_g1hcv"]
 resource_name = "walkDown"
 loop_mode = 1
@@ -233,34 +261,6 @@ tracks/1/keys = {
 "values": [&"walkUp"]
 }
 
-[sub_resource type="Animation" id="Animation_fe60t"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c0320"]
 _data = {
 "RESET": SubResource("Animation_woip3"),
@@ -272,7 +272,7 @@ _data = {
 }
 
 [node name="Rat" instance=ExtResource("1_ak73m")]
-z_index = 1
+enemyName = "rat"
 averageWanderTimer = 0.8
 
 [node name="Sprite" parent="." index="0"]

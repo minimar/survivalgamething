@@ -1,12 +1,14 @@
 extends CharacterBody2D
 class_name Enemy
 
+@export var enemyID: String
+
 @export var health := 30:
 	set(value):
 		health = value
 		if health <= 0:
 			queue_free()
-
+@export var enemyName := "enemy"
 @export var movementSpeed:= 20.0
 @export var averageWanderTimer:= 1.0
 @export var aggroRange:= 150.0
@@ -18,6 +20,9 @@ class_name Enemy
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animationPlayer: AnimationPlayer = $"Sprite/AnimationPlayer"
+
+func _ready():
+	add_to_group("Enemies")
 
 func _physics_process(delta):
 	$SightCone.rotation = move_toward($SightCone.rotation,velocity.angle(),deg_to_rad(rotationSpeed))

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bp3jv0q1lwwrv"]
 
-[ext_resource type="Script" path="res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd" id="1_l5ju7"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_l5ju7"]
 [ext_resource type="Texture2D" uid="uid://do8jjo332jk8r" path="res://icon.svg" id="2_k2xn5"]
 [ext_resource type="Texture2D" uid="uid://c0kfxea2bhx0c" path="res://Assets/Sprites/itemSlot.png" id="2_qyexl"]
 [ext_resource type="Script" path="res://Scripts/States/stateMachine.gd" id="3_l85j7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/States/enemyChase.gd" id="5_gwqnx"]
 [ext_resource type="Script" path="res://Scripts/States/EnemySearch.gd" id="6_d3hok"]
 [ext_resource type="Script" path="res://Scripts/States/EnemyAttack.gd" id="7_xfb6w"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fsiwe"]
 animations = [{

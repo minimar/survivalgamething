@@ -165,7 +165,7 @@ func _process(delta):
 					weather = 'rain'
 				else:
 					weather = 'clear'
-var spawnEnemies = true
+var spawnEnemies = false
 func spawnDailyEnemies():
 	if find_child("Biomes"):
 		var biomes = $Biomes.get_children()
@@ -176,13 +176,106 @@ func spawnDailyEnemies():
 func spawnBiomeEnemies(Biome:biome):
 	var playerExclusionArea = player.find_child("SpawnExclusionArea").polygon
 	var biomeArea = Biome.find_child("CollisionPolygon2D").polygon
+	for i in playerExclusionArea.size():
+		playerExclusionArea[i] = playerExclusionArea[i] + player.global_position
+	#for i in biomeArea.size():
+		#biomeArea[i] = biomeArea[i] + Biome.global_position
 	biomeArea = Geometry2D.clip_polygons(biomeArea,playerExclusionArea)
-	if !biomeArea:
+	if biomeArea.size() == 0:
 		return
-	if Biome.biomeName == 'cabinForest':
-		print('help')
-		$testPolygon.polygon = biomeArea
-	
+	print(weighTriangles(Geometry2D.triangulate_polygon(biomeArea[0]),biomeArea[0]))
+	var holePolygon = false
+	for polygon in biomeArea:
+		print("Is Polygon Clockwise: " + str(Geometry2D.is_polygon_clockwise(polygon)))
+		if Geometry2D.is_polygon_clockwise(polygon):
+			holePolygon = true
+			break
+	if holePolygon:
+		const maxAttempts = 5
+		var enemySpawnsScript = load(Biome.enemySpawns).new()
+		for enemy in enemySpawnsScript.enemySpawns:
+			var enemySpawnQuantityIndex = randi_range(0,enemySpawnsScript.enemySpawns[enemy]["quantity"].size()-1)
+			for num in enemySpawnsScript.enemySpawns[enemy]["quantity"][enemySpawnQuantityIndex]:
+				var spawnPoint
+				for i in maxAttempts:
+					var triangles = Geometry2D.triangulate_polygon(biomeArea[0])
+					var randomPosition = getRandomPointInTriangles(triangles,biomeArea[0])
+					if not randomPosition.distance_to(player.global_position) < player.minimumSpawnDistance:
+						spawnPoint = randomPosition
+					if spawnPoint:
+						break
+				if spawnPoint:
+					var enemyScene = load(enemySpawnsScript.enemySpawns[enemy]['sceneFile'])
+					spawnEnemyAtPoint(enemyScene,spawnPoint)
+	else:
+		var enemySpawnsScript = load(Biome.enemySpawns).new()
+		for enemy in enemySpawnsScript.enemySpawns:
+			var enemySpawnQuantityIndex = randi_range(0,enemySpawnsScript.enemySpawns[enemy]["quantity"].size()-1)
+			for num in enemySpawnsScript.enemySpawns[enemy]["quantity"][enemySpawnQuantityIndex]:
+				var spawnPoint
+				var triangles: PackedInt32Array = []
+				var polygon: PackedVector2Array = []
+				var totalVertices = 0
+				print("BiomeArea: "+str(biomeArea))
+				for individualPolygon in biomeArea:
+					print("Individial Polygon: "+str(individualPolygon))
+					polygon.append_array(individualPolygon)
+					for point in Geometry2D.triangulate_polygon(individualPolygon):
+						print("point+total: " + str(point+totalVertices))
+						triangles.append(point+totalVertices)
+					totalVertices += individualPolygon.size()
+					print("totalVertices: " + str(totalVertices))
+				print("Triangles: "+ str(triangles))
+				print("Polygon: "+ str(polygon))
+				var randomPosition = getRandomPointInTriangles(triangles,polygon)
+				var enemyScene= load(enemySpawnsScript.enemySpawns[enemy]['sceneFile'])
+				spawnEnemyAtPoint(enemyScene, randomPosition)
+
+
+func spawnEnemyAtPoint(enemyScene: PackedScene,spawnPoint: Vector2):
+	var enemyNode: Enemy = enemyScene.instantiate()
+	enemyNode.z_index = 1
+	randomize()
+	var newName = enemyNode.enemyName+str(randi_range(30,10000))
+	enemyNode.name = newName
+	print('Enemy Name:' + newName)
+	enemyNode.position = spawnPoint
+	$TileMap.add_child(enemyNode)
+
+func getRandomPointInTriangles(triangles,polygon) -> Vector2:
+	var triangleWeights = weighTriangles(triangles,polygon)
+	var sumOfWeights = 0
+	for weight in triangleWeights:
+		sumOfWeights += weight.y
+	randomize()
+	var randomRNGWeight = randf_range(0.0,sumOfWeights)
+	var randomTriangle
+	for weight in triangleWeights:
+		if weight.y < randomRNGWeight:
+			randomRNGWeight -= weight.y
+		else:
+			var r1 = randf_range(0,1)
+			var r2 = randf_range(0,1)
+			var a = polygon[triangles[weight.x*3]]
+			var b = polygon[triangles[(weight.x*3)+1]]
+			var c = polygon[triangles[(weight.x*3)+2]]
+			var P = (1-sqrt(r1))*a+sqrt(r2)*(1-r2)*b+sqrt(r1)*r2*c
+			return P
+	return Vector2()
+func weighTriangles(triangulatedPolygon,polygon) -> PackedVector2Array:
+	var triangleWeights = []
+	for i in triangulatedPolygon.size()/3:
+		var pointA = polygon[triangulatedPolygon[i*3]]
+		var pointB = polygon[triangulatedPolygon[(i*3)+1]]
+		var pointC = polygon[triangulatedPolygon[(i*3)+2]]
+		var a = pointA.distance_to(pointB)
+		var b = pointB.distance_to(pointC)
+		var c = pointC.distance_to(pointA)
+		var s = .5*(a+b+c)
+		var area = sqrt(abs(s*(s-a)*(s-b)*(s-c)))
+		triangleWeights.append(Vector2(i,area))
+	return triangleWeights
+
 func _on_dialogue_scene_pause(pause):
 	player.scenePause = pause
 
@@ -312,12 +405,22 @@ func saveScene():
 	else:
 		saveDict = {}
 	saveDict[currentScene] = {}
+	saveDict[currentScene]["containers"] = {}
+	saveDict[currentScene]["enemies"] = {}
 	print("Containers: "+str(get_tree().get_nodes_in_group("Containers")))
 	for container in get_tree().get_nodes_in_group("Containers"):
-		saveDict[currentScene][container.containerID] = {
+		saveDict[currentScene]["containers"][container.containerID] = {
 			"containerID": container.containerID,
 			"containerOpened": container.containerOpened
 		}
+	
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
+		saveDict[currentScene]["enemies"][enemy.name] = {
+			"enemyName":  enemy.enemyName,
+			"position": enemy.global_position
+		}
+		if enemy.get('enemyID'):
+			saveDict[currentScene]["enemies"][enemy.name]["enemyID"] = enemy.enemyID
 	saveFile = FileAccess.open("user://save.sav",FileAccess.WRITE)
 	saveFile.store_string(JSON.stringify(saveDict))
 	saveFile.flush()
@@ -335,11 +438,27 @@ func loadScene():
 		print("Save Dict does not have scene-specific data.")
 		return
 	var containers = get_tree().get_nodes_in_group("Containers")
+	var enemies = get_tree().get_nodes_in_group("Enemies")
 	print(saveDict[currentScene])
-	for key in saveDict[currentScene]:
+	for key in saveDict[currentScene]["containers"]:
 		print("Searching for: "+key)
 		for container in containers:
-			if saveDict[currentScene][key]['containerID'] == container.containerID:
+			if saveDict[currentScene]["containers"][key]['containerID'] == container.containerID:
 				print('Container found.')
-				container.containerOpened = saveDict[currentScene][key]['containerOpened']
+				container.containerOpened = saveDict[currentScene]["containers"][key]['containerOpened']
 				containers.erase(container)
+	for key in saveDict[currentScene]["enemies"]:
+		if !saveDict[currentScene]["enemies"][key].has("enemyID"):
+			var enemyScene = load("res://Scenes/Instanced Objects/NPCS/Enemies/"+saveDict[currentScene]["enemies"][key]['enemyName']+".tscn")
+			var enemyNode = enemyScene.instantiate()
+			enemyNode.name = key
+			$TileMap.add_child(enemyNode)
+			enemyNode.position = str_to_var("Vector2"+saveDict[currentScene]["enemies"][key]['position'])
+		else:
+			for enemy in enemies:
+				if enemy.get("enemyID"):
+					if saveDict[currentScene]["enemies"][key]['enemyID'] == enemy.enemyID:
+						enemy.enemyID = saveDict[currentScene]["enemies"][key]['enemyID']
+						enemy.global_position = saveDict[currentScene]["enemies"][key]['position']
+						enemies.erase(enemy)
+			
