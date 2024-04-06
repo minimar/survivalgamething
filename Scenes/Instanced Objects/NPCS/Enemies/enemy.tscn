@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://5xxet7d3hwvm"]
+[gd_scene load_steps=18 format=3 uid="uid://5xxet7d3hwvm"]
 
 [ext_resource type="Script" path="res://Scenes/Instanced Objects/NPCS/Enemies/enemy.gd" id="1_510pu"]
 [ext_resource type="Script" path="res://Scripts/States/stateMachine.gd" id="2_bkagx"]
@@ -8,16 +8,152 @@
 [ext_resource type="Script" path="res://Scripts/States/EnemySearch.gd" id="6_s3wjm"]
 [ext_resource type="Script" path="res://Scripts/States/EnemyAttack.gd" id="7_fo5vo"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_6rcho"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walkDown",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walkLeft",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walkRight",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walkUp",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ahg18"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_nysri"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_8iit8"]
+resource_name = "walkUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walkUp"]
+}
+
+[sub_resource type="Animation" id="Animation_jgii5"]
+resource_name = "walkLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walkLeft"]
+}
+
+[sub_resource type="Animation" id="Animation_2i5d4"]
+resource_name = "walkRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walkRight"]
+}
+
+[sub_resource type="Animation" id="Animation_3ktcv"]
+resource_name = "walkDown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walkRight"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wukqt"]
+_data = {
+"RESET": SubResource("Animation_nysri"),
+"idle": SubResource("Animation_ahg18"),
+"walkDown": SubResource("Animation_3ktcv"),
+"walkLeft": SubResource("Animation_jgii5"),
+"walkRight": SubResource("Animation_2i5d4"),
+"walkUp": SubResource("Animation_8iit8")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuyo7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_td74n"]
 size = Vector2(16, 8)
 
 [node name="Enemy" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_510pu")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6rcho")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_wukqt")
+}
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yuyo7")

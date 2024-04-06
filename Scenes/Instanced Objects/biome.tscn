@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b182gr8bg8y61"]
+
+[ext_resource type="Script" path="res://Scripts/biome.gd" id="1_4orju"]
+
+[node name="Biome" type="Area2D" node_paths=PackedStringArray("biomeShape")]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_4orju")
+biomeShape = NodePath("CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]

@@ -16,10 +16,28 @@ class_name Enemy
 @export var damage := 10
 @export var attackCooldown:= 2.0
 
-
+@onready var sprite: AnimatedSprite2D = $Sprite
+@onready var animationPlayer: AnimationPlayer = $"Sprite/AnimationPlayer"
 
 func _physics_process(delta):
 	$SightCone.rotation = move_toward($SightCone.rotation,velocity.angle(),deg_to_rad(rotationSpeed))
+	if 'walk' in animationPlayer.current_animation or velocity != Vector2():
+		if velocity == Vector2():
+			if animationPlayer.current_animation == 'walkLeft':
+				sprite.flip_h = true
+			animationPlayer.play('idle')
+		else:
+			updateMovementAnim()
 	move_and_slide()
 
-
+func updateMovementAnim():
+	sprite.flip_h = false
+	var moveDirection = velocity
+	var animationDirection = 'walkDown'
+	if moveDirection.y < 0:
+		animationDirection = 'walkUp'
+	if abs(moveDirection.x) > abs(moveDirection.y):
+		animationDirection = 'walkRight'
+		if moveDirection.x < 0:
+			animationDirection = 'walkLeft'
+	animationPlayer.play(animationDirection)

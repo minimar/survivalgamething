@@ -88,3 +88,8 @@ visible = false
 show_behind_parent = true
 position = Vector2(0, -14)
 texture = ExtResource("5_og2q0")
+
+[node name="SpawnExclusionArea" type="Polygon2D" parent="."]
+visible = false
+scale = Vector2(6, 6)
+polygon = PackedVector2Array(-32, -16, 0, -32, 32, -16, 32, 16, 0, 32, -32, 16)

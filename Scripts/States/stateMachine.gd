@@ -7,11 +7,11 @@ var currentState: State
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_parent().ready
 	for child in get_children():
 		if child is State:
 			stateDict[child.name.to_lower()] = child
 			child.Transition.connect(changeState)
-	
 	if initialState:
 		currentState = initialState
 		currentState.enter()
