@@ -20,7 +20,7 @@ var nightShader
 
 
 var minuteCountdown = .01
-
+var spawnEnemies = true
 var warpCoordinates: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,13 +28,14 @@ func _ready():
 	if name == 'Overworld':
 		nightShader = player.find_child("Camera2D").find_child('nightShader')
 	
-	if spawnEnemies:
-		spawnDailyEnemies()
+	
 	warpCoordinates = sceneSwitcher.getWarpCoordinates()
 	if warpCoordinates != Vector2():
 		player.global_position = warpCoordinates
 	loadUniversal()
 	loadScene()
+	if spawnEnemies:
+		spawnDailyEnemies()
 	#Connect Player Signals
 	player.dialogueSignal.connect(_on_player_dialogue_signal)
 	player.showGenericText.connect(_on_player_show_generic_text)
@@ -165,7 +166,7 @@ func _process(delta):
 					weather = 'rain'
 				else:
 					weather = 'clear'
-var spawnEnemies = false
+
 func spawnDailyEnemies():
 	if find_child("Biomes"):
 		var biomes = $Biomes.get_children()
@@ -337,7 +338,8 @@ func saveUniversal():
 	saveDict["world"] = {
 		"timeOfDay": timeOfDay,
 		"day": day,
-		"weather": weather
+		"weather": weather,
+		"spawnEnemies": spawnEnemies
 	}
 	#Dialogue
 	saveDict["dialogueHandler"] = {
@@ -364,6 +366,7 @@ func loadUniversal():
 			'timeOfDay': timeOfDay = saveDict['world'][key]
 			'weather': weather = saveDict['world'][key]
 			'day': day = saveDict['world'][key]
+			'spawnEnemies': spawnEnemies = saveDict['world'][key]
 	for key in saveDict["player"]:
 		match key:
 			'health': player.health = saveDict["player"][key]
