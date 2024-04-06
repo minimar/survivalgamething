@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pdvg5i74c58p"]
+[gd_scene load_steps=10 format=3 uid="uid://pdvg5i74c58p"]
 
 [ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_18tcn"]
 [ext_resource type="PackedScene" uid="uid://brfafs40nxg43" path="res://Scenes/player.tscn" id="2_5v2tu"]
@@ -12,18 +12,11 @@
 atlas = ExtResource("5_3twg7")
 region = Rect2(0, 0, 512, 302)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cx5kf"]
-atlas = ExtResource("5_3twg7")
-region = Rect2(512, 0, 512, 302)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_fmeqq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bv1eu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cx5kf")
 }],
 "loop": true,
 "name": &"default",
@@ -47,7 +40,7 @@ position = Vector2(72, 110)
 targetScene = "res://Scenes/cabin.tscn"
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_5v2tu")]
-position = Vector2(177, 153)
+position = Vector2(176, 172)
 scale = Vector2(1, 1)
 
 [node name="SpawnExclusionArea" parent="TileMap/Player" index="7"]

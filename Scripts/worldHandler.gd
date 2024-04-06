@@ -32,16 +32,19 @@ func _ready():
 	warpCoordinates = sceneSwitcher.getWarpCoordinates()
 	if warpCoordinates != Vector2():
 		player.global_position = warpCoordinates
-	loadUniversal()
-	loadScene()
+	loadGame()
+	saveUniversal()
 	if spawnEnemies:
 		spawnDailyEnemies()
 	#Connect Player Signals
 	player.dialogueSignal.connect(_on_player_dialogue_signal)
 	player.showGenericText.connect(_on_player_show_generic_text)
 	player.advanceScene.connect(_on_player_advance_scene)
-	print(error_string(player.updateInv.connect(_on_player_update_inv)))
+	player.updateInv.connect(_on_player_update_inv)
+	player.playerDeath.connect(_on_player_death)
 	dialogueHandler.scenePause.connect(_on_dialogue_scene_pause)
+	pauseMenu.createManualSave.connect(createManualSave)
+	pauseMenu.loadSave.connect(restoreSave)
 	
 	for areaWarp in get_tree().get_nodes_in_group("Area Warps"):
 		areaWarp.changeScene.connect(changeScene)
@@ -51,6 +54,13 @@ func changeScene(targetScene,newWarpCoordinates):
 	saveScene()
 	saveUniversal()
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
+
+func restoreSave():
+	var saveDict: Dictionary = getLatestSave()
+	if saveDict.has("player"):
+		if saveDict["player"].has("playerCurrentScene"):
+			sceneSwitcher.changeScene(saveDict["player"]["playerCurrentScene"],str_to_var("Vector2"+saveDict["player"]["position"]))
+
 
 var sunsetStarted = false:
 	set(value):
@@ -298,19 +308,77 @@ func _on_player_update_inv(inv:Array):
 	inventoryUI.hasGun = inv[2]
 	inventoryUI.bullets = inv[3]
 
+func _on_player_death():
+	restoreSave()
+
 func pauseGame():
-	pauseMenu.visible = true
+	pauseMenu.visible = !pauseMenu.visible
 
 
 func showInv():
 	inventoryUI.visible = !inventoryUI.visible
 
-func saveUniversal():
+func createManualSave():
+	var dir = DirAccess.open("user://")
+	if not dir.dir_exists("Manual Saves"):
+		dir.make_dir("Manual Saves")
+	var filePath = "user://Manual Saves/Save"+str(int(Time.get_unix_time_from_system()))
+	var currentSaveDict = getLatestSave()
+	var newSaveFile = FileAccess.open(filePath,FileAccess.WRITE)
+	newSaveFile.store_string(JSON.stringify(currentSaveDict))
+	newSaveFile.flush()
+	newSaveFile.close()
+	saveUniversal(filePath)
+	saveScene(filePath)
+
+
+
+func loadGame() -> void:
+	var saveDict = getLatestSave()
+	loadUniversal(saveDict)
+	loadScene(saveDict)
+
+
+func getLatestSave() -> Dictionary:
+	var quickSaveTimeStamp = 0
+	var quickSaveFile: FileAccess
+	var quickSaveDict
+	if FileAccess.file_exists("user://save.sav"):
+		quickSaveFile = FileAccess.open("user://save.sav",FileAccess.READ)
+		quickSaveDict = JSON.parse_string(quickSaveFile.get_line())
+		quickSaveTimeStamp = quickSaveDict["unixTime"]
+	var latestManualSaveFileName
+	var dir = DirAccess.open("user://")
+	if dir.dir_exists("Manual Saves"):
+		dir.change_dir("Manual Saves")
+		var files = dir.get_files()
+		if files.size() > 0:
+			latestManualSaveFileName = files[files.size()-1]
+			if int(latestManualSaveFileName.right(-4)) > quickSaveTimeStamp:
+				var manualSaveFile = FileAccess.open("user://Manual Saves/"+latestManualSaveFileName,FileAccess.READ)
+				var manualSaveDict = JSON.parse_string(manualSaveFile.get_line())
+				return manualSaveDict
+	if quickSaveDict:
+		return quickSaveDict
+	else:
+		return {}
+
+func saveUniversal(filePath := 'user://save.sav'):
+	var saveDict = createUniversalSaveDict(filePath)
+	var saveFile = FileAccess.open(filePath,FileAccess.WRITE)
+	print('test2 '+ error_string(saveFile.get_open_error()))
+	saveFile.store_string(JSON.stringify(saveDict))
+	saveFile.flush()
+	saveFile.close()
+
+func createUniversalSaveDict(filePath: String) -> Dictionary:
 	var saveFile
 	var saveDict
-	if FileAccess.file_exists("user://save.sav"):
-		saveFile = FileAccess.open("user://save.sav",FileAccess.READ)
-		print(saveFile.get_open_error())
+	#print("HELP: "+filePath)
+	if FileAccess.file_exists(filePath):
+		#print("Testxxx")
+		saveFile = FileAccess.open(filePath,FileAccess.READ)
+		#print(saveFile.get_open_error())
 		saveDict = JSON.parse_string(saveFile.get_line())
 		saveFile.close()
 	else:
@@ -322,7 +390,9 @@ func saveUniversal():
 		"bulletsInGun": player.bulletsInGun,
 		"hasGun": player.hasGun,
 		"items": {},
-		"outfit": {}
+		"outfit": {},
+		"position": player.global_position,
+		'playerCurrentScene': get_tree().current_scene.scene_file_path
 	}
 	if player.bullets:
 		saveDict["player"]["bullets"] = player.bullets.quantity
@@ -334,7 +404,7 @@ func saveUniversal():
 	for outfitPiece in player.outfit:
 		print(outfitPiece)
 		saveDict["player"]["outfit"][outfitPiece.itemID] = 1
-	
+	saveDict["unixTime"] = int(Time.get_unix_time_from_system())
 	saveDict["world"] = {
 		"timeOfDay": timeOfDay,
 		"day": day,
@@ -342,25 +412,21 @@ func saveUniversal():
 		"spawnEnemies": spawnEnemies
 	}
 	#Dialogue
-	saveDict["dialogueHandler"] = {
-		"completedScenes": dialogueHandler.completedScenes
-	}
+	if saveDict.has("dialogueHandler"):
+		saveDict["dialogueHandler"]["completedScenes"] = dialogueHandler.completedScenes
+	else:
+		saveDict["dialogueHandler"] = {
+			"completedScenes": dialogueHandler.completedScenes
+		}
+	if name == 'Cabin':
+		saveDict["dialogueHandler"]["previousCabinDay"] = day
+		saveDict["dialogueHandler"]["previousCabinTime"] = timeOfDay
 	
-	
-	
-	
-	saveFile = FileAccess.open("user://save.sav",FileAccess.WRITE)
-	print('test2 '+ error_string(saveFile.get_open_error()))
-	saveFile.store_string(JSON.stringify(saveDict))
-	saveFile.flush()
-	saveFile.close()
+	return saveDict
 
-func loadUniversal():
-	if !FileAccess.file_exists("user://save.sav"):
+func loadUniversal(saveDict):
+	if !saveDict:
 		return
-	var saveFile = FileAccess.open("user://save.sav",FileAccess.READ)
-	var saveDict = JSON.parse_string(saveFile.get_line())
-	
 	for key in saveDict['world']:
 		match key:
 			'timeOfDay': timeOfDay = saveDict['world'][key]
@@ -394,15 +460,28 @@ func loadUniversal():
 		for key in saveDict["dialogueHandler"]:
 			match key:
 				'completedScenes': dialogueHandler.completedScenes = saveDict["dialogueHandler"][key]
+				'previousCabinDay': dialogueHandler.previousCabinDay = saveDict["dialogueHandler"][key]
+				'previousCabinTime': dialogueHandler.previousCabinTime = saveDict["dialogueHandler"][key]
 
-func saveScene():
+
+
+func saveScene(filePath := "user://save.sav"):
 	print("SAVING SCENE")
-	var currentScene = get_tree().get_current_scene().name
 	var saveFile
+	var saveDict = createSceneSaveDict(filePath)
+	print("Helper2: "+str(saveDict))
+	saveFile = FileAccess.open(filePath,FileAccess.WRITE)
+	saveFile.store_string(JSON.stringify(saveDict))
+	saveFile.flush()
+	saveFile.close()
+
+func createSceneSaveDict(filePath: String)-> Dictionary:
 	var saveDict
-	if FileAccess.file_exists("user://save.sav"):
-		saveFile = FileAccess.open("user://save.sav",FileAccess.READ)
-		print(saveFile.get_open_error())
+	var saveFile
+	var currentScene = get_tree().get_current_scene().name
+	if FileAccess.file_exists(filePath):
+		saveFile = FileAccess.open(filePath,FileAccess.READ)
+		#print(saveFile.get_open_error())
 		saveDict = JSON.parse_string(saveFile.get_line())
 		saveFile.close()
 	else:
@@ -424,19 +503,11 @@ func saveScene():
 		}
 		if enemy.get('enemyID'):
 			saveDict[currentScene]["enemies"][enemy.name]["enemyID"] = enemy.enemyID
-	saveFile = FileAccess.open("user://save.sav",FileAccess.WRITE)
-	saveFile.store_string(JSON.stringify(saveDict))
-	saveFile.flush()
-	saveFile.close()
+	return saveDict
 
 
-func loadScene():
-	print("LOADING SCENE")
-	if !FileAccess.file_exists("user://save.sav"):
-		return
-	var currentScene = get_tree().get_current_scene().name
-	var saveFile = FileAccess.open("user://save.sav",FileAccess.READ)
-	var saveDict = JSON.parse_string(saveFile.get_line())
+func loadScene(saveDict):
+	var currentScene = name
 	if !saveDict.has(currentScene):
 		print("Save Dict does not have scene-specific data.")
 		return

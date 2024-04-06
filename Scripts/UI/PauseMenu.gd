@@ -1,7 +1,7 @@
 extends PanelContainer
 
 var menuButtonNode
-var mainPauseMenuButtons = ['Resume Game','Options','Quit']
+var mainPauseMenuButtons = ['Resume Game','Save Game','Load Game','Options','Quit']
 var optionsMenuButtons = ['placeholder','Return']
 @onready var mainPauseMenu = $MarginContainer/MainPauseMenu
 @onready var optionsMenu = $MarginContainer/OptionsMenu
@@ -22,6 +22,9 @@ func _ready():
 		optionsMenu.add_child(buttonNode)
 		buttonNode.pressed.connect(_on_button_pressed.bind(buttonNode))
 
+signal createManualSave
+signal loadSave
+
 var currentMenu = 'mainPause'
 func _on_button_pressed(buttonNode):
 	var button = buttonNode.name
@@ -29,6 +32,8 @@ func _on_button_pressed(buttonNode):
 		'mainPause':
 			match button:
 				"Resume Game": self.visible = false
+				"Save Game": createManualSave.emit()
+				"Load Game": loadSave.emit()
 				"Options": 
 					mainPauseMenu.visible = false
 					optionsMenu.visible = true

@@ -14,6 +14,7 @@ const minimumSpawnDistance = 300
 signal dialogueSignal
 signal showGenericText
 signal updateInv
+signal playerDeath
 
 var health = 100: 
 	set(value):
@@ -22,23 +23,22 @@ var health = 100:
 			health = 100
 		print("Player Health: "+str(health))
 		if health < 1:
-			print("game over")
+			playerDeath.emit()
 var hunger = 50:
 	set(value):
 		hunger = value
 		if hunger > 100:
 			hunger = 100
+		if hunger < 0:
+			hunger = 0
 		print("Player Hunger: "+str(hunger))
-		if hunger < 1:
-			print("game over")
 var items = []
-var hasLantern = true
+
 
 
 func updateItems():
 	var newItems = []
 	for item in items:
-		
 		for addedItem in newItems:
 			#print(addedItem)
 			if item.itemName == addedItem.itemName and addedItem.stackable:
@@ -53,6 +53,7 @@ func updateItems():
 		if item.quantity > 0:
 			newItems.append(item)
 	items = newItems
+	print('Player Items: ' + str(items))
 	updateInv.emit([items,outfit,hasGun,bullets])
 
 
@@ -98,16 +99,16 @@ var scenePause
 
 @onready var dialogueArea = $DialogueArea
 @onready var containersArea = $ContainersArea
-var itemGenerator 
+
 @onready var settings = $"/root/Settings"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	itemGenerator = $"/root/ItemGenerator"
 	if outfit == []:
-		outfit = [itemGenerator.makeItem('basicHead'),itemGenerator.makeItem('basicTorso'),itemGenerator.makeItem('basicLegs')]
+		outfit = [ItemGenerator.makeItem('basicHead'),ItemGenerator.makeItem('basicTorso'),ItemGenerator.makeItem('basicLegs')]
 	for piece in outfit:
 		print(piece.itemName)
+	updateItems()
 	add_to_group("Player")
 
 
@@ -165,13 +166,18 @@ var fastReload = false
 var normalReload = false
 var reloadTimer = 0.0
 var debugHealthTimer = 0.0
+const hungerDamageCooldown = 15.0
+var hungerDamageTimer = 0.0
 func _process(delta):
 	#debugHealthTimer += delta
 	#if debugHealthTimer > 1.0:
 	#	debugHealthTimer = 0.0
 	#	health -= 5
 	#	hunger -= 3
-	
+	hungerDamageTimer += delta
+	if hungerDamageTimer > hungerDamageCooldown:
+		health -= 5
+		hungerDamageTimer = 0.0
 	reloadTimer += delta
 	if fastReload and reloadTimer > 2.0:
 		if bullets and bullets.quantity > 0:
@@ -196,7 +202,7 @@ func _process(delta):
 	
 	#Debug give player bullets item
 	if Input.is_action_just_pressed('Inventory'):
-		var bulletItem = itemGenerator.makeItem('bullet')
+		var bulletItem = ItemGenerator.makeItem('bullet')
 		bulletItem.quantity = 99
 		bullets = bulletItem
 		updateItems()
@@ -287,7 +293,7 @@ func checkContainers() -> bool:
 		var itemQuantity = 1
 		if container.containerItems[itemKey]:
 			itemQuantity = container.containerItems[itemKey]
-		var item = itemGenerator.makeItem(itemKey)
+		var item = ItemGenerator.makeItem(itemKey)
 		item.quantity = itemQuantity
 		itemTextList += item.itemName +" ("+str(item.quantity)+")\n"
 		for checkItem in items:

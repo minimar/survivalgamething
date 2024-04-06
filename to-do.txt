@@ -1,5 +1,2 @@
--Daily Random Enemy Spawns
 -Armor
--Player Death
--Reloading Saves
--Biomes
+-Interior Darkness

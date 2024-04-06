@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Settings="*res://Scripts/Autoload/settings.gd"
 ItemGenerator="*res://Scripts/Autoload/item_generator.gd"
 SceneSwitcher="*res://Scripts/Autoload/scene_switcher.gd"
+Utility="*res://Scripts/Autoload/utility.gd"
 
 [display]
 

@@ -1,14 +1,13 @@
 extends Node
 @export var cutsceneObjID:String 
-var setup = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print('test9')
+	#Awaits parent ready
 	await get_parent().ready
+	#Adds parent to cutscene objects
 	get_parent().add_to_group("Cutscene Objects")
+	#Gives the parent objID metadata
 	get_parent().set_meta("cutsceneObjID",cutsceneObjID)
-	setup = true
+	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

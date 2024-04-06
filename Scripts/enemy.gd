@@ -24,6 +24,7 @@ class_name Enemy
 func _ready():
 	add_to_group("Enemies")
 
+#Rotates the sightCone based on the current velocity direction, then runs updateMovementAnim
 func _physics_process(delta):
 	$SightCone.rotation = move_toward($SightCone.rotation,velocity.angle(),deg_to_rad(rotationSpeed))
 	if 'walk' in animationPlayer.current_animation or velocity != Vector2():
@@ -35,6 +36,7 @@ func _physics_process(delta):
 			updateMovementAnim()
 	move_and_slide()
 
+#Updates the movement animation to match movement velocity
 func updateMovementAnim():
 	sprite.flip_h = false
 	var moveDirection = velocity

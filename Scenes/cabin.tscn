@@ -69,7 +69,7 @@ scale = Vector2(1, 1)
 
 [node name="AreaWarp" parent="TileMap" instance=ExtResource("8_0fkw3")]
 position = Vector2(104, 200)
-warpCoordinates = Vector2(88, 160)
+warpCoordinates = Vector2(72, 147)
 targetScene = "res://Scenes/overworld.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="."]
