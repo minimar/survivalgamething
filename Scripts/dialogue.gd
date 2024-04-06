@@ -22,7 +22,10 @@ var sceneDict = {
 	'meek0' = {
 		'dialogue': [
 			'"Hey, you\'re back! D-did you find anything cool?"'
-		]},
+		],
+		'confidence': 15,
+		'negative': true
+		},
 	'meek1' = {
 		'dialogue': [
 			'"Oh! You startled me.."'
@@ -36,7 +39,12 @@ var sceneDict = {
 	'soon1' = {
 		'dialogue': [
 			'"Hey! Are you teasing me?"'
-		]}
+		]},
+	'cabin0' = {
+		'dialogue':
+			[
+				'"This should never appear!"'	
+			]}
 }
 
 var completedScenes = []
@@ -140,8 +148,13 @@ func checkConf(key:String)->bool:
 	var confidence = girl.confidence
 	var goodConfidence = true
 	if sceneDict[key].has('confidence'):
-		if sceneDict[key]["confidence"] > confidence:
-			goodConfidence = false
+		if sceneDict[key].has('negative'):
+			if sceneDict[key]["confidence"] < confidence:
+				goodConfidence = false
+			pass
+		else:
+			if sceneDict[key]["confidence"] > confidence:
+				goodConfidence = false
 	return goodConfidence
 
 func checkMood(key:String)->bool:
@@ -149,8 +162,13 @@ func checkMood(key:String)->bool:
 	var mood = girl.mood
 	var goodMood = true
 	if sceneDict[key].has('mood'):
-		if sceneDict[key]["mood"] > mood:
-			goodMood = false
+		if sceneDict[key].has('negative'):
+			if sceneDict[key]["mood"] < mood:
+				goodMood = false
+			pass
+		else:
+			if sceneDict[key]["mood"] > mood:
+				goodMood = false
 	return goodMood
 
 func getRandomScene(scenes: Array) -> String:
@@ -193,7 +211,11 @@ func playerDialogueChoice(choices: Array) -> String:
 
 func cabinScene():
 	var validScenes = listValidScenes()
+	var filteredScenes = []
+	for scene in validScenes:
+		if scene.contains("soon") or scene.contains("meek"):
+			filteredScenes.append(scene)
 	randomize()
-	var randomScene = getRandomScene(validScenes)
+	var randomScene = getRandomScene(filteredScenes)
 	print(randomScene)
 	startScene(randomScene)
