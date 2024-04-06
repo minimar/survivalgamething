@@ -2,7 +2,8 @@ extends Area2D
 class_name biome
 @export var biomeName: String
 @export var biomeShape: CollisionPolygon2D
-@export var enemySpawns: Dictionary
+@export_file("*EnemySpawns.gd") var enemySpawns
+
 var biomePolygon: PackedVector2Array
 # Called when the node enters the scene tree for the first time.
 func _ready():

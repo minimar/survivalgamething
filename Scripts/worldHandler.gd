@@ -28,7 +28,8 @@ func _ready():
 	if name == 'Overworld':
 		nightShader = player.find_child("Camera2D").find_child('nightShader')
 	
-	
+	if spawnEnemies:
+		spawnDailyEnemies()
 	warpCoordinates = sceneSwitcher.getWarpCoordinates()
 	if warpCoordinates != Vector2():
 		player.global_position = warpCoordinates
@@ -84,7 +85,7 @@ func _process(delta):
 	minuteCountdown -= delta
 	#print(nightShader.modulate)
 	if minuteCountdown <= 0:
-		print(timeOfDay)
+		#print(timeOfDay)
 		timeOfDay += 1
 		minuteCountdown = minuteLengthInSeconds
 		if timeOfDay % 60 == 0:
@@ -155,6 +156,8 @@ func _process(delta):
 		if timeOfDay >= 1440:
 			timeOfDay = 0
 			day += 1
+			spawnEnemies = true
+			spawnDailyEnemies()
 			if weather == 'rain':
 				weather = 'postRain'
 			else:
@@ -162,7 +165,24 @@ func _process(delta):
 					weather = 'rain'
 				else:
 					weather = 'clear'
+var spawnEnemies = true
+func spawnDailyEnemies():
+	if find_child("Biomes"):
+		var biomes = $Biomes.get_children()
+		for Biome in biomes:
+			spawnBiomeEnemies(Biome)
+		spawnEnemies = false
 
+func spawnBiomeEnemies(Biome:biome):
+	var playerExclusionArea = player.find_child("SpawnExclusionArea").polygon
+	var biomeArea = Biome.find_child("CollisionPolygon2D").polygon
+	biomeArea = Geometry2D.clip_polygons(biomeArea,playerExclusionArea)
+	if !biomeArea:
+		return
+	if Biome.biomeName == 'cabinForest':
+		print('help')
+		$testPolygon.polygon = biomeArea
+	
 func _on_dialogue_scene_pause(pause):
 	player.scenePause = pause
 
