@@ -1,5 +1,5 @@
 extends Area2D
-class_name Warp
+class_name AreaWarp
 
 @export var warpCoordinates: Vector2
 @export_file("*.tscn") var targetScene

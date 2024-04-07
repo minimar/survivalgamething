@@ -51,6 +51,7 @@ func _ready():
 
 
 func changeScene(targetScene,newWarpCoordinates):
+	print("HELPER")
 	saveScene()
 	saveUniversal()
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
