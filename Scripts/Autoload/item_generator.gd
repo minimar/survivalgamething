@@ -5,7 +5,7 @@ var basicDict = {
 	'rock': {
 		'itemID':'rock',
 		'itemName': "Rock",
-		'description': "A piece of rock.",
+		'description': "A small, jagged rock.",
 		'sprite': 0,
 		'stackable': true,
 		'maxStack': 99
@@ -21,7 +21,7 @@ var basicDict = {
 	'bullet': {
 		'itemID': 'bullet',
 		'itemName': "Bullets",
-		'description': '9mm handgun rounds.',
+		'description': 'Small brass ammunition, intended for a 9mm handgun. They\'re old and worn, flecks of dirt dot their sides.',
 		'sprite': 2,
 		'stackable': true,
 		'maxStack': 99
@@ -37,7 +37,7 @@ var basicDict = {
 	'gun': {
 		'itemID': 'gun',
 		'itemName': 'Handgun',
-		'description': 'Your handgun.',
+		'description': 'Your trusty enforcer of ranged justice. Old and falling to pieces, it\'s a miralce it even fires.',
 		'sprite': 3,
 		'stackable': false
 	}
@@ -116,7 +116,7 @@ var foodDict = {
 	'steak': {
 		'itemID': 'steak',
 		'itemName': 'Cooked Steak',
-		'description': 'A cooked steak.',
+		'description': 'A meal for a real survivor! Thick, tough and juicy, this\'ll satisify a healthy appetite.',
 		'sprite': 0,
 		'stackable': true,
 		'maxStack': 5,

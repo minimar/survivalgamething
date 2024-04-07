@@ -28,27 +28,73 @@ var sceneDict := {
 			'"Hey, you\'re back! D-did you find anything cool?"'
 		],
 		'confidence': 15,
-		'negative': true
-		},
+		'tags': ["negative", "meek"]
+	},
 	'meek1' = {
 		'dialogue': [
 			'"Oh! You startled me.."'
-		]},
+		],
+		'tags': ["meek"]
+	},
 	'soon0' = {
 		'dialogue': [
 			'"Hmm, did you forget something?"'
 		],
+		'tags': ["soon"],
 		'confidence': 20
-		},
+	},
 	'soon1' = {
 		'dialogue': [
 			'"Hey! Are you teasing me?"'
-		]},
+		],
+		'tags': ["soon"]
+	},
 	'cabin0' = {
-		'dialogue':
-			[
-				'"This should never appear!"'	
-			]}
+		'dialogue':[
+			'"I... just wanted to say I\'m really glad you\'re here."',
+			'"I\'m not very strong, or fast, or brave... I don\'t know how I\'d survive."',
+			'"So... thank you."',
+			'###cabin0'
+		],
+		'tags': ["cabin"]
+	},
+	'cabin0Encourage' = {
+		'dialogue':[
+			'"Y-you really think so?"'
+		]			
+	},
+	'cabin0Comfort' = {
+		'dialogue':[
+			'"Well.. thank you."'
+		]
+	},
+	'cabin0Demean' = {
+		'dialogue':[
+			'"I-I will..."'
+		]
+	},
+	'cabin1' = {
+		'dialogue':[
+			'"Did you see all the stars that came out tonight?"',
+			'"There\'s so many more than I\'ve ever seen... It\'s been that way ever since it happened.."',
+			'"I remember my mom calling me a star when I was little."',
+			'"I\'m sure she meant that I\'ll shine... but instead, I feel like I\'m drowning among all the other stars in the skies."',
+			'"Just another star in the sky..."',
+			'###cabin1'
+		],
+		'tags': ["cabin"]
+	},
+	'endOfDay' = {
+		'dialogue':[
+				'"Do you want to have dinner yet?"',
+				'###endOfDayScene'
+		]
+	},
+	'fallback' = {
+		'dialogue':[
+		],
+		'tags': ["cabin"]
+	}
 }
 
 #These vars are loaded by the save file
@@ -103,12 +149,13 @@ func advanceScene() -> void:
 	if sceneDict[sceneStarted]['dialogue'][sceneLine].left(3) == "###":
 		var event = sceneDict[sceneStarted]['dialogue'][sceneLine].right(-3)
 		dialogueBox.visible = false
+		sceneLine += 1
 		call(event)
 	#Otherwise just displays text as normal
 	else:
 		dialogueText = sceneDict[sceneStarted]['dialogue'][sceneLine]
 		dialoguePos = 0
-	sceneLine += 1
+		sceneLine += 1
 
 #returns a string of text fron the text arg, up to the value given.
 func writeText(text: String,value: int) -> String:
@@ -157,6 +204,8 @@ func listValidScenes()->Array:
 	var validScenes = []
 	for scene in sceneDict:
 		if checkConfAndMood(scene): validScenes.append(scene)
+	if validScenes == []:
+		validScenes.append("fallback")
 	return validScenes
 
 #Checks both confidence and mood for a given sceneID, returns true if girl's conf/mood is above the scenes requirements
@@ -172,7 +221,7 @@ func checkConf(sceneID:String)->bool:
 	var confidence = girl.confidence
 	var goodConfidence = true
 	if sceneDict[sceneID].has('confidence'):
-		if sceneDict[sceneID].has('negative'):
+		if not checkTags(sceneID, "negative"):
 			if sceneDict[sceneID]["confidence"] < confidence:
 				goodConfidence = false
 			pass
@@ -199,12 +248,14 @@ func checkMood(sceneID:String)->bool:
 
 #Prompts the player to choose an option, the array is an array of different text options to display, the array index of the choice is returned
 func playerDialogueChoice(choices: Array) -> int:
+	dialogueText = ""
 	dialogueBox.visible = true
 	var playerChoice:String
 	var playerChoices = $"Dialogue Box/Player Choices"
 	var labelSettings = LabelSettings.new()
 	#labelSettings.font_size = 16
 	#Creates a label for each choice, giving it a name that corresponds to the choice's index in the array
+	await get_tree().create_timer(.2).timeout
 	for choice in choices:
 		var labelNode = Label.new()
 		labelNode.text = choice
@@ -239,10 +290,54 @@ func playerDialogueChoice(choices: Array) -> int:
 func cabinScene():
 	var validScenes = listValidScenes()
 	var filteredScenes = []
+	var previousTimestamp = (previousCabinDay * 1440) + previousCabinTime
+	var sceneRoot = get_tree().root.get_node("Cabin")
+	var currentTimestamp = (sceneRoot.day * 1440) + sceneRoot.timeOfDay
 	for scene in validScenes:
-		if scene.contains("soon") or scene.contains("meek"):
+		if checkTags(scene, "soon") and currentTimestamp - previousTimestamp < 5:
+			filteredScenes.append(scene)
+		elif checkTags(scene, "meek"):
 			filteredScenes.append(scene)
 	randomize()
 	var randomScene = Utility.getRandomArrayMember(filteredScenes)
 	print(randomScene)
 	startScene(randomScene)
+
+func cabin0():
+	completedScenes.append("cabin0")
+	var girl := findGirl()
+	var choice = await playerDialogueChoice(["You can be strong, too.", "I\'m happy to keep you safe.", "Just make sure you stay useful."])
+	match choice:
+		0:
+			girl.confidence += 10
+			startScene("cabin0Encourage")
+		1:
+			girl.mood += 10
+			startScene("cabin0Comfort")
+		2:
+			girl.confidence -= 10
+			girl.mood -= 5
+			startScene("cabin0Demean")
+	
+	
+func cabin1():
+	completedScenes.append("cabin1")
+	advanceScene()
+
+func endOfDayScene():
+	var choice =  await playerDialogueChoice(["Yes.", "No, not yet."])
+	var filteredScenes = []
+	randomize()
+	match choice:
+		0:
+			var scenes = listValidScenes()
+			for scene in scenes:
+				if checkTags(scene, "cabin") and not completedScenes.has(scene):
+					filteredScenes.append(scene)
+			var randomScene = Utility.getRandomArrayMember(filteredScenes)
+			startScene(randomScene)
+
+func checkTags(sceneID:String, tag:String) -> bool:
+	if sceneDict[sceneID].has('tags') and sceneDict[sceneID]["tags"].has(tag):
+		return true
+	return false
