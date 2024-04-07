@@ -35,6 +35,7 @@ position = Vector2(0, -80)
 texture = ExtResource("5_sfaql")
 
 [node name="AreaWarp" parent="TileMap" instance=ExtResource("6_w3rkm")]
+position = Vector2(48, 24)
 warpCoordinates = Vector2(48, -424)
 targetScene = "res://Scenes/overworld.tscn"
 
