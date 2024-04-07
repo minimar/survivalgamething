@@ -115,9 +115,6 @@ func _process(delta):
 				print('Time of first tween: '+ str(minuteLengthInSeconds*(30-timeProgressedInSunset)))
 				
 				sunsetTween.tween_property(nightShader, "modulate", Color8(190,78,0,70), int(minuteLengthInSeconds*(30-timeProgressedInSunset)))
-				if player.hasLantern:
-					sunsetTween.tween_property(nightShader,"frame",1,0.1)
-					sunsetTween.tween_callback(player.find_child('Lantern').set_visible.bind(true))
 				sunsetTween.tween_property(nightShader, "modulate", Color8(0,10,72,170), minuteLengthInSeconds*70)
 			else:
 				const opacityUnitsPerMinute = 1.42857
@@ -125,15 +122,10 @@ func _process(delta):
 				const greenUnitsPerMinute = 0.971429
 				const blueUnitsPerMinute = 1.02857
 				nightShader.modulate = Color8(int(190-(redUnitsPerMinute*(timeProgressedInSunset-30))),int(78-(greenUnitsPerMinute*(timeProgressedInSunset-30))),int(blueUnitsPerMinute*(timeProgressedInSunset-30)),int(70+(opacityUnitsPerMinute*(timeProgressedInSunset-30))))
-				if player.hasLantern:
-					sunsetTween.tween_property(nightShader,"frame",1,0.1)
-					sunsetTween.tween_callback(player.find_child('Lantern').set_visible.bind(true))
 				sunsetTween.tween_property(nightShader, "modulate", Color8(0,10,72,170), minuteLengthInSeconds*(100-timeProgressedInSunset))
 		if ((timeOfDay >= startOfNight && timeOfDay <= 1440) or (timeOfDay >= 0 && timeOfDay < startOfSunrise)) and nightShader and !nightStarted:
 			nightStarted = true
 			nightShader.modulate = Color8(0,10,72,170)
-			if player.hasLantern:
-				player.find_child('Lantern').visible = true
 		if (timeOfDay >= startOfSunrise && timeOfDay < startOfDay) and nightShader and !sunriseStarted:
 			sunriseStarted = true
 			var sunsetTween = create_tween()
@@ -145,9 +137,6 @@ func _process(delta):
 				const blueUnitsPerMinute = 1.02857
 				nightShader.modulate = Color8(int(0+(redUnitsPerMinute*(timeProgressedInSunrise))),int(10+(greenUnitsPerMinute*(timeProgressedInSunrise))),int(72-blueUnitsPerMinute*(timeProgressedInSunrise)),int(170-(opacityUnitsPerMinute*(timeProgressedInSunrise))))
 				sunsetTween.tween_property(nightShader, "modulate", Color8(190,78,0,70), minuteLengthInSeconds*(70-timeProgressedInSunrise))
-				if player.hasLantern:
-					sunsetTween.tween_property(nightShader,"frame",0,0.1)
-					sunsetTween.tween_callback(player.find_child('Lantern').set_visible.bind(false))
 				sunsetTween.tween_property(nightShader, "modulate", Color8(190,78,0,0), minuteLengthInSeconds*70)
 			else:
 				print('Start of Sunset Block')
@@ -157,13 +146,7 @@ func _process(delta):
 				nightShader.modulate = Color8(190,78,0,70-int(opacityUnitsPerMinute*timeProgressedInSunrise-70))
 				print(str(minuteLengthInSeconds))
 				print('Time of first tween: '+ str(minuteLengthInSeconds*(100-timeProgressedInSunrise)))
-				if player.hasLantern:
-					sunsetTween.tween_property(nightShader,"frame",0,0.1)
-					sunsetTween.tween_callback(player.find_child('Lantern').set_visible.bind(false))
 				sunsetTween.tween_property(nightShader, "modulate", Color8(190,78,0,0), int(minuteLengthInSeconds*(100-timeProgressedInSunrise)))
-		if timeOfDay > startOfDay:
-			if player.hasLantern:
-				player.find_child('Lantern').visible = false
 		if timeOfDay >= 1440:
 			timeOfDay = 0
 			day += 1
