@@ -48,5 +48,4 @@ func _on_button_pressed(buttonNode):
 
 
 func quitGame():
-	print("Quit Game Function Called")
-	pass
+	SceneSwitcher.changeScene('res://Scenes/title_screen.tscn')

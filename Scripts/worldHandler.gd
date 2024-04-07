@@ -22,7 +22,7 @@ var nightShader
 
 
 var minuteCountdown = .01
-var spawnEnemies = true
+var spawnEnemies = false
 var warpCoordinates: Vector2
 
 
@@ -69,7 +69,7 @@ func changeScene(targetScene,newWarpCoordinates):
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
 
 func restoreSave():
-	var saveDict: Dictionary = getLatestSave()
+	var saveDict: Dictionary = Utility.getLatestSave()
 	if saveDict.has("player"):
 		if saveDict["player"].has("playerCurrentScene"):
 			sceneSwitcher.changeScene(saveDict["player"]["playerCurrentScene"],str_to_var("Vector2"+saveDict["player"]["position"]))
@@ -100,8 +100,7 @@ const startOfSunset = 1140
 const startOfNight = 1240
 const startOfSunrise = 390
 const startOfDay = 490
-var joke = 10.0
-var megaJoke = 500.0
+var joke = 120.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Pause"):
@@ -111,17 +110,14 @@ func _process(delta):
 	minuteCountdown -= delta
 	#print(nightShader.modulate)
 	joke -= delta
-	megaJoke -= delta
 	if joke < 0:
 		print_rich("[color=CRIMSON][font_size=30][shake rate=20.0 level=5 connected=1]ERROR    ERROR     ERROR[/shake][/font_size][/color]")
 		
 		print_rich("[rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=-5.0 connected=1][font_size=20]You fucked it! Way to go asshole![/font_size][/wave][/rainbow]")
 		print_rich("You rn \\/")
 		print_rich("[img=160x160]res://Assets/errorCat.jpg[/img]")
-		joke = 30.0
+		joke = 120.0
 		
-	if megaJoke < 0:
-		print_rich("[img=160x160]res://Assets/errorCat.jpg[/img]")
 	
 	if minuteCountdown <= 0:
 		#print(timeOfDay)
@@ -336,7 +332,7 @@ func createManualSave():
 	if not dir.dir_exists("Manual Saves"):
 		dir.make_dir("Manual Saves")
 	var filePath = "user://Manual Saves/Save"+str(int(Time.get_unix_time_from_system()))
-	var currentSaveDict = getLatestSave()
+	var currentSaveDict = Utility.getLatestSave()
 	var newSaveFile = FileAccess.open(filePath,FileAccess.WRITE)
 	newSaveFile.store_string(JSON.stringify(currentSaveDict))
 	newSaveFile.flush()
@@ -347,34 +343,12 @@ func createManualSave():
 
 
 func loadGame() -> void:
-	var saveDict = getLatestSave()
+	var saveDict = Utility.getLatestSave()
 	loadUniversal(saveDict)
 	loadScene(saveDict)
 
 
-func getLatestSave() -> Dictionary:
-	var quickSaveTimeStamp = 0
-	var quickSaveFile: FileAccess
-	var quickSaveDict
-	if FileAccess.file_exists("user://save.sav"):
-		quickSaveFile = FileAccess.open("user://save.sav",FileAccess.READ)
-		quickSaveDict = JSON.parse_string(quickSaveFile.get_line())
-		quickSaveTimeStamp = quickSaveDict["unixTime"]
-	var latestManualSaveFileName
-	var dir = DirAccess.open("user://")
-	if dir.dir_exists("Manual Saves"):
-		dir.change_dir("Manual Saves")
-		var files = dir.get_files()
-		if files.size() > 0:
-			latestManualSaveFileName = files[files.size()-1]
-			if int(latestManualSaveFileName.right(-4)) > quickSaveTimeStamp:
-				var manualSaveFile = FileAccess.open("user://Manual Saves/"+latestManualSaveFileName,FileAccess.READ)
-				var manualSaveDict = JSON.parse_string(manualSaveFile.get_line())
-				return manualSaveDict
-	if quickSaveDict:
-		return quickSaveDict
-	else:
-		return {}
+
 
 func saveUniversal(filePath := 'user://save.sav'):
 	var saveDict = createUniversalSaveDict(filePath)

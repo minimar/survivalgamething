@@ -48,13 +48,15 @@ func updateStatBar(statType):
 		if i == numberOfBars and roundedStat % 10 == 5:
 			statBubbleNode.halved = true
 
+func _ready():
+	await get_tree().root.ready
+	player = get_tree().get_first_node_in_group("Player")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !player:
-		player = get_tree().get_first_node_in_group("Player")
-	if health != player.health:
-		health = player.health
-	if hunger != player.hunger:
-		hunger = player.hunger
+	if player:
+		if health != player.health:
+			health = player.health
+		if hunger != player.hunger:
+			hunger = player.hunger
 	
