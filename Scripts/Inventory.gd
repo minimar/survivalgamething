@@ -11,9 +11,9 @@ extends PanelContainer
 #Var that updates when the player's item var updates
 var items: Array:
 	set(value):
-		print("Setting Items")
+		#print("Setting Items")
 		items = value
-		print("Items: " + str(items))
+		#print("Items: " + str(items))
 		var itemSlotToFill = 0
 		#Sets each itemSlot to an item until there are no more items.
 		for itemSlot in get_tree().get_nodes_in_group("Item Slots"):
@@ -43,8 +43,8 @@ var hasGun: bool:
 		if hasGun:
 			for slot in get_tree().get_nodes_in_group("Outfit Slots"):
 				if slot.name == 'outfit3':
-					print('outfit3 has gun item')
-					print(gunItem.itemName)
+					#print('outfit3 has gun item')
+					#print(gunItem.itemName)
 					slot.item = gunItem
 
 var gunItem: Item
@@ -63,7 +63,7 @@ var player
 func _ready():
 	#Setup
 	gunItem = ItemGenerator.makeItem('gun')
-	print("Gun: "+str(gunItem))
+	#print("Gun: "+str(gunItem))
 	player = get_tree().get_first_node_in_group("Player")
 	combining = false
 	var itemSlot = preload("res://Scenes/Instanced Objects/item_slot.tscn")
@@ -199,7 +199,8 @@ func combine(item1:Item,item2:Item) -> void:
 	else:
 		player.bullets.quantity -= 1
 	for item in items:
-		print(item.itemName)
+		#print(item.itemName)
+		pass
 	player.updateItems()
 	combining = false
 

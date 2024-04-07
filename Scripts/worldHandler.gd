@@ -24,6 +24,8 @@ var nightShader
 var minuteCountdown = .01
 var spawnEnemies = true
 var warpCoordinates: Vector2
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -52,12 +54,16 @@ func _ready():
 		areaWarp.changeScene.connect(changeScene)
 	screenTransition.visible = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeIn")
+	player.scenePause = true
+	await screenTransition.animation_finished
+	player.scenePause = false
 
 
 func changeScene(targetScene,newWarpCoordinates):
 	print("HELPER")
 	saveScene()
 	saveUniversal()
+	player.scenePause = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeOut")
 	await screenTransition.animation_finished
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
@@ -94,6 +100,8 @@ const startOfSunset = 1140
 const startOfNight = 1240
 const startOfSunrise = 390
 const startOfDay = 490
+var joke = 10.0
+var megaJoke = 500.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Pause"):
@@ -102,6 +110,19 @@ func _process(delta):
 		showInv()
 	minuteCountdown -= delta
 	#print(nightShader.modulate)
+	joke -= delta
+	megaJoke -= delta
+	if joke < 0:
+		print_rich("[color=CRIMSON][font_size=30][shake rate=20.0 level=5 connected=1]ERROR    ERROR     ERROR[/shake][/font_size][/color]")
+		
+		print_rich("[rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=-5.0 connected=1][font_size=20]You fucked it! Way to go asshole![/font_size][/wave][/rainbow]")
+		print_rich("You rn \\/")
+		print_rich("[img=160x160]res://Assets/errorCat.jpg[/img]")
+		joke = 30.0
+		
+	if megaJoke < 0:
+		print_rich("[img=160x160]res://Assets/errorCat.jpg[/img]")
+	
 	if minuteCountdown <= 0:
 		#print(timeOfDay)
 		timeOfDay += 1
@@ -285,6 +306,8 @@ func _on_player_advance_scene():
 
 func _on_player_dialogue_signal(resultNode:dialogueArea):
 	print('test: ' + resultNode.sceneID)
+	if screenTransition.frame != 0:
+		await screenTransition.animation_finished
 	dialogueHandler.processDialogue(resultNode.sceneID, resultNode.dialogueText)
 
 func _on_player_show_generic_text(text):

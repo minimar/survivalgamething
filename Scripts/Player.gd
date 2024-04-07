@@ -53,7 +53,7 @@ func updateItems():
 		if item.quantity > 0:
 			newItems.append(item)
 	items = newItems
-	print('Player Items: ' + str(items))
+	#print('Player Items: ' + str(items))
 	updateInv.emit([items,outfit,hasGun,bullets])
 
 
@@ -206,7 +206,7 @@ func _process(delta):
 		bulletItem.quantity = 99
 		bullets = bulletItem
 		updateItems()
-		print(bullets.itemName + str(bullets.quantity))
+		#print(bullets.itemName + str(bullets.quantity))
 	
 	
 	if Input.is_action_just_pressed("Interact"):
@@ -255,12 +255,12 @@ func fireGun():
 	reload('cancel')
 	if $"Aiming Reticle".visible and bulletsInGun > 0 and hasGun:
 		bulletsInGun -= 1
-		print("BANG: "+str(bulletsInGun))
+		#print("BANG: "+str(bulletsInGun))
 		if $GunRay.is_colliding():
-			print('is colliding' + $GunRay.get_collider().name)
+		#	print('is colliding' + $GunRay.get_collider().name)
 			if $GunRay.get_collider().get('health'):
 				$GunRay.get_collider().health -= gunDamage
-				print('dealt damage')
+		#		print('dealt damage')
 		
 
 func reload(doCancel = 'false'):
@@ -288,7 +288,7 @@ func checkContainers() -> bool:
 	var container = containerNodes[0]
 	var backupItems = items
 	var itemTextList = ""
-	print(container)
+	#print(container)
 	for itemKey in container.containerItems:
 		var itemQuantity = 1
 		if container.containerItems[itemKey]:
@@ -297,7 +297,7 @@ func checkContainers() -> bool:
 		item.quantity = itemQuantity
 		itemTextList += item.itemName +" ("+str(item.quantity)+")\n"
 		for checkItem in items:
-			print(checkItem)
+			#print(checkItem)
 			if item.itemName == checkItem.itemName and checkItem.stackable:
 				if checkItem.quantity + item.quantity > checkItem.maxStack:
 					item.quantity = item.quantity - (checkItem.maxStack - checkItem.quantity)

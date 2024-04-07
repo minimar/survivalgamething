@@ -22,10 +22,6 @@ ItemGenerator="*res://Scripts/Autoload/item_generator.gd"
 SceneSwitcher="*res://Scripts/Autoload/scene_switcher.gd"
 Utility="*res://Scripts/Autoload/utility.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/viewport_width=1920
