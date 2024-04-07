@@ -38,7 +38,7 @@ shape = SubResource("RectangleShape2D_4ht0x")
 
 [node name="dialogueArea" parent="." instance=ExtResource("2_2pqsh")]
 position = Vector2(0, -8)
-sceneID = "scene1"
+sceneID = "endOfDay"
 
 [node name="Cutscene Object" parent="." instance=ExtResource("3_tune5")]
 cutsceneObjID = "girl"
