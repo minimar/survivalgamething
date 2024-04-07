@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://5xxet7d3hwvm"]
+[gd_scene load_steps=19 format=3 uid="uid://5xxet7d3hwvm"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_510pu"]
 [ext_resource type="Script" path="res://Scripts/States/stateMachine.gd" id="2_bkagx"]
@@ -214,8 +214,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuyo7"]
+size = Vector2(18, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_td74n"]
+size = Vector2(19.5398, 14.1675)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3x3t4"]
 size = Vector2(16, 8)
 
 [node name="Enemy" type="CharacterBody2D"]
@@ -250,7 +254,7 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 scale = Vector2(1.02355, 1.05876)
-shape = SubResource("RectangleShape2D_td74n")
+shape = SubResource("RectangleShape2D_3x3t4")
 debug_color = Color(0.952941, 0.203922, 0.219608, 0.419608)
 
 [node name="Debug Hurtbox Sprite" type="Sprite2D" parent="Hurtbox"]

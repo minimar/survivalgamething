@@ -2,7 +2,7 @@ extends VBoxContainer
 
 var inputResult
 signal playerChoiceInput
-func _process(delta):
+func _process(_delta):
 	if get_children():
 		if Input.is_action_just_pressed("Up"):
 			playerChoiceInput.emit("Up")

@@ -97,9 +97,8 @@ var movementSpeed = defaultMovementSpeed
 var scenePause
 
 
-@onready var dialogueArea = $DialogueArea
+@onready var DialogueArea = $DialogueArea
 @onready var containersArea = $ContainersArea
-@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var settings = $"/root/Settings"
 
 # Called when the node enters the scene tree for the first time.
@@ -156,8 +155,8 @@ func _physics_process(_delta):
 		velocity = velocity.normalized()*movementSpeed
 		move_and_slide()
 		if velocity != Vector2(0,0):
-			dialogueArea.position = Vector2(0,-4)
-			dialogueArea.position += velocity * hitboxOffset
+			DialogueArea.position = Vector2(0,-4)
+			DialogueArea.position += velocity * hitboxOffset
 			containersArea.position = Vector2(0,-4)
 			containersArea.position += velocity * hitboxOffset
 
@@ -327,7 +326,7 @@ func checkContainers() -> bool:
 
 
 func checkDialogueNodes():
-	var dialogueNodes = dialogueArea.get_overlapping_areas()
+	var dialogueNodes = DialogueArea.get_overlapping_areas()
 	if dialogueNodes.size() == 0:
 		showGenericText.emit("")
 		return

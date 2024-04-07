@@ -283,3 +283,6 @@ speed_scale = 0.25
 libraries = {
 "": SubResource("AnimationLibrary_c0320")
 }
+
+[node name="CollisionShape2D" parent="SpawnDetectHitbox" index="0"]
+position = Vector2(0, 0.5)

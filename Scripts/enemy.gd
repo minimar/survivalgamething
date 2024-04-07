@@ -25,7 +25,7 @@ func _ready():
 	add_to_group("Enemies")
 
 #Rotates the sightCone based on the current velocity direction, then runs updateMovementAnim
-func _physics_process(delta):
+func _physics_process(_delta):
 	$SightCone.rotation = move_toward($SightCone.rotation,velocity.angle(),deg_to_rad(rotationSpeed))
 	if 'walk' in animationPlayer.current_animation or velocity != Vector2():
 		if velocity == Vector2():

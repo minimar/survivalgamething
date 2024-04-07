@@ -5,7 +5,7 @@ var day = 1
 var weather = "clear"
 const weatherTypes = ["clear","rain","postRain"]
 @export var minuteLengthInSeconds := 10.0
-
+@export var localCamera: Camera2D
 
 @export var oddsOfRain := 4
 
@@ -22,7 +22,7 @@ var nightShader
 
 
 var minuteCountdown = .01
-var spawnEnemies = false
+var spawnEnemies = true
 var warpCoordinates: Vector2
 
 
@@ -38,6 +38,7 @@ func _ready():
 		player.global_position = warpCoordinates
 	loadGame()
 	saveUniversal()
+	saveScene()
 	if spawnEnemies:
 		spawnDailyEnemies()
 	#Connect Player Signals
@@ -47,6 +48,7 @@ func _ready():
 	player.updateInv.connect(_on_player_update_inv)
 	player.playerDeath.connect(_on_player_death)
 	dialogueHandler.scenePause.connect(_on_dialogue_scene_pause)
+	dialogueHandler.shakeScreen.connect(shakeScreen)
 	pauseMenu.createManualSave.connect(createManualSave)
 	pauseMenu.loadSave.connect(restoreSave)
 	
@@ -58,6 +60,16 @@ func _ready():
 	await screenTransition.animation_finished
 	player.scenePause = false
 
+func shakeScreen(intensity:= 4,duration:= 3):
+	var tween = create_tween()
+	duration = duration*5
+	var originalCameraPosition = localCamera.position
+	for i in duration:
+		var shake = Vector2(localCamera.position.x + randf_range(-intensity,intensity),localCamera.position.y + randf_range(-intensity,intensity))
+		tween.tween_property(localCamera,"position",shake,0.1)
+		tween.tween_property(localCamera,"position",localCamera.position.move_toward(originalCameraPosition,float(intensity)/4),0.1)
+	tween.tween_property(localCamera,"position",originalCameraPosition,0.1)
+	
 
 func changeScene(targetScene,newWarpCoordinates):
 	print("HELPER")
@@ -230,7 +242,6 @@ func spawnBiomeEnemies(Biome:biome):
 		for enemy in enemySpawnsScript.enemySpawns:
 			var enemySpawnQuantityIndex = randi_range(0,enemySpawnsScript.enemySpawns[enemy]["quantity"].size()-1)
 			for num in enemySpawnsScript.enemySpawns[enemy]["quantity"][enemySpawnQuantityIndex]:
-				var spawnPoint
 				var triangles: PackedInt32Array = []
 				var polygon: PackedVector2Array = []
 				var totalVertices = 0
@@ -267,7 +278,6 @@ func getRandomPointInTriangles(triangles,polygon) -> Vector2:
 		sumOfWeights += weight.y
 	randomize()
 	var randomRNGWeight = randf_range(0.0,sumOfWeights)
-	var randomTriangle
 	for weight in triangleWeights:
 		if weight.y < randomRNGWeight:
 			randomRNGWeight -= weight.y
@@ -302,7 +312,7 @@ func _on_player_advance_scene():
 
 func _on_player_dialogue_signal(resultNode:dialogueArea):
 	print('test: ' + resultNode.sceneID)
-	if screenTransition.frame != 0:
+	if screenTransition.frame != 11:
 		await screenTransition.animation_finished
 	dialogueHandler.processDialogue(resultNode.sceneID, resultNode.dialogueText)
 
@@ -318,7 +328,7 @@ func _on_player_update_inv(inv:Array):
 	inventoryUI.bullets = inv[3]
 
 func _on_player_death():
-	restoreSave()
+	sceneSwitcher.changeScene("res://Scenes/game_over.tscn")
 
 func pauseGame():
 	pauseMenu.visible = !pauseMenu.visible
@@ -353,7 +363,6 @@ func loadGame() -> void:
 func saveUniversal(filePath := 'user://save.sav'):
 	var saveDict = createUniversalSaveDict(filePath)
 	var saveFile = FileAccess.open(filePath,FileAccess.WRITE)
-	print('test2 '+ error_string(saveFile.get_open_error()))
 	saveFile.store_string(JSON.stringify(saveDict))
 	saveFile.flush()
 	saveFile.close()

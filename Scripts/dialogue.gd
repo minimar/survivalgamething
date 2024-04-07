@@ -94,8 +94,24 @@ var sceneDict := {
 		'dialogue':[
 		],
 		'tags': ["cabin"]
+	},
+	'openingCutscene1' = {
+		'dialogue': [
+			'###openingCutscene1'
+		],
+		'tags': ["special"]
+	},
+	'openingCutscene2' = {
+		'dialogue': [
+			'###openingCutscene2'
+		],
+		'tags': ["special"]
 	}
 }
+
+#A signal that tells the world to shake the screen
+signal shakeScreen
+
 
 #These vars are loaded by the save file
 var completedScenes := []
@@ -121,6 +137,7 @@ var sceneLine := 0
 #A signal that tells the world that a scene is playing and to pause player movement
 signal scenePause
 func startScene(ID:String) -> void:
+	print('Starting Scene: '+ID)
 	#Checks the sceneDict has the scene
 	if !sceneDict.has(ID):
 		push_error('Scene not found: '+str(ID))
@@ -165,6 +182,7 @@ func writeText(text: String,value: int) -> String:
 #This function gets called by the world node when the player either touches or interacts with a dialogue area, depending on if its a trigger.
 #Runs either a scene, if provided, or just displays text.
 func processDialogue(nodeDialogueID: String, nodeDialogueText: String) -> void:
+	print("Processing Dialogue")
 	if nodeDialogueID == "":
 		dialogueText = nodeDialogueText
 		dialoguePos = 0
@@ -200,7 +218,6 @@ func findGirl()->Node:
 
 #Lists the valid scenes and returns them, based on the scenes required confidence/mood and the Girl's current confidence/mood
 func listValidScenes()->Array:
-	var girl := findGirl()
 	var validScenes = []
 	for scene in sceneDict:
 		if checkConfAndMood(scene): validScenes.append(scene)
@@ -341,3 +358,19 @@ func checkTags(sceneID:String, tag:String) -> bool:
 	if sceneDict[sceneID].has('tags') and sceneDict[sceneID]["tags"].has(tag):
 		return true
 	return false
+
+func screenShake(intensity,duration):
+	shakeScreen.emit(intensity,duration)
+
+func openingCutscene1():
+	print("working")
+	var tween = get_tree().create_tween()
+	tween.tween_callback(self.screenShake.bind(10,400))
+	tween.tween_callback(get_tree().root.get_node("Cliffside Overlook/TileMap/CameraHolder/OverlookCamera/CliffSprite").play.bind("default"))
+	advanceScene()
+
+func openingCutscene2():
+	print("working")
+	var tween = get_tree().create_tween()
+	tween.tween_callback(self.screenShake.bind(10,400))
+	advanceScene()
