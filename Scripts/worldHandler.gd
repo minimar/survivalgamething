@@ -13,6 +13,8 @@ const weatherTypes = ["clear","rain","postRain"]
 @onready var sceneSwitcher = $"/root/SceneSwitcher"
 @onready var pauseMenu = $UI/PauseMenu
 @onready var inventoryUI = $UI/Inventory
+@onready var screenTransition = $UI/ScreenTransition
+@onready var screenTransitionAnimationPlayer = $UI/ScreenTransition/AnimationPlayer
 @onready var itemGenerator = $"/root/ItemGenerator"
 @onready var player = find_child("Player")
 var nightShader
@@ -48,12 +50,16 @@ func _ready():
 	
 	for areaWarp in get_tree().get_nodes_in_group("Area Warps"):
 		areaWarp.changeScene.connect(changeScene)
+	screenTransition.visible = true
+	screenTransitionAnimationPlayer.play("ScreenTransitionFadeIn")
 
 
 func changeScene(targetScene,newWarpCoordinates):
 	print("HELPER")
 	saveScene()
 	saveUniversal()
+	screenTransitionAnimationPlayer.play("ScreenTransitionFadeOut")
+	await screenTransition.animation_finished
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
 
 func restoreSave():

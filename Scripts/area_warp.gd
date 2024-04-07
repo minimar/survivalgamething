@@ -11,5 +11,5 @@ func _ready():
 		printerr('Area Warp: '+name+' is missing target scene.')
 	add_to_group("Area Warps")
 
-func _on_player_entered(body):
+func _on_player_entered(player:Player):
 	changeScene.emit(targetScene,warpCoordinates)

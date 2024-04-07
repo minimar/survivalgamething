@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://brfafs40nxg43"]
+[gd_scene load_steps=9 format=3 uid="uid://brfafs40nxg43"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_plsyy"]
 [ext_resource type="Texture2D" uid="uid://cb7mcesitkwdl" path="res://Assets/Sprites/playerTemp.png" id="2_e1k7d"]
 [ext_resource type="Texture2D" uid="uid://c7q722vag83u2" path="res://Assets/Sprites/reticle.png" id="3_ebdcu"]
 [ext_resource type="Texture2D" uid="uid://c0kfxea2bhx0c" path="res://Assets/Sprites/itemSlot.png" id="3_jl8b1"]
-[ext_resource type="Texture2D" uid="uid://cj7x145dqydqn" path="res://Assets/Sprites/lantern.png" id="5_og2q0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tw5jg"]
 atlas = ExtResource("2_e1k7d")
@@ -44,8 +43,6 @@ script = ExtResource("1_plsyy")
 sprite_frames = SubResource("SpriteFrames_7k0fh")
 offset = Vector2(0, -16)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
-
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_1bo3f")
@@ -81,12 +78,6 @@ target_position = Vector2(0, 700)
 [node name="GunRayDebug" type="Line2D" parent="GunRay"]
 visible = false
 points = PackedVector2Array(0, 0, 0, 0)
-
-[node name="Lantern" type="Sprite2D" parent="."]
-visible = false
-show_behind_parent = true
-position = Vector2(0, -14)
-texture = ExtResource("5_og2q0")
 
 [node name="SpawnExclusionArea" type="Polygon2D" parent="."]
 visible = false

@@ -42,7 +42,7 @@ targetScene = "res://Scenes/cabin.tscn"
 [node name="Player" parent="TileMap" instance=ExtResource("2_5v2tu")]
 position = Vector2(176, 168)
 
-[node name="SpawnExclusionArea" parent="TileMap/Player" index="7"]
+[node name="SpawnExclusionArea" parent="TileMap/Player" index="6"]
 color = Color(1, 1, 1, 0.356863)
 
 [node name="Camera2D" type="Camera2D" parent="TileMap/Player"]

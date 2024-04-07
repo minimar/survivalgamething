@@ -99,7 +99,7 @@ var scenePause
 
 @onready var dialogueArea = $DialogueArea
 @onready var containersArea = $ContainersArea
-
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var settings = $"/root/Settings"
 
 # Called when the node enters the scene tree for the first time.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt2omxug7nikb"]
+[gd_scene load_steps=39 format=3 uid="uid://dt2omxug7nikb"]
 
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
 [ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="2_giw67"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/PlayerChoices.gd" id="3_j5syh"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerStats.gd" id="5_yiis5"]
+[ext_resource type="Texture2D" uid="uid://buhu5w2xh2e44" path="res://Assets/Sprites/Special Assets/Screen Transition.png" id="7_dmvad"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2snxt"]
 texture = ExtResource("2_giw67")
@@ -22,6 +23,267 @@ texture = ExtResource("2_giw67")
 
 [sub_resource type="TileSet" id="TileSet_bk5wx"]
 sources/0 = SubResource("TileSetAtlasSource_2snxt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hh1l"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(0, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moo4j"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqlk4"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4psku"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(1440, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fcwe"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(1920, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wax7o"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(2400, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0di7q"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(2880, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tdqb"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(3360, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwmpm"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(3840, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2uch"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(4320, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2kql"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(4800, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb4t4"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v1ny"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s638j"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(480, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1v7m"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(960, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uo10"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(1440, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nssdd"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(1920, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3yvg"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(2400, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fawtc"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(2880, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a12by"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(3360, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sjai"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(3840, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m1tf"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(4320, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6bcp"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(4800, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl754"]
+atlas = ExtResource("7_dmvad")
+region = Rect2(0, 270, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ky3lq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hh1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moo4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqlk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4psku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fcwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wax7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0di7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tdqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwmpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2uch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2kql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb4t4")
+}],
+"loop": false,
+"name": &"FadeIn",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v1ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s638j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1v7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uo10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nssdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3yvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fawtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a12by")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sjai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m1tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6bcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl754")
+}],
+"loop": false,
+"name": &"FadeOut",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_ajm4a"]
+resource_name = "ScreenTransitionFadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenTransition:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"FadeOut"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenTransition")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_146wl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenTransition:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"FadeOut"]
+}
+
+[sub_resource type="Animation" id="Animation_ulyfp"]
+resource_name = "ScreenTransitionFadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenTransition:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"FadeIn"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScreenTransition")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_28lrc"]
+_data = {
+"RESET": SubResource("Animation_146wl"),
+"ScreenTransitionFadeIn": SubResource("Animation_ulyfp"),
+"ScreenTransitionFadeOut": SubResource("Animation_ajm4a")
+}
 
 [node name="UI" type="CanvasLayer"]
 
@@ -154,3 +416,18 @@ theme_override_constants/separation = 0
 [node name="HungerBar" type="HBoxContainer" parent="PlayerStats"]
 layout_mode = 2
 theme_override_constants/separation = 0
+
+[node name="ScreenTransition" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 12
+scale = Vector2(4.1, 4.1)
+sprite_frames = SubResource("SpriteFrames_ky3lq")
+animation = &"FadeOut"
+frame = 11
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_28lrc")
+}
