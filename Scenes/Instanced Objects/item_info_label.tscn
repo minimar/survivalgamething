@@ -2,3 +2,4 @@
 
 [node name="ItemInfoLabel" type="Label"]
 theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
