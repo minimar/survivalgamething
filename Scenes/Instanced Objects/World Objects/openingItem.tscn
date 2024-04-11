@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck83iiccp0f3g"]
+
+[ext_resource type="PackedScene" uid="uid://qwvrfxf8fyr7" path="res://Scenes/Instanced Objects/World Objects/itemLoose.tscn" id="1_68fyr"]
+
+[node name="AnimatedSprite2D" instance=ExtResource("1_68fyr")]
