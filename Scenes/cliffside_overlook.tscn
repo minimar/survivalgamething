@@ -75,5 +75,6 @@ targetScene = "res://Scenes/overworld.tscn"
 [node name="OpeningPickup" parent="TileMap" instance=ExtResource("7_adwms")]
 z_index = 1
 position = Vector2(261, -186)
+frame = 4
 
 [node name="UI" parent="." instance=ExtResource("7_tp10c")]
