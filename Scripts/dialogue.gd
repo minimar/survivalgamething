@@ -382,4 +382,17 @@ func openingCutscene2():
 	advanceScene()
 
 func openingItem():
+	var openingItemNode:dialogueArea
+	var cliffSprite:AnimatedSprite2D
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "openingItem":
+			openingItemNode = node
+			break
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "cliffSprite":
+			cliffSprite = node
+			break
+	openingItemNode.sceneID = ""
+	cliffSprite.play()
+	screenShake(10, 1000)
 	advanceScene()
