@@ -1,5 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck83iiccp0f3g"]
+[gd_scene load_steps=3 format=3 uid="uid://ck83iiccp0f3g"]
 
-[ext_resource type="PackedScene" uid="uid://qwvrfxf8fyr7" path="res://Scenes/Instanced Objects/World Objects/itemLoose.tscn" id="1_68fyr"]
+[ext_resource type="PackedScene" uid="uid://n6r0marigtb4" path="res://Scenes/Instanced Objects/dialogue_area.tscn" id="1_503o8"]
+[ext_resource type="SpriteFrames" uid="uid://c3dhlm8kr5l4o" path="res://Assets/Sprites/itemSpriteFrames.tres" id="2_aq8kj"]
 
-[node name="AnimatedSprite2D" instance=ExtResource("1_68fyr")]
+[node name="dialogueArea" instance=ExtResource("1_503o8")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = ExtResource("2_aq8kj")
+animation = &"items"
+frame = 4

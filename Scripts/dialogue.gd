@@ -106,6 +106,12 @@ var sceneDict := {
 			'###openingCutscene2'
 		],
 		'tags': ["special"]
+	},
+	'openingItem' = {
+		'dialogue': [
+			'You pick up the item of yet to be determined nature. It\'s cold in your hand. Probably.',
+			'###openingItem'
+		]
 	}
 }
 
@@ -373,4 +379,7 @@ func openingCutscene2():
 	print("working")
 	var tween = get_tree().create_tween()
 	tween.tween_callback(self.screenShake.bind(10,400))
+	advanceScene()
+
+func openingItem():
 	advanceScene()
