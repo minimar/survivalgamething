@@ -72,7 +72,7 @@ position = Vector2(48, 24)
 warpCoordinates = Vector2(48, -424)
 targetScene = "res://Scenes/overworld.tscn"
 
-[node name="AnimatedSprite2D" parent="TileMap" instance=ExtResource("7_adwms")]
+[node name="OpeningPickup" parent="TileMap" instance=ExtResource("7_adwms")]
 z_index = 1
 position = Vector2(261, -186)
 

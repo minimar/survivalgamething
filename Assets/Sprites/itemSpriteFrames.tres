@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c3dhlm8kr5l4o"]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c3dhlm8kr5l4o"]
 
 [ext_resource type="Texture2D" uid="uid://bhj0t0mgcletc" path="res://Assets/Sprites/itemSpriteSheet.png" id="1_o5jlq"]
 
@@ -18,6 +18,10 @@ region = Rect2(32, 112, 16, 16)
 atlas = ExtResource("1_o5jlq")
 region = Rect2(48, 112, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_crn5e"]
+atlas = ExtResource("1_o5jlq")
+region = Rect2(64, 112, 16, 16)
+
 [resource]
 animations = [{
 "frames": [{
@@ -32,6 +36,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wr0sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crn5e")
 }],
 "loop": true,
 "name": &"items",
