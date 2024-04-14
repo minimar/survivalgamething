@@ -6,6 +6,7 @@ var weather = "clear"
 const weatherTypes = ["clear","rain","postRain"]
 @export var minuteLengthInSeconds := 10.0
 @export var localCamera: Camera2D
+@export var tileMap: TileMap
 
 @export var oddsOfRain := 4
 
@@ -71,20 +72,20 @@ func shakeScreen(intensity:= 4,duration:= 3):
 	tween.tween_property(localCamera,"position",originalCameraPosition,0.1)
 	
 
-func changeScene(targetScene,newWarpCoordinates):
+func changeScene(targetScene,newWarpCoordinates,subScene):
 	print("HELPER")
 	saveScene()
 	saveUniversal()
 	player.scenePause = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeOut")
 	await screenTransition.animation_finished
-	sceneSwitcher.changeScene(targetScene,newWarpCoordinates)
+	sceneSwitcher.changeScene(targetScene,newWarpCoordinates,subScene)
 
 func restoreSave():
 	var saveDict: Dictionary = Utility.getLatestSave()
 	if saveDict.has("player"):
 		if saveDict["player"].has("playerCurrentScene"):
-			sceneSwitcher.changeScene(saveDict["player"]["playerCurrentScene"],str_to_var("Vector2"+saveDict["player"]["position"]))
+			sceneSwitcher.changeScene(saveDict["player"]["playerCurrentScene"],str_to_var("Vector2"+saveDict["player"]["position"]),saveDict["player"]["subScene"])
 
 
 var sunsetStarted = false:
@@ -269,7 +270,7 @@ func spawnEnemyAtPoint(enemyScene: PackedScene,spawnPoint: Vector2):
 	enemyNode.name = newName
 	print('Enemy Name:' + newName)
 	enemyNode.position = spawnPoint
-	$TileMap.add_child(enemyNode)
+	tileMap.add_child(enemyNode)
 
 func getRandomPointInTriangles(triangles,polygon) -> Vector2:
 	var triangleWeights = weighTriangles(triangles,polygon)
@@ -388,7 +389,8 @@ func createUniversalSaveDict(filePath: String) -> Dictionary:
 		"items": {},
 		"outfit": {},
 		"position": player.global_position,
-		'playerCurrentScene': get_tree().current_scene.scene_file_path
+		'playerCurrentScene': get_tree().current_scene.scene_file_path,
+		"subScene": sceneSwitcher.subScene
 	}
 	if player.bullets:
 		saveDict["player"]["bullets"] = player.bullets.quantity
@@ -522,7 +524,7 @@ func loadScene(saveDict):
 			var enemyScene = load("res://Scenes/Instanced Objects/NPCS/Enemies/"+saveDict[currentScene]["enemies"][key]['enemyName']+".tscn")
 			var enemyNode = enemyScene.instantiate()
 			enemyNode.name = key
-			$TileMap.add_child(enemyNode)
+			tileMap.add_child(enemyNode)
 			enemyNode.position = str_to_var("Vector2"+saveDict[currentScene]["enemies"][key]['position'])
 		else:
 			for enemy in enemies:
