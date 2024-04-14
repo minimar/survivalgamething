@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1csv0gv6chq4"]
+
+[ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_u2qde"]
+[ext_resource type="Script" path="res://Scripts/subsceneHandler.gd" id="2_3rtuk"]
+[ext_resource type="PackedScene" uid="uid://0ynntogy7vmw" path="res://Scenes/Instanced Objects/tile_map.tscn" id="3_6n5np"]
+[ext_resource type="PackedScene" uid="uid://brfafs40nxg43" path="res://Scenes/player.tscn" id="4_2kw6g"]
+[ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="5_sgtc2"]
+
+[node name="City Building Interiors" type="Node2D" node_paths=PackedStringArray("localCamera", "tileMap")]
+script = ExtResource("1_u2qde")
+localCamera = NodePath("Subscene Handler/Camera2D")
+tileMap = NodePath("Subscene Handler/TileMap")
+
+[node name="Subscene Handler" type="Node2D" parent="."]
+script = ExtResource("2_3rtuk")
+
+[node name="TileMap" parent="Subscene Handler" instance=ExtResource("3_6n5np")]
+
+[node name="Player" parent="Subscene Handler/TileMap" instance=ExtResource("4_2kw6g")]
+
+[node name="Camera2D" type="Camera2D" parent="Subscene Handler"]
+zoom = Vector2(4, 4)
+
+[node name="UI" parent="." instance=ExtResource("5_sgtc2")]

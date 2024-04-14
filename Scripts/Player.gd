@@ -95,7 +95,8 @@ var movementSpeed = defaultMovementSpeed
 
 #Pause for scene
 var scenePause
-
+#Pause for screen transition
+var screenTransitionPause = false
 
 @onready var DialogueArea = $DialogueArea
 @onready var containersArea = $ContainersArea
@@ -168,6 +169,8 @@ var debugHealthTimer = 0.0
 const hungerDamageCooldown = 15.0
 var hungerDamageTimer = 0.0
 func _process(delta):
+	if screenTransitionPause:
+		return
 	#debugHealthTimer += delta
 	#if debugHealthTimer > 1.0:
 	#	debugHealthTimer = 0.0
@@ -214,6 +217,7 @@ func _process(delta):
 				#print("test")
 				checkDialogueNodes()
 		else:
+			print("player emitted signal")
 			advanceScene.emit()
 	if settings.controlMode == 'kb&m':
 		if Input.is_action_pressed("Aim"):

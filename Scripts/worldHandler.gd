@@ -57,9 +57,9 @@ func _ready():
 		areaWarp.changeScene.connect(changeScene)
 	screenTransition.visible = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeIn")
-	player.scenePause = true
+	player.screenTransitionPause = true
 	await screenTransition.animation_finished
-	player.scenePause = false
+	player.screenTransitionPause = false
 
 func shakeScreen(intensity:= 4,duration:= 3):
 	var tween = create_tween()
@@ -306,9 +306,11 @@ func weighTriangles(triangulatedPolygon,polygon) -> PackedVector2Array:
 	return triangleWeights
 
 func _on_dialogue_scene_pause(pause):
+	print("player scene pause = "+str(pause))
 	player.scenePause = pause
 
 func _on_player_advance_scene():
+	print("Player Received in world")
 	dialogueHandler.playerAdvanced()
 
 func _on_player_dialogue_signal(resultNode:dialogueArea):

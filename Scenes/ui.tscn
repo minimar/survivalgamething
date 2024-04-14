@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerStats.gd" id="5_yiis5"]
 [ext_resource type="Texture2D" uid="uid://buhu5w2xh2e44" path="res://Assets/Sprites/Special Assets/Screen Transition.png" id="7_dmvad"]
-[ext_resource type="PackedScene" uid="uid://bovm0gljtusgb" path="res://Scenes/Instanced Objects/cutscene_object.tscn" id="8_xmgeb"]
+[ext_resource type="PackedScene" uid="uid://bovm0gljtusgb" path="res://Scenes/Instanced Objects/cutscene_object.tscn" id="8_xfexo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2snxt"]
 texture = ExtResource("2_giw67")
@@ -440,5 +440,5 @@ libraries = {
 "": SubResource("AnimationLibrary_28lrc")
 }
 
-[node name="Cutscene Object" parent="ScreenTransition/AnimationPlayer" instance=ExtResource("8_xmgeb")]
+[node name="Cutscene Object" parent="ScreenTransition/AnimationPlayer" instance=ExtResource("8_xfexo")]
 cutsceneObjID = "fade"

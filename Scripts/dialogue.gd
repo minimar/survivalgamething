@@ -143,7 +143,7 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			'###kalmTransition'
+			'###screenTransitionFade'
 		]
 	},
 	'openingKalm' = {
@@ -189,6 +189,7 @@ func startScene(ID:String) -> void:
 	if !sceneDict.has(ID):
 		push_error('Scene not found: '+str(ID))
 		return
+	print("emit signal")
 	#Sets up the scene, then advances it to run the first line.
 	scenePause.emit(true)
 	sceneStarted = ID
@@ -197,13 +198,16 @@ func startScene(ID:String) -> void:
 
 #Runs when the player presses Interact during a scene.
 func playerAdvanced() -> void:
+	print("player advanced")
 	if !eventHold:
 		advanceScene()
 
 func advanceScene() -> void:
+	print("Advancing Scene")
 	dialogueBox.visible = true
 	#Resets scene data and returns, if the sceneLine is bigger than the scene size, I.e. when the scene is over.
 	if sceneDict[sceneStarted]['dialogue'].size() < sceneLine+1:
+		print('test')
 		scenePause.emit(false)
 		sceneStarted = ""
 		sceneLine = 0
@@ -312,6 +316,7 @@ func checkMood(sceneID:String)->bool:
 
 #Prompts the player to choose an option, the array is an array of different text options to display, the array index of the choice is returned
 func playerDialogueChoice(choices: Array) -> int:
+	print("playerDialogueChoice Fired")
 	dialogueText = ""
 	dialogueBox.visible = true
 	var playerChoice:String
@@ -459,11 +464,13 @@ func completeOpening():
 	completedScenes.append("openingCabin")
 	advanceScene()
 
-func kalmTransition():
+func screenTransitionFade():
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
 			fadeNode = node
 			break
 	fadeNode.play("ScreenTransitionFadeOut")
+	await fadeNode.animation_finished
+	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
