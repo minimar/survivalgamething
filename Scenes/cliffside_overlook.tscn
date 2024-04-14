@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ec4t386hbnxr"]
+[gd_scene load_steps=13 format=3 uid="uid://ec4t386hbnxr"]
 
 [ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_25iut"]
 [ext_resource type="PackedScene" uid="uid://0ynntogy7vmw" path="res://Scenes/Instanced Objects/tile_map.tscn" id="2_52lmq"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/Scene Specific Scripts/OverlookCamera.gd" id="4_b8d4w"]
 [ext_resource type="Texture2D" uid="uid://dif50dcp3es6c" path="res://Assets/Sprites/Special Assets/CliffsideOverlook-sheet.png" id="5_ykb6a"]
 [ext_resource type="PackedScene" uid="uid://dtftppak8ll7" path="res://Scenes/Instanced Objects/World Objects/area_warp.tscn" id="6_w3rkm"]
-[ext_resource type="PackedScene" uid="uid://ck83iiccp0f3g" path="res://Scenes/Instanced Objects/World Objects/openingItem.tscn" id="7_adwms"]
 [ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="7_tp10c"]
 [ext_resource type="PackedScene" uid="uid://bovm0gljtusgb" path="res://Scenes/Instanced Objects/cutscene_object.tscn" id="8_0aet6"]
 
@@ -75,13 +74,5 @@ cutsceneObjID = "cliffSprite"
 position = Vector2(48, 24)
 warpCoordinates = Vector2(48, -424)
 targetScene = "res://Scenes/overworld.tscn"
-
-[node name="openingItem" parent="TileMap" instance=ExtResource("7_adwms")]
-z_index = 1
-position = Vector2(254, -186)
-sceneID = "openingItem"
-
-[node name="Cutscene Object" parent="TileMap/openingItem" instance=ExtResource("8_0aet6")]
-cutsceneObjID = "openingItem"
 
 [node name="UI" parent="." instance=ExtResource("7_tp10c")]
