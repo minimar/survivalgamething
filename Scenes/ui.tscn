@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dt2omxug7nikb"]
+[gd_scene load_steps=40 format=3 uid="uid://dt2omxug7nikb"]
 
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_jmj38"]
 [ext_resource type="Texture2D" uid="uid://ch6tjji0asvx4" path="res://Assets/Sprites/menuButton.png" id="2_giw67"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_ajafu"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerStats.gd" id="5_yiis5"]
 [ext_resource type="Texture2D" uid="uid://buhu5w2xh2e44" path="res://Assets/Sprites/Special Assets/Screen Transition.png" id="7_dmvad"]
+[ext_resource type="PackedScene" uid="uid://bovm0gljtusgb" path="res://Scenes/Instanced Objects/cutscene_object.tscn" id="8_xmgeb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2snxt"]
 texture = ExtResource("2_giw67")
@@ -438,3 +439,6 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_28lrc")
 }
+
+[node name="Cutscene Object" parent="ScreenTransition/AnimationPlayer" instance=ExtResource("8_xmgeb")]
+cutsceneObjID = "fade"

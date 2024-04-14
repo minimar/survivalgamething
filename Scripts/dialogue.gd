@@ -112,6 +112,47 @@ var sceneDict := {
 			'You pick up the item of yet to be determined nature. It\'s cold in your hand. Probably.',
 			'###openingItem'
 		]
+	},
+	'openingCabin' = {
+		'dialogue': [
+			'"S-stop! Don\'t come any closer!"',
+			'"Please... don\'t hurt me..."',
+			'###openingChoice'
+		],
+		'tags': ["cabin"]
+	},
+	'openingOkay' = {
+		'dialogue': [
+			'""I-I\'m fine..."',
+			'###openingCont'
+		]
+	},
+	'openingNoHurt' = {
+		'dialogue': [
+			'"R-really...?"',
+			'###openingCont'
+		]
+	},
+	'openingLeave' = {
+		'dialogue': [
+			'"Y-yes, right away! I\'m sorry!"',
+			'###openingGirlExit'
+		]
+	},
+	'openingPanik' = {
+		'dialogue': [
+			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
+			'"I don\'t know what to do... I\'m so scared..."',
+			'###kalmTransition'
+		]
+	},
+	'openingKalm' = {
+		'dialogue': [
+			'[Some time passes as you try to calm her.]',
+			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
+			'"I can try and fix this place up a bit... and you can try finding us some food and maybe a way off the island!"',
+			'###completeOpening'
+		]
 	}
 }
 
@@ -278,7 +319,7 @@ func playerDialogueChoice(choices: Array) -> int:
 	var labelSettings = LabelSettings.new()
 	#labelSettings.font_size = 16
 	#Creates a label for each choice, giving it a name that corresponds to the choice's index in the array
-	await get_tree().create_timer(.2).timeout
+	await get_tree().create_timer(.4).timeout
 	for choice in choices:
 		var labelNode = Label.new()
 		labelNode.text = choice
@@ -316,13 +357,17 @@ func cabinScene():
 	var previousTimestamp = (previousCabinDay * 1440) + previousCabinTime
 	var sceneRoot = get_tree().root.get_node("Cabin")
 	var currentTimestamp = (sceneRoot.day * 1440) + sceneRoot.timeOfDay
-	for scene in validScenes:
-		if checkTags(scene, "soon") and currentTimestamp - previousTimestamp < 5:
-			filteredScenes.append(scene)
-		elif checkTags(scene, "meek"):
-			filteredScenes.append(scene)
-	randomize()
-	var randomScene = Utility.getRandomArrayMember(filteredScenes)
+	var randomScene = ""
+	if completedScenes.has("openingCabin"):
+		for scene in validScenes:
+			if checkTags(scene, "soon") and currentTimestamp - previousTimestamp < 5:
+				filteredScenes.append(scene)
+			elif checkTags(scene, "meek"):
+				filteredScenes.append(scene)
+		randomize()
+		randomScene = Utility.getRandomArrayMember(filteredScenes)
+	else:
+		randomScene = "openingCabin"
 	print(randomScene)
 	startScene(randomScene)
 
@@ -396,3 +441,29 @@ func openingItem():
 	cliffSprite.play()
 	screenShake(10, 1000)
 	advanceScene()
+
+func openingChoice():
+	var choice = await playerDialogueChoice(["Are you okay?", "I\'m not going to hurt you.", "Get out, now."])
+	match choice:
+		0:
+			startScene("openingOkay")
+		1:
+			startScene("openingNoHurt")
+		2:
+			startScene("openingLeave")
+
+func openingCont():
+	startScene("openingPanik")
+
+func completeOpening():
+	completedScenes.append("openingCabin")
+	advanceScene()
+
+func kalmTransition():
+	var fadeNode:AnimationPlayer
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
+			fadeNode = node
+			break
+	fadeNode.play("ScreenTransitionFadeOut")
+	await fadeNode.animation_finished
