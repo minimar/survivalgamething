@@ -143,15 +143,12 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			'###screenTransitionFade'
-		]
-	},
-	'openingKalm' = {
-		'dialogue': [
+			'###screenTransitionFadeOut',
 			'[Some time passes as you try to calm her.]',
+			'###screenTransitionFadeIn',
 			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
 			'"I can try and fix this place up a bit... and you can try finding us some food and maybe a way off the island!"',
-			'###completeOpening'
+			'###completeOpening'			
 		]
 	}
 }
@@ -464,7 +461,7 @@ func completeOpening():
 	completedScenes.append("openingCabin")
 	advanceScene()
 
-func screenTransitionFade():
+func screenTransitionFadeFull():
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
@@ -474,3 +471,24 @@ func screenTransitionFade():
 	await fadeNode.animation_finished
 	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
+	advanceScene()
+
+func screenTransitionFadeIn():
+	var fadeNode:AnimationPlayer
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
+			fadeNode = node
+			break
+	fadeNode.play("ScreenTransitionFadeIn")
+	await fadeNode.animation_finished
+	advanceScene()	
+	
+func screenTransitionFadeOut():
+	var fadeNode:AnimationPlayer
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
+			fadeNode = node
+			break
+	fadeNode.play("ScreenTransitionFadeOut")
+	await fadeNode.animation_finished
+	advanceScene()	
