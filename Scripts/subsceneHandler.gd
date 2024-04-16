@@ -2,15 +2,15 @@ extends Node2D
 class_name SubsceneHandler
 
 var player
-var subScene: String
-var cityInteriorSubScenes = {
+var subscene: String
+var cityInteriorSubscenes = {
 	"apartmentBuilding1": {
 		"player": Vector2(64,93),
 		"camera": Vector2(0,0)
 	},
 	"apartmentBuilding1A": {
 		"player": Vector2(),
-		"camera": Vector2()
+		"camera": Vector2(488,-56)
 	}
 }
 
@@ -19,19 +19,22 @@ func _ready():
 	
 
 
-func changeSubScene(newSubScene,changePlayerPosition = false):
-	subScene = newSubScene
+func changeSubScene(newSubscene,changePlayerPosition = false):
+	print('test')
 	var playerTargetPosition
 	var cameraTargetPosition
-	if cityInteriorSubScenes.has(newSubScene):
+	if cityInteriorSubscenes.has(newSubscene):
 		if cameraTargetPosition:
 			push_error("TWO DICTS, SAME SUBSCENE ID: cityInteriorSubScenes")
-		
-		cameraTargetPosition = cityInteriorSubScenes[newSubScene]["camera"]
-		playerTargetPosition = cityInteriorSubScenes[newSubScene]["player"]
+		print('test2')
+		cameraTargetPosition = cityInteriorSubscenes[newSubscene]["camera"]
+		playerTargetPosition = cityInteriorSubscenes[newSubscene]["player"]
 		
 	#ADD NEW SUBSCENE DICTS HERE
-	
+	if not cameraTargetPosition and not cameraTargetPosition == Vector2() :
+		push_error('No subscene found: '+newSubscene)
+		return
+	subscene = newSubscene
 	if changePlayerPosition:
 		player.position = playerTargetPosition
 	get_parent().localCamera.position = cameraTargetPosition

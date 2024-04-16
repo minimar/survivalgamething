@@ -24,21 +24,25 @@ layer_4/tile_data = PackedInt32Array(131070, 393223, 2, 65539, 393223, 2, -13107
 [node name="Player" parent="Subscene Handler/TileMap" instance=ExtResource("4_2kw6g")]
 position = Vector2(64, 93)
 
-[node name="LocalAreaWarp" parent="Subscene Handler/TileMap" instance=ExtResource("5_fks1c")]
+[node name="LocalAreaWarp" parent="Subscene Handler/TileMap" node_paths=PackedStringArray("subsceneHandler") instance=ExtResource("5_fks1c")]
+warp1SubsceneID = "apartmentBuilding1"
+warp2SubsceneID = "apartmentBuilding1A"
+subsceneHandler = NodePath("../..")
 
 [node name="AreaWarp1" parent="Subscene Handler/TileMap/LocalAreaWarp" index="0"]
-position = Vector2(-24, 45)
+position = Vector2(-24, 65)
 
 [node name="CollisionShape2D" parent="Subscene Handler/TileMap/LocalAreaWarp/AreaWarp1" index="0"]
-position = Vector2(0, -24)
+position = Vector2(0, -44)
 
 [node name="AreaWarp2" parent="Subscene Handler/TileMap/LocalAreaWarp" index="1"]
-position = Vector2(200, 21)
+position = Vector2(308, 21)
 
 [node name="CollisionShape2D" parent="Subscene Handler/TileMap/LocalAreaWarp/AreaWarp2" index="0"]
 position = Vector2(0, 32)
 
 [node name="Camera2D" type="Camera2D" parent="Subscene Handler"]
+position = Vector2(488, -56)
 zoom = Vector2(4, 4)
 
 [node name="UI" parent="." instance=ExtResource("5_sgtc2")]
