@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://coxk314be2h26"]
+
+[ext_resource type="Script" path="res://Scripts/local_area_warp.gd" id="1_h1pxa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t8o5"]
+size = Vector2(16, 28)
+
+[node name="LocalAreaWarp" type="Node2D" node_paths=PackedStringArray("warp1", "warp2")]
+script = ExtResource("1_h1pxa")
+warp1 = NodePath("AreaWarp1")
+warp2 = NodePath("AreaWarp2")
+
+[node name="AreaWarp1" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaWarp1"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_2t8o5")
+
+[node name="AreaWarp2" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaWarp2"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_2t8o5")
