@@ -20,7 +20,9 @@ const weatherTypes = ["clear","rain","postRain"]
 @onready var player = find_child("Player")
 var nightShader
 
-
+#Use only to completely freeze interaction, INCLUDING PAUSING NORMALLY
+#Starts true, and is set to false in _ready, so game remains fully halted until the scene loads.
+var overallPause = true
 
 var minuteCountdown = .01
 var spawnEnemies = true
@@ -57,9 +59,10 @@ func _ready():
 		areaWarp.changeScene.connect(changeScene)
 	screenTransition.visible = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeIn")
-	player.screenTransitionPause = true
+	get_tree().call_group("Pausing Nodes","toggleGamePause")
 	await screenTransition.animation_finished
-	player.screenTransitionPause = false
+	overallPause = false
+	get_tree().call_group("Pausing Nodes","toggleGamePause")
 
 func shakeScreen(intensity:= 4,duration:= 3):
 	var tween = create_tween()
@@ -116,6 +119,8 @@ const startOfDay = 490
 var joke = 120.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if overallPause:
+		return
 	if Input.is_action_just_pressed("Pause"):
 		pauseGame()
 	if Input.is_action_just_pressed("Inventory"):
@@ -313,7 +318,7 @@ func _on_player_advance_scene():
 	print("Player Received in world")
 	dialogueHandler.playerAdvanced()
 
-func _on_player_dialogue_signal(resultNode:dialogueArea):
+func _on_player_dialogue_signal(resultNode:DialogueArea):
 	print('test: ' + resultNode.sceneID)
 	if screenTransition.frame != 11:
 		await screenTransition.animation_finished
@@ -335,6 +340,7 @@ func _on_player_death():
 
 func pauseGame():
 	pauseMenu.visible = !pauseMenu.visible
+	get_tree().call_group("Pausing Nodes","toggleGamePause")
 
 
 func showInv():

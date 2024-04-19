@@ -1,5 +1,5 @@
-extends Area2D
-class_name dialogueArea
+extends Interactable
+class_name DialogueArea
 @export var sceneID = ""
 @export var dialogueText = ""
 @export var dialoguePriority = 1

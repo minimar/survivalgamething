@@ -429,7 +429,7 @@ func openingCutscene2():
 	advanceScene()
 
 func openingItem():
-	var openingItemNode:dialogueArea
+	var openingItemNode:DialogueArea
 	var cliffSprite:AnimatedSprite2D
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "openingItem":
@@ -461,34 +461,49 @@ func completeOpening():
 	completedScenes.append("openingCabin")
 	advanceScene()
 
-func screenTransitionFadeFull():
+func screenTransitionFadeFull(showDialogueBox = false):
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
 			fadeNode = node
 			break
+	var dialogueBoxIndex = dialogueBox.z_index
+	if showDialogueBox:
+		dialogueBox.z_index = fadeNode.z_index + 1
 	fadeNode.play("ScreenTransitionFadeOut")
 	await fadeNode.animation_finished
 	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
+	if showDialogueBox:
+		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()
 
-func screenTransitionFadeIn():
+func screenTransitionFadeIn(showDialogueBox = false):
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
 			fadeNode = node
 			break
+	var dialogueBoxIndex = dialogueBox.z_index
+	if showDialogueBox:
+		dialogueBox.z_index = fadeNode.z_index + 1
 	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
+	if showDialogueBox:
+		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()	
 	
-func screenTransitionFadeOut():
+func screenTransitionFadeOut(showDialogueBox = false):
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
 			fadeNode = node
 			break
+	var dialogueBoxIndex = dialogueBox.z_index
+	if showDialogueBox:
+		dialogueBox.z_index = fadeNode.z_index + 1
 	fadeNode.play("ScreenTransitionFadeOut")
 	await fadeNode.animation_finished
+	if showDialogueBox:
+		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()	

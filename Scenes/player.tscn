@@ -47,26 +47,18 @@ offset = Vector2(0, -16)
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_1bo3f")
 
-[node name="DialogueArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, -8)
 collision_layer = 2
 collision_mask = 2
 
-[node name="Dialog Hitbox" type="CollisionShape2D" parent="DialogueArea"]
+[node name="Dialog Hitbox" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_ec67u")
 
-[node name="Debug Hitbox Sprite" type="Sprite2D" parent="DialogueArea"]
+[node name="Debug Hitbox Sprite" type="Sprite2D" parent="InteractionArea"]
 visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_jl8b1")
-
-[node name="ContainersArea" type="Area2D" parent="."]
-position = Vector2(0, -8)
-collision_layer = 4
-collision_mask = 4
-
-[node name="ContainersHitbox" type="CollisionShape2D" parent="ContainersArea"]
-shape = SubResource("RectangleShape2D_ec67u")
 
 [node name="Aiming Reticle" type="Sprite2D" parent="."]
 visible = false

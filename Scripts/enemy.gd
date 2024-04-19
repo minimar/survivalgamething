@@ -21,11 +21,18 @@ class_name Enemy
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animationPlayer: AnimationPlayer = $"Sprite/AnimationPlayer"
 
+var gamePause = false
+func toggleGamePause():
+	gamePause = !gamePause
+
 func _ready():
 	add_to_group("Enemies")
+	add_to_group("Pausing Nodes")
 
 #Rotates the sightCone based on the current velocity direction, then runs updateMovementAnim
 func _physics_process(_delta):
+	if gamePause:
+		return
 	$SightCone.rotation = move_toward($SightCone.rotation,velocity.angle(),deg_to_rad(rotationSpeed))
 	if 'walk' in animationPlayer.current_animation or velocity != Vector2():
 		if velocity == Vector2():

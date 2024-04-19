@@ -95,11 +95,12 @@ var movementSpeed = defaultMovementSpeed
 
 #Pause for scene
 var scenePause
-#Pause for screen transition
-var screenTransitionPause = false
+#Pause for overall game
+var gamePause = false
+func toggleGamePause():
+	gamePause = !gamePause
 
-@onready var DialogueArea = $DialogueArea
-@onready var containersArea = $ContainersArea
+@onready var interactionArea: Area2D= $InteractionArea
 @onready var settings = $"/root/Settings"
 
 # Called when the node enters the scene tree for the first time.
@@ -110,6 +111,7 @@ func _ready():
 		print(piece.itemName)
 	updateItems()
 	add_to_group("Player")
+	add_to_group("Pausing Nodes")
 
 
 func eat(foodItem = 'quick'):
@@ -151,15 +153,14 @@ func eat(foodItem = 'quick'):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	if !scenePause:
-		velocity = Vector2(Input.get_axis("Left","Right"), Input.get_axis("Up","Down"))
-		velocity = velocity.normalized()*movementSpeed
-		move_and_slide()
-		if velocity != Vector2(0,0):
-			DialogueArea.position = Vector2(0,-4)
-			DialogueArea.position += velocity * hitboxOffset
-			containersArea.position = Vector2(0,-4)
-			containersArea.position += velocity * hitboxOffset
+	if scenePause or gamePause:
+		return
+	velocity = Vector2(Input.get_axis("Left","Right"), Input.get_axis("Up","Down"))
+	velocity = velocity.normalized()*movementSpeed
+	move_and_slide()
+	if velocity != Vector2(0,0):
+		interactionArea.position = Vector2(0,-4)
+		interactionArea.position += velocity * hitboxOffset
 
 signal advanceScene
 var fastReload = false
@@ -169,7 +170,7 @@ var debugHealthTimer = 0.0
 const hungerDamageCooldown = 15.0
 var hungerDamageTimer = 0.0
 func _process(delta):
-	if screenTransitionPause:
+	if gamePause:
 		return
 	#debugHealthTimer += delta
 	#if debugHealthTimer > 1.0:
@@ -214,8 +215,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("Interact"):
 		if !scenePause:
 			if !checkContainers():
-				#print("test")
-				checkDialogueNodes()
+				if !checkDialogueNodes():
+					for node in interactionArea.get_overlapping_areas():
+						node.onInteract()
 		else:
 			print("player emitted signal")
 			advanceScene.emit()
@@ -285,10 +287,15 @@ func reload(doCancel = 'false'):
 	normalReload = false
 
 func checkContainers() -> bool:
-	var containerNodes = containersArea.get_overlapping_areas()
-	if containerNodes.size() == 0:
+	var containerNodes = interactionArea.get_overlapping_areas()
+	var container: ContainerNode
+	for node in containerNodes:
+		if node is ContainerNode:
+			container = node
+			break
+	if not container:
 		return false
-	var container = containerNodes[0]
+	container.onInteract()
 	var backupItems = items
 	var itemTextList = ""
 	#print(container)
@@ -330,12 +337,18 @@ func checkContainers() -> bool:
 
 
 func checkDialogueNodes():
-	var dialogueNodes = DialogueArea.get_overlapping_areas()
+	var dialogueNodes = interactionArea.get_overlapping_areas()
 	if dialogueNodes.size() == 0:
 		showGenericText.emit("")
-		return
-	var priorityDialogueNode = dialogueNodes[0]
+		return false
+	var priorityDialogueNode: DialogueArea
 	for dialogueNode in dialogueNodes:
-		if dialogueNode.dialoguePriority > priorityDialogueNode.dialoguePriority:
+		if not priorityDialogueNode and dialogueNode is DialogueArea:
 			priorityDialogueNode = dialogueNode
-	dialogueSignal.emit(priorityDialogueNode)
+		elif dialogueNode is DialogueArea and dialogueNode.dialoguePriority > priorityDialogueNode.dialoguePriority:
+			priorityDialogueNode = dialogueNode
+	if priorityDialogueNode:
+		priorityDialogueNode.onInteract()
+		dialogueSignal.emit(priorityDialogueNode)
+		return true
+	return false

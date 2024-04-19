@@ -1,4 +1,4 @@
-extends Area2D
+extends Interactable
 class_name ContainerNode
 @export var containerID: String
 @export var containerItems = {}
