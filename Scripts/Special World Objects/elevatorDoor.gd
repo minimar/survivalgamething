@@ -18,4 +18,5 @@ func toggleDoorCollision():
 		$ElevatorDoor.collision_mask = 8
 
 func onInteract():
+	print('Elevator Test')
 	open = !open
