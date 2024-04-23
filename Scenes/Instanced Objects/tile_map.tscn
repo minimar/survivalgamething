@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0ynntogy7vmw"]
+[gd_scene load_steps=22 format=3 uid="uid://0ynntogy7vmw"]
 
 [ext_resource type="Texture2D" uid="uid://dlk503n14kgo1" path="res://Assets/Sprites/worldSpriteSheet.png" id="1_cjs8t"]
 [ext_resource type="Texture2D" uid="uid://ynrq185ctnc7" path="res://Assets/Sprites/CabinSpriteSheet.png" id="2_r5m24"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://di4d2ccjm6isy" path="res://Assets/Sprites/CityDecorationsSheet.png" id="7_3pftm"]
 [ext_resource type="Texture2D" uid="uid://bf7gdaraoy2mn" path="res://Assets/Sprites/cityInteriorsSheet.png" id="8_dnfsn"]
 [ext_resource type="Texture2D" uid="uid://c8b8rrf31tcxf" path="res://Assets/Sprites/collisionShapes.png" id="9_krary"]
+[ext_resource type="Texture2D" uid="uid://38vhwp1xw5qm" path="res://Assets/Sprites/ElevatorSceneSheet.png" id="10_4n7e4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jw1s1"]
 texture = ExtResource("1_cjs8t")
@@ -1395,6 +1396,21 @@ texture = ExtResource("9_krary")
 3:3/0/physics_layer_0/angular_velocity = 0.0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, 0.353553, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lin4u"]
+texture = ExtResource("10_4n7e4")
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:0/size_in_atlas = Vector2i(2, 2)
+1:0/0 = 0
+1:0/0/z_index = 1
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/size_in_atlas = Vector2i(2, 2)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_uf38w"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jw1s1")
@@ -1406,6 +1422,7 @@ sources/5 = SubResource("TileSetAtlasSource_ojgyg")
 sources/6 = SubResource("TileSetAtlasSource_utakj")
 sources/7 = SubResource("TileSetAtlasSource_sb0lq")
 sources/8 = SubResource("TileSetAtlasSource_dm8je")
+sources/9 = SubResource("TileSetAtlasSource_lin4u")
 
 [node name="TileMap" type="TileMap"]
 y_sort_enabled = true

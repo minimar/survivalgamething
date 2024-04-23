@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpnt3e6136c1p"]
+[gd_scene load_steps=21 format=3 uid="uid://bpnt3e6136c1p"]
 
 [ext_resource type="Texture2D" uid="uid://1m6onfhggbrb" path="res://Assets/Sprites/World Objects/ElevatorAnimSheet.png" id="1_xvxes"]
+[ext_resource type="Script" path="res://Scripts/area_warp.gd" id="2_gv11l"]
 [ext_resource type="Script" path="res://Scripts/Special World Objects/elevatorDoor.gd" id="2_ki043"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr0sm"]
@@ -189,6 +190,7 @@ z_index = 2
 position = Vector2(0, 7)
 collision_layer = 8
 collision_mask = 8
+script = ExtResource("2_gv11l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorDoor"]
 position = Vector2(0, -1)

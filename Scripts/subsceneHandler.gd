@@ -1,9 +1,10 @@
 extends Node2D
 class_name SubsceneHandler
 
+@export var activeSubsceneDict: String
 var player
 var subscene: String
-var cityInteriorSubscenes = {
+const cityInterior = {
 	"apartmentBuilding1": {
 		"player": Vector2(64,93),
 		"camera": Vector2(0,0)
@@ -14,25 +15,21 @@ var cityInteriorSubscenes = {
 	}
 }
 
+
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	
 
 
 func changeSubScene(newSubscene,changePlayerPosition = false):
-	print('test')
 	var playerTargetPosition
 	var cameraTargetPosition
-	if cityInteriorSubscenes.has(newSubscene):
-		if cameraTargetPosition:
-			push_error("TWO DICTS, SAME SUBSCENE ID: cityInteriorSubScenes")
-		print('test2')
-		cameraTargetPosition = cityInteriorSubscenes[newSubscene]["camera"]
-		playerTargetPosition = cityInteriorSubscenes[newSubscene]["player"]
-		
-	#ADD NEW SUBSCENE DICTS HERE
+	if get(activeSubsceneDict).has(newSubscene):
+		cameraTargetPosition = get(activeSubsceneDict)[newSubscene]["camera"]
+		playerTargetPosition = get(activeSubsceneDict)[newSubscene]["player"]
+	
 	if not cameraTargetPosition and not cameraTargetPosition == Vector2() :
-		push_error('No subscene found: '+newSubscene)
+		push_error('No subscene found: '+newSubscene+' in: '+activeSubsceneDict)
 		return
 	subscene = newSubscene
 	if changePlayerPosition:

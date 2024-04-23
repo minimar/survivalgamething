@@ -1,5 +1,7 @@
 extends Interactable
 
+@export var elevatorID: String
+@export var floor: int
 var open = false:
 	set(value):
 		open = value
@@ -18,5 +20,6 @@ func toggleDoorCollision():
 		$ElevatorDoor.collision_mask = 8
 
 func onInteract():
-	print('Elevator Test')
 	open = !open
+	SceneSwitcher.elevatorID = elevatorID
+	SceneSwitcher.elevatorFloor = floor
