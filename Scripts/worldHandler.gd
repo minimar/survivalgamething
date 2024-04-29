@@ -17,7 +17,7 @@ const weatherTypes = ["clear","rain","postRain"]
 @onready var screenTransition = $UI/ScreenTransition
 @onready var screenTransitionAnimationPlayer = $UI/ScreenTransition/AnimationPlayer
 @onready var itemGenerator = $"/root/ItemGenerator"
-@onready var player = find_child("Player")
+@onready var player: Player = find_child("Player")
 var nightShader
 
 #Use only to completely freeze interaction, INCLUDING PAUSING NORMALLY
@@ -79,7 +79,7 @@ func changeScene(targetScene,newWarpCoordinates,subScene):
 	print("HELPER")
 	saveScene()
 	saveUniversal()
-	player.scenePause = true
+	player.gamePause = true
 	screenTransitionAnimationPlayer.play("ScreenTransitionFadeOut")
 	await screenTransition.animation_finished
 	sceneSwitcher.changeScene(targetScene,newWarpCoordinates,subScene)
