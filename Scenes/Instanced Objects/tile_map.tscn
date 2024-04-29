@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://0ynntogy7vmw"]
+[gd_scene load_steps=24 format=3 uid="uid://0ynntogy7vmw"]
 
 [ext_resource type="Texture2D" uid="uid://dlk503n14kgo1" path="res://Assets/Sprites/worldSpriteSheet.png" id="1_cjs8t"]
 [ext_resource type="Texture2D" uid="uid://ynrq185ctnc7" path="res://Assets/Sprites/CabinSpriteSheet.png" id="2_r5m24"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bf7gdaraoy2mn" path="res://Assets/Sprites/cityInteriorsSheet.png" id="8_dnfsn"]
 [ext_resource type="Texture2D" uid="uid://c8b8rrf31tcxf" path="res://Assets/Sprites/collisionShapes.png" id="9_krary"]
 [ext_resource type="Texture2D" uid="uid://38vhwp1xw5qm" path="res://Assets/Sprites/ElevatorSceneSheet.png" id="10_4n7e4"]
+[ext_resource type="Script" path="res://Scripts/tile_map.gd" id="11_ojj2k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jw1s1"]
 texture = ExtResource("1_cjs8t")
@@ -1471,3 +1472,4 @@ layer_6/z_index = 1
 layer_6/tile_data = PackedInt32Array()
 layer_7/name = "SPECIAL COLLISION"
 layer_7/tile_data = PackedInt32Array()
+script = ExtResource("11_ojj2k")

@@ -13,4 +13,5 @@ func _ready():
 	add_to_group("Area Warps")
 
 func _on_player_entered(_player:Player):
+	print('testbbb')
 	changeScene.emit(targetScene,warpCoordinates,subScene)
