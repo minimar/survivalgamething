@@ -26,20 +26,6 @@ tracks/0/keys = {
 "method": &"play"
 }]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"toggleDoorCollision"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_hylh4"]
 resource_name = "doorOpen"
@@ -55,20 +41,6 @@ tracks/0/keys = {
 "values": [{
 "args": [&"doorOpen", 1.0, false],
 "method": &"play"
-}]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"toggleDoorCollision"
 }]
 }
 
@@ -188,9 +160,10 @@ shape = SubResource("RectangleShape2D_xr0sm")
 [node name="ElevatorDoor" type="Area2D" parent="."]
 z_index = 2
 position = Vector2(0, 7)
-collision_layer = 8
-collision_mask = 8
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_gv11l")
+targetScene = "res://Scenes/elevator_scene.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorDoor"]
 position = Vector2(0, -1)
@@ -205,3 +178,5 @@ libraries = {
 [node name="Elevator" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sbkye")
 animation = &"doorStart"
+
+[connection signal="body_entered" from="ElevatorDoor" to="ElevatorDoor" method="_on_player_entered"]

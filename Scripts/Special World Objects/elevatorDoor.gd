@@ -7,11 +7,16 @@ var open = false:
 		open = value
 		if open:
 			$AnimationPlayer.play("doorOpen")
+			await $Elevator.animation_finished
+			toggleDoorCollision()
 		else:
 			$AnimationPlayer.play("doorClose")
+			await $Elevator.animation_finished
+			toggleDoorCollision()
 
 
 func toggleDoorCollision():
+	print('toggle')
 	if $ElevatorDoor.collision_layer == 8:
 		$ElevatorDoor.collision_layer = 0
 		$ElevatorDoor.collision_mask = 0

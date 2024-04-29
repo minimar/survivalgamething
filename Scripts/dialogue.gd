@@ -1,4 +1,5 @@
 extends Node
+class_name DialogueHandler
 @onready var dialogueBox = $"Dialogue Box"
 @onready var dialogueTextBox = $"Dialogue Box/Dialogue Text Box"
 
@@ -204,7 +205,7 @@ func advanceScene() -> void:
 	dialogueBox.visible = true
 	#Resets scene data and returns, if the sceneLine is bigger than the scene size, I.e. when the scene is over.
 	if sceneDict[sceneStarted]['dialogue'].size() < sceneLine+1:
-		print('test')
+		#print('test')
 		scenePause.emit(false)
 		sceneStarted = ""
 		sceneLine = 0

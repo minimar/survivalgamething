@@ -94,7 +94,11 @@ var hasGun = true
 var movementSpeed = defaultMovementSpeed
 
 #Pause for scene
-var scenePause
+var scenePause: 
+	set(value):
+		scenePause = value
+		if scenePause:
+			print()
 #Pause for overall game
 var gamePause = false
 func toggleGamePause():
@@ -214,6 +218,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("Interact"):
 		if !scenePause:
+			print('player pressed interact')
 			if !checkContainers():
 				if !checkDialogueNodes():
 					for node in interactionArea.get_overlapping_areas():

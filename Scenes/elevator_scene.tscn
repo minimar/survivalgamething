@@ -1,19 +1,145 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtan3m5jkmhak"]
+[gd_scene load_steps=22 format=3 uid="uid://dtan3m5jkmhak"]
 
 [ext_resource type="Script" path="res://Scripts/worldHandler.gd" id="1_yuy76"]
 [ext_resource type="PackedScene" uid="uid://0ynntogy7vmw" path="res://Scenes/Instanced Objects/tile_map.tscn" id="2_3vdb8"]
 [ext_resource type="Script" path="res://Scripts/Scene Specific Scripts/ElevatorHandler.gd" id="3_ad4ht"]
 [ext_resource type="PackedScene" uid="uid://dt2omxug7nikb" path="res://Scenes/ui.tscn" id="3_utj6w"]
 [ext_resource type="PackedScene" uid="uid://brfafs40nxg43" path="res://Scenes/player.tscn" id="4_sq4ea"]
+[ext_resource type="Texture2D" uid="uid://cygmcx01nitye" path="res://Assets/Sprites/World Objects/ElevatorInteriorAnimSheet.png" id="5_egh6d"]
+[ext_resource type="PackedScene" uid="uid://dtftppak8ll7" path="res://Scenes/Instanced Objects/World Objects/area_warp.tscn" id="6_m65qc"]
+[ext_resource type="Script" path="res://Scripts/Special World Objects/InteriorElevatorButton.gd" id="7_ndd2a"]
 
-[node name="ElevatorScene" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeiu4"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8q5w"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kk41"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10lst"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8wvj"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44qt4"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ml5p"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6op8"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhu33"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ytek"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vuqx"]
+atlas = ExtResource("5_egh6d")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2nelx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeiu4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8q5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kk41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10lst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8wvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44qt4")
+}],
+"loop": false,
+"name": &"doorClose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ml5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6op8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhu33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ytek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vuqx")
+}],
+"loop": false,
+"name": &"doorOpen",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mro8l"]
+size = Vector2(8, 20)
+
+[node name="ElevatorScene" type="Node2D" node_paths=PackedStringArray("localCamera")]
 script = ExtResource("1_yuy76")
+localCamera = NodePath("ElevatorHandler/Camera2D")
 
 [node name="ElevatorHandler" type="Node2D" parent="."]
 script = ExtResource("3_ad4ht")
 
 [node name="TileMap" parent="ElevatorHandler" instance=ExtResource("2_3vdb8")]
+position = Vector2(0, 0)
+layer_0/tile_data = PackedInt32Array(65536, 65546, 2, 65537, 65546, 2, 131073, 65546, 2, 131072, 65546, 2, 196608, 65546, 2, 196609, 65546, 2, 0, 196618, 0)
+layer_4/tile_data = PackedInt32Array(0, 65546, 0)
 
 [node name="Player" parent="ElevatorHandler/TileMap" instance=ExtResource("4_sq4ea")]
+position = Vector2(10, 45)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ElevatorHandler/TileMap"]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_2nelx")
+centered = false
+
+[node name="AreaWarp" parent="ElevatorHandler/TileMap" instance=ExtResource("6_m65qc")]
+position = Vector2(16, -3)
+
+[node name="Button" type="Area2D" parent="ElevatorHandler/TileMap"]
+script = ExtResource("7_ndd2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorHandler/TileMap/Button"]
+position = Vector2(3, 4)
+shape = SubResource("RectangleShape2D_mro8l")
+
+[node name="Camera2D" type="Camera2D" parent="ElevatorHandler"]
+zoom = Vector2(4, 4)
 
 [node name="UI" parent="." instance=ExtResource("3_utj6w")]
+
+[connection signal="elevatorButtonPressed" from="ElevatorHandler/TileMap/Button" to="ElevatorHandler" method="_on_elevator_button_pressed"]
