@@ -13,7 +13,10 @@ var dialogueText:String:
 			dialogueTextBox.text = ""
 		else:
 			dialogueBox.visible = true
-			
+		if dialogueText.find('#'):
+			if dialogueText.right(8) == '#ADVANCE':
+				dialogueText = dialogueText.left(-8)
+				call_deferred("advanceScene")
 #The current dialoguePos, used to place characters one at a time
 var dialoguePos:int
 
@@ -145,9 +148,8 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			screenTransitionFadeOut.bind(true),
-			'[Some time passes as you try to calm her.]',
-			screenTransitionFadeIn.bind(true),
+			'[Some time passes as you try to calm her.]#ADVANCE',
+			screenTransitionFadeFull.bind(true),
 			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
 			'"I can try and fix this place up a bit... and you can try finding us some food and maybe a way off the island!"',
 			completeOpening
@@ -220,12 +222,17 @@ func advanceScene() -> void:
 		event.call()
 	#Otherwise just displays text as normal
 	else:
-		dialogueText = sceneDict[sceneStarted]['dialogue'][sceneLine]
 		dialoguePos = 0
+		dialogueText = sceneDict[sceneStarted]['dialogue'][sceneLine]
 		sceneLine += 1
 
 #returns a string of text fron the text arg, up to the value given.
 func writeText(text: String,value: int) -> String:
+	if text.left(value).right(1) == '#' and dialogueText.find('#ADVANCEWHENDONE') != -1:
+		dialogueText = dialogueText.right(-15)
+		advanceScene()
+		text = dialogueText
+		return text 
 	text = text.left(value)
 	return text
 
@@ -473,7 +480,8 @@ func screenTransitionFadeFull(showDialogueBox = false):
 			break
 	var dialogueBoxIndex = dialogueBox.z_index
 	if showDialogueBox:
-		dialogueBox.z_index = fadeNode.z_index + 1
+		dialogueBox.visible = true
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
 	fadeNode.play("ScreenTransitionFadeOut")
 	await fadeNode.animation_finished
 	fadeNode.play("ScreenTransitionFadeIn")
@@ -491,16 +499,18 @@ func screenTransitionFadeIn(showDialogueBox = false):
 			break
 	var dialogueBoxIndex = dialogueBox.z_index
 	if showDialogueBox:
-		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
+		dialogueBox.visible = true
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
 	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
-	advanceScene()	
+	advanceScene()
 	eventHold = false
 
 
 func screenTransitionFadeOut(showDialogueBox = false):
+	print("showDialogueBox: "+ str(showDialogueBox))
 	eventHold = true
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
@@ -509,7 +519,8 @@ func screenTransitionFadeOut(showDialogueBox = false):
 			break
 	var dialogueBoxIndex = dialogueBox.z_index
 	if showDialogueBox:
-		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
+		dialogueBox.visible = true
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
 	fadeNode.play("ScreenTransitionFadeOut")
 	await fadeNode.animation_finished
 	if showDialogueBox:
