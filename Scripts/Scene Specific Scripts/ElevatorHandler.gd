@@ -43,7 +43,7 @@ func _on_elevator_button_pressed():
 	var totalFloorDifference = int(playerChoice) - int(floor)
 	var tween = get_tree().create_tween()
 	const secondsPerFloor = 2
-	const cameraMovementVector = Vector2(0,5)
+	const cameraMovementVector = Vector2(0,-5)
 	if totalFloorDifference > 0:
 		if $TileMap/AnimatedSprite2D.animation == 'doorOpen':
 			tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorClose'))

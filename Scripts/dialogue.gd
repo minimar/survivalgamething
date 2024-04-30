@@ -219,6 +219,8 @@ func advanceScene() -> void:
 		sceneLine = 0
 		dialogueText = ""
 		return
+	print("sceneLine: "+ str(sceneLine))
+	print(sceneDict[sceneStarted]['dialogue'][sceneLine])
 	#Checks for an event code, as denoted by ###, then calls that event's corresponding function
 	if sceneDict[sceneStarted]['dialogue'][sceneLine] is Callable:
 		var event = sceneDict[sceneStarted]['dialogue'][sceneLine]
@@ -487,10 +489,12 @@ func screenTransitionFadeFull(showDialogueBox = false):
 	if showDialogueBox:
 		dialogueBox.visible = true
 		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
+	else:
+		dialogueText = ""
 	fadeNode.play("ScreenTransitionFadeOut")
-	await fadeNode.animation_finished
+	await fadeNode.get_parent().animation_finished
 	fadeNode.play("ScreenTransitionFadeIn")
-	await fadeNode.animation_finished
+	await fadeNode.get_parent().animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()
@@ -506,8 +510,10 @@ func screenTransitionFadeIn(showDialogueBox = false):
 	if showDialogueBox:
 		dialogueBox.visible = true
 		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
+	else:
+		dialogueText = ""
 	fadeNode.play("ScreenTransitionFadeIn")
-	await fadeNode.animation_finished
+	await fadeNode.get_parent().animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()
@@ -526,8 +532,10 @@ func screenTransitionFadeOut(showDialogueBox = false):
 	if showDialogueBox:
 		dialogueBox.visible = true
 		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
+	else:
+		dialogueText = ""
 	fadeNode.play("ScreenTransitionFadeOut")
-	await fadeNode.animation_finished
+	await fadeNode.get_parent().animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()
@@ -544,5 +552,6 @@ func dialogBoxTop(status = true):
 		dialogueBox.visible = true
 		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
 	else:
-		dialogueBox.visible = false
+		dialogueText = ""
 		dialogueBox.z_index = fadeNode.get_parent().z_index - 5
+	advanceScene()

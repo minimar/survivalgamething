@@ -431,7 +431,6 @@ z_index = 12
 scale = Vector2(4.1, 4.1)
 sprite_frames = SubResource("SpriteFrames_ky3lq")
 animation = &"FadeOut"
-frame = 11
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition"]
