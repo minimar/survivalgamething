@@ -148,7 +148,7 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			screenTransitionFadeOut.bind(true),
+			screenTransitionFadeOut,
 			dialogBoxTop.bind(true),
 			'[Some time passes as you try to calm her.]',
 			screenTransitionFadeIn,
@@ -536,6 +536,10 @@ func screenTransitionFadeOut(showDialogueBox = false):
 func dialogBoxTop(status = true):
 	var fadeNode:AnimationPlayer
 	var dialogueBoxIndex = dialogueBox.z_index
+	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
+		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
+			fadeNode = node
+			break
 	if status:
 		dialogueBox.visible = true
 		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
