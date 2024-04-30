@@ -3,6 +3,7 @@ extends Node2D
 var elevatorID = SceneSwitcher.elevatorID
 var floor = str(SceneSwitcher.elevatorFloor)
 var dialogueHandler: DialogueHandler
+@onready var player = get_tree().get_first_node_in_group("Player")
 
 const elevatorData := {
 	"cityApartment1": {
@@ -37,7 +38,7 @@ func _on_elevator_button_pressed():
 			floors.append(key)
 	floors.erase(floor)
 	print("prompting Player Choice")
-	var player = get_tree().get_first_node_in_group("Player")
+	
 	player.scenePause = true
 	var playerChoice = floors[await dialogueHandler.playerDialogueChoice(floors)]
 	var totalFloorDifference = int(playerChoice) - int(floor)
@@ -59,7 +60,6 @@ func _on_elevator_button_pressed():
 		tween.tween_property($Camera2D,"position",$Camera2D.position+cameraMovementVector,1)
 		tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorOpen'))
 	floor = playerChoice
-	player.scenePause = false
 	updateAreaWarp()
 
 func _on_animation_changed():
@@ -67,6 +67,7 @@ func _on_animation_changed():
 		await $TileMap/AnimatedSprite2D.animation_finished
 		$TileMap/AreaWarp.collision_mask = 8
 		$TileMap/AreaWarp.collision_layer = 8
+		player.scenePause = false
 	else:
 		$TileMap/AreaWarp.collision_mask = 0
 		$TileMap/AreaWarp.collision_layer = 0
