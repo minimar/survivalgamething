@@ -148,8 +148,11 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			'[Some time passes as you try to calm her.]#ADVANCE',
-			screenTransitionFadeFull.bind(true),
+			screenTransitionFadeOut.bind(true),
+			dialogBoxTop.bind(true),
+			'[Some time passes as you try to calm her.]',
+			screenTransitionFadeIn,
+			dialogBoxTop.bind(false),
 			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
 			'"I can try and fix this place up a bit... and you can try finding us some food and maybe a way off the island!"',
 			completeOpening
@@ -528,3 +531,12 @@ func screenTransitionFadeOut(showDialogueBox = false):
 	advanceScene()
 	eventHold = false
 
+func dialogBoxTop(status = true):
+	var fadeNode:AnimationPlayer
+	var dialogueBoxIndex = dialogueBox.z_index
+	if status:
+		dialogueBox.visible = true
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 5
+	else:
+		dialogueBox.visible = false
+		dialogueBox.z_index = fadeNode.get_parent().z_index - 5
