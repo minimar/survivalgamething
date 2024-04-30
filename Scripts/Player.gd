@@ -220,8 +220,11 @@ func _process(delta):
 		if !scenePause:
 			print('player pressed interact')
 			if !checkContainers():
+				print('Containers failed')
 				if !checkDialogueNodes():
+					print('dialogueNodes failed')
 					for node in interactionArea.get_overlapping_areas():
+						print('activating on interact for: '+ node.name)
 						node.onInteract()
 		else:
 			print("player emitted signal")

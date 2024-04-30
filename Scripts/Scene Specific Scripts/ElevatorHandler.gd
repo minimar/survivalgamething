@@ -1,7 +1,7 @@
 extends Node2D
 
 var elevatorID = SceneSwitcher.elevatorID
-var floor = SceneSwitcher.elevatorFloor
+var floor = str(SceneSwitcher.elevatorFloor)
 var dialogueHandler: DialogueHandler
 
 const elevatorData := {
@@ -16,11 +16,16 @@ const elevatorData := {
 		"3": Vector2(-97,-77),
 	}
 }
-
+@onready var areaWarp = $TileMap/AreaWarp
+var currentElevator = elevatorData[elevatorID]
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#print("ElevatorID: " + elevatorID)
 	await get_parent().ready
-	dialogueHandler = get_parent().find_child("UI/Dialogue Handler")
+	dialogueHandler = get_parent().get_node("UI/Dialogue Handler")
+	areaWarp.targetScene = currentElevator["scene"]
+	areaWarp.subscene = currentElevator["subscene"]
+	areaWarp.warpCoordinates = currentElevator[floor]
 
 
 
@@ -32,4 +37,4 @@ func _on_elevator_button_pressed():
 	floors.erase(floor)
 	print("prompting Player Choice")
 	var playerChoice = await dialogueHandler.playerDialogueChoice(floors)
-	
+	print(playerChoice)

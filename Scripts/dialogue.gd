@@ -322,7 +322,7 @@ func playerDialogueChoice(choices: Array) -> int:
 	var labelSettings = LabelSettings.new()
 	#labelSettings.font_size = 16
 	#Creates a label for each choice, giving it a name that corresponds to the choice's index in the array
-	await get_tree().create_timer(.4).timeout
+	#await get_tree().create_timer(.4).timeout
 	for choice in choices:
 		var labelNode = Label.new()
 		labelNode.text = choice
@@ -333,6 +333,8 @@ func playerDialogueChoice(choices: Array) -> int:
 	var currentlySelectedChoice = 0
 	#Adds a carat to the first choice, as it is selected by default
 	playerChoices.get_child(0).text = '> '+playerChoices.get_child(0).text
+	#Places the inputHold so that moving to the player choice menu doesn't instantly select a choice.
+	playerChoices.inputHold = true
 	while true:
 		#playerChoices node handles the actual input, sends a signal with the button pressed when recognized.
 		var inputResult = await playerChoices.playerChoiceInput
@@ -480,6 +482,7 @@ func screenTransitionFadeFull(showDialogueBox = false):
 	advanceScene()
 
 func screenTransitionFadeIn(showDialogueBox = false):
+	eventHold = true
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
@@ -493,8 +496,9 @@ func screenTransitionFadeIn(showDialogueBox = false):
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()	
-	
+	eventHold = false
 func screenTransitionFadeOut(showDialogueBox = false):
+	eventHold = true
 	var fadeNode:AnimationPlayer
 	for node in get_tree().get_nodes_in_group("Cutscene Objects"):
 		if node.has_meta("cutsceneObjID") and node.get_meta("cutsceneObjID") == "fade":
@@ -507,4 +511,5 @@ func screenTransitionFadeOut(showDialogueBox = false):
 	await fadeNode.animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
-	advanceScene()	
+	advanceScene()
+	eventHold = false

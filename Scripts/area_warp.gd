@@ -3,7 +3,7 @@ class_name AreaWarp
 
 @export var warpCoordinates: Vector2
 @export_file("*.tscn") var targetScene
-@export var subScene: String
+@export var subscene: String
 
 
 signal changeScene
@@ -14,4 +14,4 @@ func _ready():
 
 func _on_player_entered(_player:Player):
 	print('testbbb')
-	changeScene.emit(targetScene,warpCoordinates,subScene)
+	changeScene.emit(targetScene,warpCoordinates,subscene)
