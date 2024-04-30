@@ -23,11 +23,12 @@ func _ready():
 	#print("ElevatorID: " + elevatorID)
 	await get_parent().ready
 	dialogueHandler = get_parent().get_node("UI/Dialogue Handler")
+	
+
+func updateAreaWarp():
 	areaWarp.targetScene = currentElevator["scene"]
 	areaWarp.subscene = currentElevator["subscene"]
 	areaWarp.warpCoordinates = currentElevator[floor]
-
-
 
 func _on_elevator_button_pressed():
 	var floors = []
@@ -38,19 +39,28 @@ func _on_elevator_button_pressed():
 	print("prompting Player Choice")
 	var player = get_tree().get_first_node_in_group("Player")
 	player.scenePause = true
-	var playerChoice = await dialogueHandler.playerDialogueChoice(floors)
+	var playerChoice = floors[await dialogueHandler.playerDialogueChoice(floors)]
 	var totalFloorDifference = int(playerChoice) - int(floor)
 	var tween = get_tree().create_tween()
 	const secondsPerFloor = 2
-	const cameraMovementVector = Vector2(0,15)
+	const cameraMovementVector = Vector2(0,5)
 	if totalFloorDifference > 0:
 		if $TileMap/AnimatedSprite2D.animation == 'doorOpen':
-			tween.tween_callback($TileMap/AnimatedSprite2D.play('doorClose'))
+			tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorClose'))
 		tween.tween_property($Camera2D,"position",$Camera2D.position+cameraMovementVector,1)
 		tween.tween_interval(totalFloorDifference*secondsPerFloor)
 		tween.tween_property($Camera2D,"position",$Camera2D.position-cameraMovementVector,1)
-		tween.tween_callback($TileMap/AnimatedSprite2D.play('doorOpen'))
-
+		tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorOpen'))
+	else:
+		if $TileMap/AnimatedSprite2D.animation == 'doorOpen':
+			tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorClose'))
+		tween.tween_property($Camera2D,"position",$Camera2D.position-cameraMovementVector,1)
+		tween.tween_interval(abs(totalFloorDifference)*secondsPerFloor)
+		tween.tween_property($Camera2D,"position",$Camera2D.position+cameraMovementVector,1)
+		tween.tween_callback($TileMap/AnimatedSprite2D.play.bind('doorOpen'))
+	floor = playerChoice
+	player.scenePause = false
+	updateAreaWarp()
 
 func _on_animation_changed():
 	if $TileMap/AnimatedSprite2D.animation == 'doorOpen':

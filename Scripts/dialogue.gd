@@ -207,6 +207,8 @@ func playerAdvanced() -> void:
 		advanceScene()
 
 func advanceScene() -> void:
+	if not sceneDict.has(sceneStarted):
+		return
 	print("Advancing Scene")
 	dialogueBox.visible = true
 	#Resets scene data and returns, if the sceneLine is bigger than the scene size, I.e. when the scene is over.
