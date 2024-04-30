@@ -17,11 +17,12 @@ var dialogueText:String:
 #The current dialoguePos, used to place characters one at a time
 var dialoguePos:int
 
+
 #All cutscenes data
 var sceneDict := {
 	'cabinScene' = {
 		'dialogue': [
-			'###cabinScene'
+			cabinScene
 		]
 	},
 	'meek0' = {
@@ -55,7 +56,7 @@ var sceneDict := {
 			'"I... just wanted to say I\'m really glad you\'re here."',
 			'"I\'m not very strong, or fast, or brave... I don\'t know how I\'d survive."',
 			'"So... thank you."',
-			'###cabin0'
+			cabin0
 		],
 		'tags': ["cabin"]
 	},
@@ -81,14 +82,14 @@ var sceneDict := {
 			'"I remember my mom calling me a star when I was little."',
 			'"I\'m sure she meant that I\'ll shine... but instead, I feel like I\'m drowning among all the other stars in the skies."',
 			'"Just another star in the sky..."',
-			'###cabin1'
+			cabin1
 		],
 		'tags': ["cabin"]
 	},
 	'endOfDay' = {
 		'dialogue':[
 				'"Do you want to have dinner yet?"',
-				'###endOfDayScene'
+				endOfDayScene
 		]
 	},
 	'fallback' = {
@@ -98,58 +99,58 @@ var sceneDict := {
 	},
 	'openingCutscene1' = {
 		'dialogue': [
-			'###openingCutscene1'
+			openingCutscene1
 		],
 		'tags': ["special"]
 	},
 	'openingCutscene2' = {
 		'dialogue': [
-			'###openingCutscene2'
+			openingCutscene2
 		],
 		'tags': ["special"]
 	},
 	'openingItem' = {
 		'dialogue': [
 			'You pick up the item of yet to be determined nature. It\'s cold in your hand. Probably.',
-			'###openingItem'
+			openingItem
 		]
 	},
 	'openingCabin' = {
 		'dialogue': [
 			'"S-stop! Don\'t come any closer!"',
 			'"Please... don\'t hurt me..."',
-			'###openingChoice'
+			openingChoice
 		],
 		'tags': ["cabin"]
 	},
 	'openingOkay' = {
 		'dialogue': [
 			'""I-I\'m fine..."',
-			'###openingCont'
+			openingCont
 		]
 	},
 	'openingNoHurt' = {
 		'dialogue': [
 			'"R-really...?"',
-			'###openingCont'
+			openingCont
 		]
 	},
 	'openingLeave' = {
 		'dialogue': [
 			'"Y-yes, right away! I\'m sorry!"',
-			'###openingGirlExit'
+			#openingGirlExit
 		]
 	},
 	'openingPanik' = {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			'###screenTransitionFadeOutwTextbox',
+			screenTransitionFadeOut.bind(true),
 			'[Some time passes as you try to calm her.]',
-			'###screenTransitionFadeIn',
+			screenTransitionFadeIn.bind(true),
 			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
 			'"I can try and fix this place up a bit... and you can try finding us some food and maybe a way off the island!"',
-			'###completeOpening'			
+			completeOpening
 		]
 	}
 }
@@ -212,11 +213,11 @@ func advanceScene() -> void:
 		dialogueText = ""
 		return
 	#Checks for an event code, as denoted by ###, then calls that event's corresponding function
-	if sceneDict[sceneStarted]['dialogue'][sceneLine].left(3) == "###":
-		var event = sceneDict[sceneStarted]['dialogue'][sceneLine].right(-3)
+	if sceneDict[sceneStarted]['dialogue'][sceneLine] is Callable:
+		var event = sceneDict[sceneStarted]['dialogue'][sceneLine]
 		dialogueBox.visible = false
 		sceneLine += 1
-		call(event)
+		event.call()
 	#Otherwise just displays text as normal
 	else:
 		dialogueText = sceneDict[sceneStarted]['dialogue'][sceneLine]
