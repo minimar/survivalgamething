@@ -54,7 +54,7 @@ func startNewGame():
 			dir.change_dir("user://")
 			dir.remove("Manual Saves")
 	
-	SceneSwitcher.changeScene("res://Scenes/overworld.tscn",Vector2(0,0))
+	SceneSwitcher.changeScene("res://Scenes/openingCutsceneOverworld.tscn",Vector2(0,0))
 
 func loadGame():
 	var saveDict = Utility.getLatestSave()

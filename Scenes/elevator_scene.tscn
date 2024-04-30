@@ -148,4 +148,5 @@ zoom = Vector2(4, 4)
 
 [node name="UI" parent="." instance=ExtResource("3_utj6w")]
 
+[connection signal="animation_changed" from="ElevatorHandler/TileMap/AnimatedSprite2D" to="ElevatorHandler" method="_on_animation_changed"]
 [connection signal="elevatorButtonPressed" from="ElevatorHandler/TileMap/Button" to="ElevatorHandler" method="_on_elevator_button_pressed"]
