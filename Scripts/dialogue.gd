@@ -144,7 +144,7 @@ var sceneDict := {
 		'dialogue': [
 			'"I d-don\'t understand what\'s happening... I was just walking by, and there was this huge noise, and everything started shaking..."',
 			'"I don\'t know what to do... I\'m so scared..."',
-			'###screenTransitionFadeOut',
+			'###screenTransitionFadeOutwTextbox',
 			'[Some time passes as you try to calm her.]',
 			'###screenTransitionFadeIn',
 			'"It sounds like we both need somewhere to sleep... how about here, for now?"',
@@ -513,3 +513,7 @@ func screenTransitionFadeOut(showDialogueBox = false):
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()
 	eventHold = false
+
+func screenTransitionFadeOutwTextbox():
+	await screenTransitionFadeOut(true)
+	advanceScene()
