@@ -491,13 +491,15 @@ func screenTransitionFadeIn(showDialogueBox = false):
 			break
 	var dialogueBoxIndex = dialogueBox.z_index
 	if showDialogueBox:
-		dialogueBox.z_index = fadeNode.z_index + 1
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
 	fadeNode.play("ScreenTransitionFadeIn")
 	await fadeNode.animation_finished
 	if showDialogueBox:
 		dialogueBox.z_index = dialogueBoxIndex
 	advanceScene()	
 	eventHold = false
+
+
 func screenTransitionFadeOut(showDialogueBox = false):
 	eventHold = true
 	var fadeNode:AnimationPlayer
@@ -507,7 +509,7 @@ func screenTransitionFadeOut(showDialogueBox = false):
 			break
 	var dialogueBoxIndex = dialogueBox.z_index
 	if showDialogueBox:
-		dialogueBox.z_index = fadeNode.z_index + 1
+		dialogueBox.z_index = fadeNode.get_parent().z_index + 1
 	fadeNode.play("ScreenTransitionFadeOut")
 	await fadeNode.animation_finished
 	if showDialogueBox:
@@ -515,6 +517,3 @@ func screenTransitionFadeOut(showDialogueBox = false):
 	advanceScene()
 	eventHold = false
 
-func screenTransitionFadeOutwTextbox():
-	await screenTransitionFadeOut(true)
-	advanceScene()
